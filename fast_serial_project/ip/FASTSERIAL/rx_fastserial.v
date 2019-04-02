@@ -4,9 +4,7 @@ module rx_fastserial(i_clk,
                      i_fsdo,
 							i_fsclk,
                      o_data,
-                     o_ready,
-							o_debug0,
-							o_debug1);
+                     o_ready);
 
               
 
@@ -17,11 +15,7 @@ input wire         	i_fsclk;          // IF TX is busy
 output wire [7:0]    o_data;          // Data to TX
 output wire          o_ready;         // Start Transmitting
 
-output wire         o_debug0;
-output wire         o_debug1;
-
-
-	// Define several states
+// Define several states
 localparam [3:0]    WAIT_FOR_START_BIT	= 4'h0,
 	                BIT_ZERO	    = 4'h1,
 	                BIT_ONE		    = 4'h2,
@@ -39,20 +33,17 @@ reg [3:0] state;
 reg [7:0] rx_data;
 reg rx_ready;
 reg q_fsdo, d_fsdo;
-reg debug_0;
-reg debug_1;
+
 
 initial state = WAIT_FOR_START_BIT;
 initial rx_ready = 0;
-initial debug_0 = 0;
-initial debug_1 = 0;
 initial q_fsdo = 1;
 initial d_fsdo =1;
 
 always @(posedge i_clk) begin
 	if (i_fsclk) begin
 		{ q_fsdo, d_fsdo} <= { d_fsdo, i_fsdo};
-		debug_1 <= q_fsdo;
+
 	end
 end	 
 
@@ -81,24 +72,14 @@ always @(posedge i_clk) begin
 				if (state >= BIT_ZERO && state <= BIT_SEVEN) begin
 					state <= state + 1;
 					{rx_data }<= {rx_data[6:0], q_fsdo};
-					debug_0 <= 1;
-
-					
 				end
 			end
 			endcase
-	end
-	else
-	begin
-			debug_0 <= 0;
-
 	end
 end
 
 assign o_ready = rx_ready;
 assign o_data = rx_data;
-assign o_debug0 = debug_0;
-assign o_debug1 = debug_1;
 
 
 endmodule
