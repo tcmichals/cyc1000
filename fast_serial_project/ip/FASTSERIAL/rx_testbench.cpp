@@ -2,16 +2,16 @@
 #include <cstdlib>
 #include <memory>
 
-#include "Vrx_fastserial.h"
+#include "Vrx_testbench.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 
 
 
-#define TRACE_FILE "rx_fastserial.vcd"
+#define TRACE_FILE "rx_testbench.vcd"
 
 
-void	tick(int tickcount, std::unique_ptr<Vrx_fastserial> &tb, std::unique_ptr<VerilatedVcdC> &tfp) 
+void	tick(int tickcount, std::unique_ptr<Vrx_testbench> &tb, std::unique_ptr<VerilatedVcdC> &tfp) 
 {
 	tb->eval();
 	if (tfp)
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
     unsigned tickcount = 0;
     Verilated::commandArgs(argc, argv);
 
-    std::unique_ptr<Vrx_fastserial> tb= std::make_unique<Vrx_fastserial>();
+    std::unique_ptr<Vrx_testbench> tb= std::make_unique<Vrx_testbench>();
 
     	// Generate a trace
 	Verilated::traceEverOn(true);

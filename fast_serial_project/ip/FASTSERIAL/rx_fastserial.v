@@ -15,7 +15,11 @@ input wire         	i_fsclk;          // IF TX is busy
 output wire [7:0]    o_data;          // Data to TX
 output wire          o_ready;         // Start Transmitting
 
+<<<<<<< HEAD
 	// Define several states
+=======
+// Define several states
+>>>>>>> 7b0704c901cebfc77cf10ea5a4acdae4db390414
 localparam [3:0]    WAIT_FOR_START_BIT	= 4'h0,
 	                BIT_ZERO	    = 4'h1,
 	                BIT_ONE		    = 4'h2,
@@ -43,6 +47,10 @@ initial d_fsdo =1;
 always @(posedge i_clk) begin
 	if (i_fsclk) begin
 		{ q_fsdo, d_fsdo} <= { d_fsdo, i_fsdo};
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7b0704c901cebfc77cf10ea5a4acdae4db390414
 	end
 end	 
 
@@ -79,6 +87,10 @@ end
 
 assign o_ready = rx_ready;
 assign o_data = rx_data;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7b0704c901cebfc77cf10ea5a4acdae4db390414
 
 endmodule
 //eof
