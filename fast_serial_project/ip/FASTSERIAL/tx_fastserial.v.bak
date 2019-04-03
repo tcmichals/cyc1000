@@ -41,8 +41,7 @@ module tx_fastserial(i_clk,
                     i_data,
                     i_write,
                     o_busy,
-                    o_fsdi,
-						  o_debug_0);
+                    o_fsdi);
 
 parameter	[1:0]	CLOCKS_PER = 2'd2;                    
 parameter	DEST_PORT = 1'd1;  
@@ -54,8 +53,6 @@ input wire [7:0]    i_data;          // Data to TX
 input wire          i_write;         // Start Transmitting
 output wire         o_busy;          // IF TX is busy
 output wire         o_fsdi;          //Tx out
-output wire			  o_debug_0;
-
 
 	// Define several states
 localparam [3:0]   START	      = 4'h0,
@@ -74,85 +71,74 @@ localparam [3:0]   START	      = 4'h0,
 
 reg	[3:0]	state;
 reg	[7:0]	lcl_data;
-reg   d_fscts, q_fscts ;
-reg	busy;
-reg	fsdi;
-reg   debug_0;
-
+reg     d_fscts, q_fscts ;
+reg		busy;
+reg		fsdi;
 initial	busy = 1'b0;
 initial	state  = IDLE;
 initial	lcl_data = 8'hff;
 initial  fsdi = 1;
-initial  d_fscts = 1;
-initial  q_fscts = 1;
 
-always @(posedge i_clk) begin
-	 q_fscts <= i_fscts;
-	debug_0 <= q_fscts;
-	
+
+always @(posedge i_clk)
+begin
+	if (i_fsclk)
+	  	{ q_fscts, d_fscts} <= {d_fscts, i_fscts};
 end
 
-always @(posedge i_clk) begin
 
-	if ( (i_write) && (!busy)) begin
+always @(posedge i_clk)
+begin
+      if ( (i_write) && (!busy)) begin
 			// Immediately start us off with a start bit
 			{ busy, state } <= { 1'b1, START };
 	      lcl_data <= i_data;
-    end
-	 
-	case (state)
-		IDLE: begin  fsdi <= 1; end /* keep high */
-					
-      START: begin
-			if (q_fscts && ~i_fsclk) begin
-				/* send start bit 0 */
-				fsdi <= 0;
-	         state <= state + 1;
-				//debug_0 <= 1;
-			end
-		end
-		
-      WAIT_FOR_FCTS: begin
-     /* wait for FSCTS to drop then start sending data */
-    	if ( !q_fscts && i_fsclk) begin
-				state <= state +1;
-          end
-       end    
-
-       BIT_DEST: begin
-			if ( !q_fscts && ~i_fsclk) begin
-				fsdi <= DEST_PORT;
-				state <= state +1;
-			end
-       end
-
-       DONE: begin
-			if ( !q_fscts && i_fsclk) begin
-					lcl_data <= 8'hff;
-					{ busy, state } <= { 1'b0, IDLE };
-           end 
         end
+        else begin
+            case (state)
+					IDLE: begin  fsdi <= 1; end
+                START: begin
+                    if (i_fsclk && q_fscts) begin
+                    /* upper 8 bits is i_data, 0 bit is 0*/
+                    /* send start bit 0 */
+                     fsdi <= 0;
+	                    state <= state + 1;
+                    end
+						end
 
-         default: begin
-				if ( state >= BIT_ZERO && state <= BIT_SEVEN) begin
-				/* wait for FSCTS to drop then start sending data */
-					if ( !q_fscts && !i_fsclk) begin
-						state <= state +1;
-						fsdi <= lcl_data[0];
-                  lcl_data <= { 1'b1, lcl_data[7:1] };
-					end 
-				end
-			end
-         endcase
+                WAIT_FOR_FCTS: begin
+                    /* wait for FSCTS to drop then start sending data */
+                    if ( !q_fscts && i_fsclk) begin
+                        state <= state +1;
+                    end
+                end    
 
-end //always end
+                BIT_DEST: begin
+                      fsdi <= DEST_PORT;
+                     state <= state +1;
+                end
 
-	 
+                DONE: begin
+                    if ( !q_fscts && i_fsclk) begin
+                        lcl_data <= 8'hff;
+                        { busy, state } <= { 1'b0, IDLE };
+                    end 
+                end
 
+
+                default:
+                    if ( state >= BIT_ZERO && state <= BIT_SEVEN)
+                    /* wait for FSCTS to drop then start sending data */
+                        if ( !q_fscts && i_fsclk) begin
+                            state <= state +1;
+									 fsdi <= lcl_data[0];
+                            lcl_data <= { 1'b1, lcl_data[7:1] };
+                        end 
+            endcase
+	end
+end
 assign o_busy = busy;
 assign o_fsdi = fsdi;
-
-assign o_debug_0 = debug_0;
 
 endmodule
 //eof
