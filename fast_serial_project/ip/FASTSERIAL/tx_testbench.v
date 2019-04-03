@@ -3,13 +3,14 @@
 
 
 
-module tx_testbench(i_clk, i_fscts, o_fsdi, o_fsclk);
+module tx_testbench(i_clk, i_fscts, o_fsdi, o_fsclk, debug_0);
 
 /* inputs/ ouputs/ parameters */
 input wire i_clk;
 input wire i_fscts;
 output wire o_fsdi;
 output wire o_fsclk;
+output wire debug_0;
 
 
 localparam TX_COUNT =1;
@@ -35,7 +36,8 @@ tx_fastserial tx_lite(  .i_clk(i_clk),
 						.i_data(tx_data),
 						.i_write(tx_write),
 						.o_busy(tx_busy),
-						.o_fsdi(o_fsdi));
+						.o_fsdi(o_fsdi),
+						.o_debug_0(debug_0));
 
 always @(posedge i_clk) begin
     if ( !tx_busy && !tx_write && tx_write_count!=TX_COUNT) begin

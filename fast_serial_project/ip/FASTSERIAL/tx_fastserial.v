@@ -58,23 +58,23 @@ output wire			  o_debug_0;
 
 
 	// Define several states
-localparam [3:0]   START	      = 4'h0,
-	                WAIT_FOR_FCTS	= 4'h1,
-	                BIT_ZERO	= 4'h2,
-	                BIT_ONE		= 4'h3,
-	                BIT_TWO	   = 4'h4,
-	                BIT_THREE	= 4'h5,
-                   BIT_FOUR   = 4'h6,
-	                BIT_FIVE   = 4'h7,
-	                BIT_SIX		= 4'h8,
-	                BIT_SEVEN	= 4'h9,
-	                BIT_DEST	= 4'hA,
-                   DONE       = 4'hB,
-	                IDLE	    	= 4'hf;
+localparam [3:0]  START	      	= 4'h0,
+	               WAIT_FOR_FCTS	= 4'h1,
+	               BIT_ZERO			= 4'h2,
+	               BIT_ONE			= 4'h3,
+	               BIT_TWO	   	= 4'h4,
+	               BIT_THREE		= 4'h5,
+                  BIT_FOUR   		= 4'h6,
+	               BIT_FIVE   		= 4'h7,
+	               BIT_SIX			= 4'h8,
+	               BIT_SEVEN		= 4'h9,
+	               BIT_DEST			= 4'hA,
+                  DONE      		= 4'hB,
+	               IDLE	    		= 4'hf;
 
 reg	[3:0]	state;
 reg	[7:0]	lcl_data;
-reg   d_fscts, q_fscts ;
+reg   q_fscts, d_fscts;
 reg	busy;
 reg	fsdi;
 reg   debug_0;
@@ -83,16 +83,16 @@ initial	busy = 1'b0;
 initial	state  = IDLE;
 initial	lcl_data = 8'hff;
 initial  fsdi = 1;
-initial  d_fscts = 1;
 initial  q_fscts = 1;
+initial debug_0 = 0;
 
-always @(posedge i_clk) begin
-	 q_fscts <= i_fscts;
-	debug_0 <= q_fscts;
-	
+/* use combinational logic  to get i_fscts*/
+always @(*) begin
+	d_fscts = i_fscts;
 end
 
 always @(posedge i_clk) begin
+	q_fscts <= d_fscts;
 
 	if ( (i_write) && (!busy)) begin
 			// Immediately start us off with a start bit
@@ -104,11 +104,10 @@ always @(posedge i_clk) begin
 		IDLE: begin  fsdi <= 1; end /* keep high */
 					
       START: begin
-			if (q_fscts && ~i_fsclk) begin
+			if (q_fscts && i_fsclk) begin
 				/* send start bit 0 */
 				fsdi <= 0;
-	         state <= state + 1;
-				//debug_0 <= 1;
+	      state <= BIT_ZERO;
 			end
 		end
 		
@@ -116,30 +115,34 @@ always @(posedge i_clk) begin
      /* wait for FSCTS to drop then start sending data */
     	if ( !q_fscts && i_fsclk) begin
 				state <= state +1;
+				
           end
        end    
 
        BIT_DEST: begin
-			if ( !q_fscts && ~i_fsclk) begin
-				fsdi <= DEST_PORT;
-				state <= state +1;
-			end
+				if ( !q_fscts && i_fsclk) begin
+					fsdi <= DEST_PORT;
+					state <= state +1;
+					debug_0 <= ~debug_0;
+				end
        end
 
-       DONE: begin
-			if ( !q_fscts && i_fsclk) begin
+       DONE: begin 
+				if ( !q_fscts && i_fsclk) begin
 					lcl_data <= 8'hff;
 					{ busy, state } <= { 1'b0, IDLE };
+					debug_0 <= 0;
            end 
         end
 
-         default: begin
+        default: begin
 				if ( state >= BIT_ZERO && state <= BIT_SEVEN) begin
 				/* wait for FSCTS to drop then start sending data */
-					if ( !q_fscts && !i_fsclk) begin
+					if ( i_fsclk) begin
 						state <= state +1;
 						fsdi <= lcl_data[0];
                   lcl_data <= { 1'b1, lcl_data[7:1] };
+						debug_0 <= ~debug_0;
 					end 
 				end
 			end
