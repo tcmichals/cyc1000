@@ -53,14 +53,16 @@ output wire [7:0]LED;
 wire CLK100M_0;
 wire CLK1M_1;
 
-
+reg write_once;
 reg [7:0]tx_data;
 wire [7:0]rx_data;
 reg tx_write;
 wire tx_busy;
 wire rx_ready;
+
 initial tx_data = "0";
 initial tx_write = 0;
+initial write_once = 0;
 
 PLL12M	PLL12M_inst (
 							.areset (  ),
@@ -70,25 +72,35 @@ PLL12M	PLL12M_inst (
 							.locked (  )
 						);
 
- clock_fastserial clock_for_fastserial(.i_clk(CLK100M_0), 
+ clock_fastserial clock_for_fastserial(.i_clk(CLK1M_1), 
 													.o_fsclk(BDBUS1));
 
-rx_fastserial rx_lite(.i_clk(CLK100M_0),
+rx_fastserial rx_lite(.i_clk(CLK1M_1),
 								.i_fsdo(BDBUS2),
 								.i_fsclk(BDBUS1),
 							   .o_data(rx_data),
-								.o_ready(rx_ready),
-								.o_debug0(AIN5),
-								.o_debug1(AIN6));
+								.o_ready(rx_ready));
 								
-tx_fastserial tx_lite(.i_clk(CLK100M_0),
+tx_fastserial tx_lite(.i_clk(CLK1M_1),
 							.i_fsclk(BDBUS1),
 							.i_fscts(BDBUS3),
 							.i_data(tx_data),
 							.i_write(tx_write),
 							.o_busy(tx_busy),
-							.o_fsdi(BDBUS0));
+							.o_fsdi(BDBUS0), 
+							.o_debug_0(AIN6));
+			
+always @(posedge CLK1M_1) begin
 
+	if (!tx_busy && !tx_write && !write_once) begin
+		tx_data <= "0";
+		tx_write <=1;
+		write_once <= 1;
+	end
+	else if (tx_busy )
+		tx_write <= 0;
+
+end	
 
 assign		LED[0] = rx_data[0];
 assign		LED[1] = rx_data[1];
@@ -98,12 +110,13 @@ assign		LED[4] = rx_data[4];
 assign		LED[5] = rx_data[5];
 assign		LED[6] = rx_data[6];
 assign		LED[7] = rx_data[7];
-//assign AIN0 = BDBUS0;
-assign AIN0 = CLK1M_1;
+
+assign AIN0 = BDBUS0;
 assign AIN1 = BDBUS1;
 assign AIN2 = BDBUS2;
 assign AIN3 = BDBUS3;
-assign AIN4 = rx_ready;
+assign AIN4 = tx_write;
+assign AIN5 = CLK1M_1;
 
 	
 
