@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy
+ date="2019.04.25.21:29:47"
+ outputDirectory="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/">
+ <perimeter>
+  <parameter
+     name="AUTO_GENERATION_ID"
+     type="Integer"
+     defaultValue="0"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_UNIQUE_ID"
+     type="String"
+     defaultValue=""
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_FAMILY"
+     type="String"
+     defaultValue="Cyclone 10 LP"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE"
+     type="String"
+     defaultValue="10CL025YU256C8G"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_DEVICE_SPEEDGRADE"
+     type="String"
+     defaultValue="8"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLK_CLOCK_RATE"
+     type="Long"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLK_CLOCK_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <parameter
+     name="AUTO_CLK_RESET_DOMAIN"
+     type="Integer"
+     defaultValue="-1"
+     onHdl="0"
+     affectsHdl="1" />
+  <interface name="clk" kind="clock" start="0">
+   <property name="clockRate" value="50000000" />
+   <property name="externallyDriven" value="false" />
+   <property name="ptfSchematicName" value="" />
+   <port name="clk_clk" direction="input" role="clk" width="1" />
+  </interface>
+  <interface name="in_bytes_stream" kind="avalon_streaming" start="0">
+   <property name="associatedClock" value="clk" />
+   <property name="associatedReset" value="reset" />
+   <property name="beatsPerCycle" value="1" />
+   <property name="dataBitsPerSymbol" value="8" />
+   <property name="emptyWithinPacket" value="false" />
+   <property name="errorDescriptor" value="" />
+   <property name="firstSymbolInHighOrderBits" value="true" />
+   <property name="highOrderSymbolAtMSB" value="false" />
+   <property name="maxChannel" value="0" />
+   <property name="packetDescription" value="" />
+   <property name="readyLatency" value="0" />
+   <property name="symbolsPerBeat" value="1" />
+   <port
+       name="in_bytes_stream_ready"
+       direction="output"
+       role="ready"
+       width="1" />
+   <port name="in_bytes_stream_valid" direction="input" role="valid" width="1" />
+   <port name="in_bytes_stream_data" direction="input" role="data" width="8" />
+  </interface>
+  <interface name="out_bytes_stream" kind="avalon_streaming" start="1">
+   <property name="associatedClock" value="clk" />
+   <property name="associatedReset" value="reset" />
+   <property name="beatsPerCycle" value="1" />
+   <property name="dataBitsPerSymbol" value="8" />
+   <property name="emptyWithinPacket" value="false" />
+   <property name="errorDescriptor" value="" />
+   <property name="firstSymbolInHighOrderBits" value="true" />
+   <property name="highOrderSymbolAtMSB" value="false" />
+   <property name="maxChannel" value="0" />
+   <property name="packetDescription" value="" />
+   <property name="readyLatency" value="0" />
+   <property name="symbolsPerBeat" value="1" />
+   <port
+       name="out_bytes_stream_ready"
+       direction="input"
+       role="ready"
+       width="1" />
+   <port
+       name="out_bytes_stream_valid"
+       direction="output"
+       role="valid"
+       width="1" />
+   <port name="out_bytes_stream_data" direction="output" role="data" width="8" />
+  </interface>
+  <interface name="reset" kind="reset" start="0">
+   <property name="associatedClock" value="" />
+   <property name="synchronousEdges" value="NONE" />
+   <port name="reset_reset_n" direction="input" role="reset_n" width="1" />
+  </interface>
+ </perimeter>
+ <entity
+   path=""
+   parameterizationKey="avalonBus:1.0:AUTO_CLK_CLOCK_DOMAIN=-1,AUTO_CLK_CLOCK_RATE=-1,AUTO_CLK_RESET_DOMAIN=-1,AUTO_DEVICE=10CL025YU256C8G,AUTO_DEVICE_FAMILY=Cyclone 10 LP,AUTO_DEVICE_SPEEDGRADE=8,AUTO_GENERATION_ID=1556245786,AUTO_UNIQUE_ID=(clock_source:18.1:clockFrequency=50000000,clockFrequencyKnown=true,inputClockFrequency=0,resetSynchronousEdges=NONE)(altera_avalon_packets_to_master:18.1:EXPORT_MASTER_SIGNALS=0,FAST_VER=0,FIFO_DEPTHS=2,FIFO_WIDTHU=1)(altera_avalon_st_bytes_to_packets:18.1:CHANNEL_WIDTH=8,CHANNEL_WIDTH_DERIVED=8,ENCODING=0)(altera_avalon_st_packets_to_bytes:18.1:CHANNEL_WIDTH=8,CHANNEL_WIDTH_DERIVED=8,ENCODING=0)(avalon_streaming:18.1:)(avalon_streaming:18.1:)(clock:18.1:)(clock:18.1:)(clock:18.1:)(reset:18.1:)(reset:18.1:)(reset:18.1:)"
+   instancePathKey="avalonBus"
+   kind="avalonBus"
+   version="1.0"
+   name="avalonBus">
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="-1" />
+  <parameter name="AUTO_GENERATION_ID" value="1556245786" />
+  <parameter name="AUTO_DEVICE" value="10CL025YU256C8G" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone 10 LP" />
+  <parameter name="AUTO_CLK_RESET_DOMAIN" value="-1" />
+  <parameter name="AUTO_CLK_CLOCK_DOMAIN" value="-1" />
+  <parameter name="AUTO_UNIQUE_ID" value="" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="8" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/avalonBus.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_avalon_packets_to_master.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_avalon_st_bytes_to_packets.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_avalon_st_packets_to_bytes.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter.v"
+       type="VERILOG" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_channel_adapter_0.sv"
+       type="SYSTEM_VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_001.v"
+       type="VERILOG" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0.sv"
+       type="SYSTEM_VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_reset_controller.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_reset_synchronizer.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_reset_controller.sdc"
+       type="SDC"
+       attributes="" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus.qsys" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/sopc_builder_ip/altera_avalon_packets_to_master/altera_avalon_packets_to_master_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/sopc_builder_ip/altera_avalon_st_bytes_to_packets/altera_avalon_st_bytes_to_packets_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/sopc_builder_ip/altera_avalon_st_packets_to_bytes/altera_avalon_st_packets_to_bytes_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_adapter/altera_avalon_st_adapter_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_channel_adapter/avalon-st_channel_adapter_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_adapter/altera_avalon_st_adapter_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_channel_adapter/avalon-st_channel_adapter_hw.tcl" />
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/merlin/altera_reset_controller/altera_reset_controller_hw.tcl" />
+  </childSourceFiles>
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 0 starting:avalonBus "avalonBus"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>4</b> modules, <b>8</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Info" culprit="avalon_st_adapter">Inserting channel_adapter: channel_adapter_0</message>
+   <message level="Debug" culprit="avalon_st_adapter.clk_bridge_0">Timing: ELA:1/0.001s</message>
+   <message level="Debug" culprit="avalon_st_adapter.rst_bridge_0">Timing: ELA:2/0.001s/0.001s</message>
+   <message level="Debug" culprit="avalon_st_adapter.channel_adapter_0">Timing: ELA:1/0.007s</message>
+   <message level="Debug" culprit="avalon_st_adapter">Timing: COM:3/0.020s/0.027s</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Info" culprit="avalon_st_adapter_001">Inserting channel_adapter: channel_adapter_0</message>
+   <message level="Debug" culprit="avalon_st_adapter_001.clk_bridge_0">Timing: ELA:1/0.001s</message>
+   <message level="Debug" culprit="avalon_st_adapter_001.rst_bridge_0">Timing: ELA:2/0.001s/0.001s</message>
+   <message level="Debug" culprit="avalon_st_adapter_001.channel_adapter_0">Timing: ELA:1/0.005s</message>
+   <message level="Debug" culprit="avalon_st_adapter_001">Timing: COM:3/0.015s/0.016s</message>
+   <message
+       level="Debug"
+       culprit="com_altera_sopcmodel_transforms_avalonst_AvalonStreamingTransform"><![CDATA[After transform: <b>6</b> modules, <b>14</b> connections]]></message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug" culprit="reset_adaptation_transform"><![CDATA[After transform: <b>7</b> modules, <b>16</b> connections]]></message>
+   <message level="Debug" culprit="avalonBus"><![CDATA["<b>avalonBus</b>" reuses <b>altera_avalon_packets_to_master</b> "<b>submodules/altera_avalon_packets_to_master</b>"]]></message>
+   <message level="Debug" culprit="avalonBus"><![CDATA["<b>avalonBus</b>" reuses <b>altera_avalon_st_bytes_to_packets</b> "<b>submodules/altera_avalon_st_bytes_to_packets</b>"]]></message>
+   <message level="Debug" culprit="avalonBus"><![CDATA["<b>avalonBus</b>" reuses <b>altera_avalon_st_packets_to_bytes</b> "<b>submodules/altera_avalon_st_packets_to_bytes</b>"]]></message>
+   <message level="Debug" culprit="avalonBus"><![CDATA["<b>avalonBus</b>" reuses <b>altera_avalon_st_adapter</b> "<b>submodules/avalonBus_avalon_st_adapter</b>"]]></message>
+   <message level="Debug" culprit="avalonBus"><![CDATA["<b>avalonBus</b>" reuses <b>altera_avalon_st_adapter</b> "<b>submodules/avalonBus_avalon_st_adapter_001</b>"]]></message>
+   <message level="Debug" culprit="avalonBus"><![CDATA["<b>avalonBus</b>" reuses <b>altera_reset_controller</b> "<b>submodules/altera_reset_controller</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 5 starting:altera_avalon_packets_to_master "submodules/altera_avalon_packets_to_master"</message>
+   <message level="Info" culprit="packets_to_master_0"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_packets_to_master</b> "<b>packets_to_master_0</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 4 starting:altera_avalon_st_bytes_to_packets "submodules/altera_avalon_st_bytes_to_packets"</message>
+   <message level="Info" culprit="st_bytes_to_packets_0"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_bytes_to_packets</b> "<b>st_bytes_to_packets_0</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 3 starting:altera_avalon_st_packets_to_bytes "submodules/altera_avalon_st_packets_to_bytes"</message>
+   <message level="Info" culprit="st_packets_to_bytes_0"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_packets_to_bytes</b> "<b>st_packets_to_bytes_0</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 2 starting:altera_avalon_st_adapter "submodules/avalonBus_avalon_st_adapter"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>3</b> modules, <b>3</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Debug" culprit="avalon_st_adapter"><![CDATA["<b>avalon_st_adapter</b>" reuses <b>channel_adapter</b> "<b>submodules/avalonBus_avalon_st_adapter_channel_adapter_0</b>"]]></message>
+   <message level="Info" culprit="avalon_st_adapter"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_adapter</b> "<b>avalon_st_adapter</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 1 starting:channel_adapter "submodules/avalonBus_avalon_st_adapter_channel_adapter_0"</message>
+   <message level="Info" culprit="channel_adapter_0"><![CDATA["<b>avalon_st_adapter</b>" instantiated <b>channel_adapter</b> "<b>channel_adapter_0</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 2 starting:altera_avalon_st_adapter "submodules/avalonBus_avalon_st_adapter_001"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>3</b> modules, <b>3</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Debug" culprit="avalon_st_adapter_001"><![CDATA["<b>avalon_st_adapter_001</b>" reuses <b>channel_adapter</b> "<b>submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0</b>"]]></message>
+   <message level="Info" culprit="avalon_st_adapter_001"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_adapter</b> "<b>avalon_st_adapter_001</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 0 starting:channel_adapter "submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0"</message>
+   <message level="Info" culprit="channel_adapter_0"><![CDATA["<b>avalon_st_adapter_001</b>" instantiated <b>channel_adapter</b> "<b>channel_adapter_0</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 2 starting:altera_reset_controller "submodules/altera_reset_controller"</message>
+   <message level="Info" culprit="rst_controller"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_reset_controller</b> "<b>rst_controller</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_avalon_packets_to_master:18.1:EXPORT_MASTER_SIGNALS=0,FAST_VER=0,FIFO_DEPTHS=2,FIFO_WIDTHU=1"
+   instancePathKey="avalonBus:.:packets_to_master_0"
+   kind="altera_avalon_packets_to_master"
+   version="18.1"
+   name="altera_avalon_packets_to_master">
+  <parameter name="EXPORT_MASTER_SIGNALS" value="0" />
+  <parameter name="FAST_VER" value="0" />
+  <parameter name="FIFO_WIDTHU" value="1" />
+  <parameter name="FIFO_DEPTHS" value="2" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_avalon_packets_to_master.v"
+       type="VERILOG"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/sopc_builder_ip/altera_avalon_packets_to_master/altera_avalon_packets_to_master_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="avalonBus" as="packets_to_master_0" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 5 starting:altera_avalon_packets_to_master "submodules/altera_avalon_packets_to_master"</message>
+   <message level="Info" culprit="packets_to_master_0"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_packets_to_master</b> "<b>packets_to_master_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_avalon_st_bytes_to_packets:18.1:CHANNEL_WIDTH=8,CHANNEL_WIDTH_DERIVED=8,ENCODING=0"
+   instancePathKey="avalonBus:.:st_bytes_to_packets_0"
+   kind="altera_avalon_st_bytes_to_packets"
+   version="18.1"
+   name="altera_avalon_st_bytes_to_packets">
+  <parameter name="CHANNEL_WIDTH_DERIVED" value="8" />
+  <parameter name="ENCODING" value="0" />
+  <parameter name="CHANNEL_WIDTH" value="8" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_avalon_st_bytes_to_packets.v"
+       type="VERILOG"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/sopc_builder_ip/altera_avalon_st_bytes_to_packets/altera_avalon_st_bytes_to_packets_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="avalonBus" as="st_bytes_to_packets_0" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 4 starting:altera_avalon_st_bytes_to_packets "submodules/altera_avalon_st_bytes_to_packets"</message>
+   <message level="Info" culprit="st_bytes_to_packets_0"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_bytes_to_packets</b> "<b>st_bytes_to_packets_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_avalon_st_packets_to_bytes:18.1:CHANNEL_WIDTH=8,CHANNEL_WIDTH_DERIVED=8,ENCODING=0"
+   instancePathKey="avalonBus:.:st_packets_to_bytes_0"
+   kind="altera_avalon_st_packets_to_bytes"
+   version="18.1"
+   name="altera_avalon_st_packets_to_bytes">
+  <parameter name="CHANNEL_WIDTH_DERIVED" value="8" />
+  <parameter name="ENCODING" value="0" />
+  <parameter name="CHANNEL_WIDTH" value="8" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_avalon_st_packets_to_bytes.v"
+       type="VERILOG"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/sopc_builder_ip/altera_avalon_st_packets_to_bytes/altera_avalon_st_packets_to_bytes_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="avalonBus" as="st_packets_to_bytes_0" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 3 starting:altera_avalon_st_packets_to_bytes "submodules/altera_avalon_st_packets_to_bytes"</message>
+   <message level="Info" culprit="st_packets_to_bytes_0"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_packets_to_bytes</b> "<b>st_packets_to_bytes_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_avalon_st_adapter:18.1:AUTO_DEVICE=10CL025YU256C8G,AUTO_DEVICE_FAMILY=Cyclone 10 LP,AUTO_DEVICE_SPEEDGRADE=,inBitsPerSymbol=8,inChannelWidth=8,inDataWidth=8,inEmptyWidth=1,inErrorDescriptor=,inErrorWidth=0,inMaxChannel=255,inReadyLatency=0,inUseEmptyPort=0,inUsePackets=1,inUseReady=1,inUseValid=1,outChannelWidth=0,outDataWidth=8,outEmptyWidth=1,outErrorDescriptor=,outErrorWidth=0,outMaxChannel=0,outReadyLatency=0,outUseEmptyPort=0,outUseReady=1,outUseValid=1(altera_clock_bridge:18.1:DERIVED_CLOCK_RATE=0,EXPLICIT_CLOCK_RATE=0,NUM_CLOCK_OUTPUTS=1)(altera_reset_bridge:18.1:ACTIVE_LOW_RESET=0,AUTO_CLK_CLOCK_RATE=0,NUM_RESET_OUTPUTS=1,SYNCHRONOUS_EDGES=deassert,USE_RESET_REQUEST=0)(channel_adapter:18.1:inBitsPerSymbol=8,inChannelWidth=8,inErrorDescriptor=,inErrorWidth=0,inMaxChannel=255,inReadyLatency=0,inSymbolsPerBeat=1,inUseEmpty=false,inUseEmptyPort=NO,inUsePackets=true,inUseReady=true,outChannelWidth=0,outMaxChannel=0)(clock:18.1:)(clock:18.1:)(reset:18.1:)"
+   instancePathKey="avalonBus:.:avalon_st_adapter"
+   kind="altera_avalon_st_adapter"
+   version="18.1"
+   name="avalonBus_avalon_st_adapter">
+  <parameter name="inUseValid" value="1" />
+  <parameter name="inBitsPerSymbol" value="8" />
+  <parameter name="outUseEmptyPort" value="0" />
+  <parameter name="inChannelWidth" value="8" />
+  <parameter name="outErrorWidth" value="0" />
+  <parameter name="outUseValid" value="1" />
+  <parameter name="outMaxChannel" value="0" />
+  <parameter name="inErrorDescriptor" value="" />
+  <parameter name="inUsePackets" value="1" />
+  <parameter name="inErrorWidth" value="0" />
+  <parameter name="inEmptyWidth" value="1" />
+  <parameter name="inUseReady" value="1" />
+  <parameter name="outReadyLatency" value="0" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone 10 LP" />
+  <parameter name="outDataWidth" value="8" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="" />
+  <parameter name="inUseEmptyPort" value="0" />
+  <parameter name="outChannelWidth" value="0" />
+  <parameter name="inMaxChannel" value="255" />
+  <parameter name="outUseReady" value="1" />
+  <parameter name="inReadyLatency" value="0" />
+  <parameter name="AUTO_DEVICE" value="10CL025YU256C8G" />
+  <parameter name="inDataWidth" value="8" />
+  <parameter name="outErrorDescriptor" value="" />
+  <parameter name="outEmptyWidth" value="1" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_channel_adapter_0.sv"
+       type="SYSTEM_VERILOG"
+       attributes="" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_adapter/altera_avalon_st_adapter_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_channel_adapter/avalon-st_channel_adapter_hw.tcl" />
+  </childSourceFiles>
+  <instantiator instantiator="avalonBus" as="avalon_st_adapter" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 2 starting:altera_avalon_st_adapter "submodules/avalonBus_avalon_st_adapter"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>3</b> modules, <b>3</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Debug" culprit="avalon_st_adapter"><![CDATA["<b>avalon_st_adapter</b>" reuses <b>channel_adapter</b> "<b>submodules/avalonBus_avalon_st_adapter_channel_adapter_0</b>"]]></message>
+   <message level="Info" culprit="avalon_st_adapter"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_adapter</b> "<b>avalon_st_adapter</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 1 starting:channel_adapter "submodules/avalonBus_avalon_st_adapter_channel_adapter_0"</message>
+   <message level="Info" culprit="channel_adapter_0"><![CDATA["<b>avalon_st_adapter</b>" instantiated <b>channel_adapter</b> "<b>channel_adapter_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_avalon_st_adapter:18.1:AUTO_DEVICE=10CL025YU256C8G,AUTO_DEVICE_FAMILY=Cyclone 10 LP,AUTO_DEVICE_SPEEDGRADE=,inBitsPerSymbol=8,inChannelWidth=0,inDataWidth=8,inEmptyWidth=1,inErrorDescriptor=,inErrorWidth=0,inMaxChannel=0,inReadyLatency=0,inUseEmptyPort=0,inUsePackets=1,inUseReady=1,inUseValid=1,outChannelWidth=8,outDataWidth=8,outEmptyWidth=1,outErrorDescriptor=,outErrorWidth=0,outMaxChannel=255,outReadyLatency=0,outUseEmptyPort=0,outUseReady=1,outUseValid=1(altera_clock_bridge:18.1:DERIVED_CLOCK_RATE=0,EXPLICIT_CLOCK_RATE=0,NUM_CLOCK_OUTPUTS=1)(altera_reset_bridge:18.1:ACTIVE_LOW_RESET=0,AUTO_CLK_CLOCK_RATE=0,NUM_RESET_OUTPUTS=1,SYNCHRONOUS_EDGES=deassert,USE_RESET_REQUEST=0)(channel_adapter:18.1:inBitsPerSymbol=8,inChannelWidth=0,inErrorDescriptor=,inErrorWidth=0,inMaxChannel=0,inReadyLatency=0,inSymbolsPerBeat=1,inUseEmpty=false,inUseEmptyPort=NO,inUsePackets=true,inUseReady=true,outChannelWidth=8,outMaxChannel=255)(clock:18.1:)(clock:18.1:)(reset:18.1:)"
+   instancePathKey="avalonBus:.:avalon_st_adapter_001"
+   kind="altera_avalon_st_adapter"
+   version="18.1"
+   name="avalonBus_avalon_st_adapter_001">
+  <parameter name="inUseValid" value="1" />
+  <parameter name="inBitsPerSymbol" value="8" />
+  <parameter name="outUseEmptyPort" value="0" />
+  <parameter name="inChannelWidth" value="0" />
+  <parameter name="outErrorWidth" value="0" />
+  <parameter name="outUseValid" value="1" />
+  <parameter name="outMaxChannel" value="255" />
+  <parameter name="inErrorDescriptor" value="" />
+  <parameter name="inUsePackets" value="1" />
+  <parameter name="inErrorWidth" value="0" />
+  <parameter name="inEmptyWidth" value="1" />
+  <parameter name="inUseReady" value="1" />
+  <parameter name="outReadyLatency" value="0" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Cyclone 10 LP" />
+  <parameter name="outDataWidth" value="8" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="" />
+  <parameter name="inUseEmptyPort" value="0" />
+  <parameter name="outChannelWidth" value="8" />
+  <parameter name="inMaxChannel" value="0" />
+  <parameter name="outUseReady" value="1" />
+  <parameter name="inReadyLatency" value="0" />
+  <parameter name="AUTO_DEVICE" value="10CL025YU256C8G" />
+  <parameter name="inDataWidth" value="8" />
+  <parameter name="outErrorDescriptor" value="" />
+  <parameter name="outEmptyWidth" value="1" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_001.v"
+       type="VERILOG" />
+  </generatedFiles>
+  <childGeneratedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0.sv"
+       type="SYSTEM_VERILOG"
+       attributes="" />
+  </childGeneratedFiles>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_adapter/altera_avalon_st_adapter_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_channel_adapter/avalon-st_channel_adapter_hw.tcl" />
+  </childSourceFiles>
+  <instantiator instantiator="avalonBus" as="avalon_st_adapter_001" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 2 starting:altera_avalon_st_adapter "submodules/avalonBus_avalon_st_adapter_001"</message>
+   <message level="Progress" culprit="min"></message>
+   <message level="Progress" culprit="max"></message>
+   <message level="Progress" culprit="current"></message>
+   <message level="Debug">Transform: CustomInstructionTransform</message>
+   <message level="Debug">No custom instruction connections, skipping transform </message>
+   <message level="Debug" culprit="merlin_custom_instruction_transform"><![CDATA[After transform: <b>3</b> modules, <b>3</b> connections]]></message>
+   <message level="Debug">Transform: MMTransform</message>
+   <message level="Debug">Transform: InterruptMapperTransform</message>
+   <message level="Debug">Transform: InterruptSyncTransform</message>
+   <message level="Debug">Transform: InterruptFanoutTransform</message>
+   <message level="Debug">Transform: AvalonStreamingTransform</message>
+   <message level="Debug">Transform: ResetAdaptation</message>
+   <message level="Debug" culprit="avalon_st_adapter_001"><![CDATA["<b>avalon_st_adapter_001</b>" reuses <b>channel_adapter</b> "<b>submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0</b>"]]></message>
+   <message level="Info" culprit="avalon_st_adapter_001"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_avalon_st_adapter</b> "<b>avalon_st_adapter_001</b>"]]></message>
+   <message level="Debug" culprit="avalonBus">queue size: 0 starting:channel_adapter "submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0"</message>
+   <message level="Info" culprit="channel_adapter_0"><![CDATA["<b>avalon_st_adapter_001</b>" instantiated <b>channel_adapter</b> "<b>channel_adapter_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="altera_reset_controller:18.1:ADAPT_RESET_REQUEST=0,MIN_RST_ASSERTION_TIME=3,NUM_RESET_INPUTS=1,OUTPUT_RESET_SYNC_EDGES=deassert,RESET_REQUEST_PRESENT=0,RESET_REQ_EARLY_DSRT_TIME=1,RESET_REQ_WAIT_TIME=1,SYNC_DEPTH=2,USE_RESET_REQUEST_IN0=0,USE_RESET_REQUEST_IN1=0,USE_RESET_REQUEST_IN10=0,USE_RESET_REQUEST_IN11=0,USE_RESET_REQUEST_IN12=0,USE_RESET_REQUEST_IN13=0,USE_RESET_REQUEST_IN14=0,USE_RESET_REQUEST_IN15=0,USE_RESET_REQUEST_IN2=0,USE_RESET_REQUEST_IN3=0,USE_RESET_REQUEST_IN4=0,USE_RESET_REQUEST_IN5=0,USE_RESET_REQUEST_IN6=0,USE_RESET_REQUEST_IN7=0,USE_RESET_REQUEST_IN8=0,USE_RESET_REQUEST_IN9=0,USE_RESET_REQUEST_INPUT=0"
+   instancePathKey="avalonBus:.:rst_controller"
+   kind="altera_reset_controller"
+   version="18.1"
+   name="altera_reset_controller">
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_reset_controller.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_reset_synchronizer.v"
+       type="VERILOG"
+       attributes="" />
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/altera_reset_controller.sdc"
+       type="SDC"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/merlin/altera_reset_controller/altera_reset_controller_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="avalonBus" as="rst_controller" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 2 starting:altera_reset_controller "submodules/altera_reset_controller"</message>
+   <message level="Info" culprit="rst_controller"><![CDATA["<b>avalonBus</b>" instantiated <b>altera_reset_controller</b> "<b>rst_controller</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="channel_adapter:18.1:inBitsPerSymbol=8,inChannelWidth=8,inErrorDescriptor=,inErrorWidth=0,inMaxChannel=255,inReadyLatency=0,inSymbolsPerBeat=1,inUseEmpty=false,inUseEmptyPort=NO,inUsePackets=true,inUseReady=true,outChannelWidth=0,outMaxChannel=0"
+   instancePathKey="avalonBus:.:avalon_st_adapter:.:channel_adapter_0"
+   kind="channel_adapter"
+   version="18.1"
+   name="avalonBus_avalon_st_adapter_channel_adapter_0">
+  <parameter name="inErrorWidth" value="0" />
+  <parameter name="inUseReady" value="true" />
+  <parameter name="inBitsPerSymbol" value="8" />
+  <parameter name="inChannelWidth" value="8" />
+  <parameter name="inSymbolsPerBeat" value="1" />
+  <parameter name="outChannelWidth" value="0" />
+  <parameter name="inUseEmptyPort" value="NO" />
+  <parameter name="inMaxChannel" value="255" />
+  <parameter name="inReadyLatency" value="0" />
+  <parameter name="outMaxChannel" value="0" />
+  <parameter name="inUseEmpty" value="false" />
+  <parameter name="inErrorDescriptor" value="" />
+  <parameter name="inUsePackets" value="true" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_channel_adapter_0.sv"
+       type="SYSTEM_VERILOG"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_channel_adapter/avalon-st_channel_adapter_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="avalonBus_avalon_st_adapter" as="channel_adapter_0" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 1 starting:channel_adapter "submodules/avalonBus_avalon_st_adapter_channel_adapter_0"</message>
+   <message level="Info" culprit="channel_adapter_0"><![CDATA["<b>avalon_st_adapter</b>" instantiated <b>channel_adapter</b> "<b>channel_adapter_0</b>"]]></message>
+  </messages>
+ </entity>
+ <entity
+   path="submodules/"
+   parameterizationKey="channel_adapter:18.1:inBitsPerSymbol=8,inChannelWidth=0,inErrorDescriptor=,inErrorWidth=0,inMaxChannel=0,inReadyLatency=0,inSymbolsPerBeat=1,inUseEmpty=false,inUseEmptyPort=NO,inUsePackets=true,inUseReady=true,outChannelWidth=8,outMaxChannel=255"
+   instancePathKey="avalonBus:.:avalon_st_adapter_001:.:channel_adapter_0"
+   kind="channel_adapter"
+   version="18.1"
+   name="avalonBus_avalon_st_adapter_001_channel_adapter_0">
+  <parameter name="inErrorWidth" value="0" />
+  <parameter name="inUseReady" value="true" />
+  <parameter name="inBitsPerSymbol" value="8" />
+  <parameter name="inChannelWidth" value="0" />
+  <parameter name="inSymbolsPerBeat" value="1" />
+  <parameter name="outChannelWidth" value="8" />
+  <parameter name="inUseEmptyPort" value="NO" />
+  <parameter name="inMaxChannel" value="0" />
+  <parameter name="inReadyLatency" value="0" />
+  <parameter name="outMaxChannel" value="255" />
+  <parameter name="inUseEmpty" value="false" />
+  <parameter name="inErrorDescriptor" value="" />
+  <parameter name="inUsePackets" value="true" />
+  <generatedFiles>
+   <file
+       path="/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis/submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0.sv"
+       type="SYSTEM_VERILOG"
+       attributes="" />
+  </generatedFiles>
+  <childGeneratedFiles/>
+  <sourceFiles>
+   <file
+       path="/home/tcmichals/intelFPGA_lite/18.1/ip/altera/avalon_st/altera_avalon_st_channel_adapter/avalon-st_channel_adapter_hw.tcl" />
+  </sourceFiles>
+  <childSourceFiles/>
+  <instantiator instantiator="avalonBus_avalon_st_adapter_001" as="channel_adapter_0" />
+  <messages>
+   <message level="Debug" culprit="avalonBus">queue size: 0 starting:channel_adapter "submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0"</message>
+   <message level="Info" culprit="channel_adapter_0"><![CDATA["<b>avalon_st_adapter_001</b>" instantiated <b>channel_adapter</b> "<b>channel_adapter_0</b>"]]></message>
+  </messages>
+ </entity>
+</deploy>

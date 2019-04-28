@@ -1,0 +1,53 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "BDBUS0",
+					"strict" : false
+				},
+				{
+					"name" : "BDBUS1",
+					"strict" : false
+				},
+				{
+					"name" : "AIN6",
+					"strict" : false
+				},
+				{
+					"name" : "D0",
+					"strict" : false
+				},
+				{
+					"name" : "D1",
+					"strict" : false
+				},
+				{
+					"name" : "D2",
+					"strict" : false
+				},
+				{
+					"name" : "D3",
+					"strict" : false
+				},
+				{
+					"name" : "D4",
+					"strict" : false
+				},
+				{
+					"name" : "D5",
+					"strict" : false
+				},
+				{
+					"name" : "BDBUS3",
+					"strict" : false
+				},
+				{
+					"name" : "BDBUS2",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

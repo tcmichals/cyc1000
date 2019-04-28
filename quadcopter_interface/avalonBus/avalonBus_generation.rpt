@@ -1,0 +1,114 @@
+Info: Starting: Create simulation model
+Info: qsys-generate /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus.qsys --simulation=VERILOG --allow-mixed-language-simulation --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading quadcopter_interface/avalonBus.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding packets_to_master_0 [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module packets_to_master_0
+Progress: Adding st_bytes_to_packets_0 [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module st_bytes_to_packets_0
+Progress: Adding st_packets_to_bytes_0 [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module st_packets_to_bytes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: avalonBus.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: avalonBus.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: avalonBus.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: avalonBus.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Warning: avalonBus.packets_to_master_0: packets_to_master_0.avalon_master must be connected to an Avalon-MM slave
+Info: avalonBus: Generating avalonBus "avalonBus" for SIM_VERILOG
+Info: avalon_st_adapter: Inserting channel_adapter: channel_adapter_0
+Info: avalon_st_adapter_001: Inserting channel_adapter: channel_adapter_0
+Info: packets_to_master_0: "avalonBus" instantiated altera_avalon_packets_to_master "packets_to_master_0"
+Info: st_bytes_to_packets_0: "avalonBus" instantiated altera_avalon_st_bytes_to_packets "st_bytes_to_packets_0"
+Info: st_packets_to_bytes_0: "avalonBus" instantiated altera_avalon_st_packets_to_bytes "st_packets_to_bytes_0"
+Info: avalon_st_adapter: "avalonBus" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_001: "avalonBus" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
+Info: rst_controller: "avalonBus" instantiated altera_reset_controller "rst_controller"
+Info: channel_adapter_0: "avalon_st_adapter" instantiated channel_adapter "channel_adapter_0"
+Info: channel_adapter_0: "avalon_st_adapter_001" instantiated channel_adapter "channel_adapter_0"
+Info: avalonBus: Done "avalonBus" with 9 modules, 11 files
+Info: qsys-generate succeeded.
+Info: Finished: Create simulation model
+Info: Starting: Create Modelsim Project.
+Info: sim-script-gen --spd=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/avalonBus.spd --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ --use-relative-paths=true
+Info: Doing: ip-make-simscript --spd=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/avalonBus.spd --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ --use-relative-paths=true
+Info: Generating the following file(s) for MODELSIM simulator in /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ directory:
+Info: 	mentor/msim_setup.tcl
+Info: Generating the following file(s) for VCS simulator in /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ directory:
+Info: 	synopsys/vcs/vcs_setup.sh
+Info: Generating the following file(s) for VCSMX simulator in /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ directory:
+Info: 	synopsys/vcsmx/synopsys_sim.setup
+Info: 	synopsys/vcsmx/vcsmx_setup.sh
+Info: Generating the following file(s) for NCSIM simulator in /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ directory:
+Info: 	cadence/cds.lib
+Info: 	cadence/hdl.var
+Info: 	cadence/ncsim_setup.sh
+Info: 	7 .cds.lib files in cadence/cds_libs/ directory
+Info: Generating the following file(s) for RIVIERA simulator in /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/ directory:
+Info: 	aldec/rivierapro_setup.tcl
+Info: For information on how to simulate your IP, see the explanatory comments in the simulator-specific subdirectories under /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/simulation/.
+Info: Regenerate these scripts whenever you make any change to any Quartus-generated IP in your project.
+Info: Finished: Create Modelsim Project.
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus.qsys --block-symbol-file --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading quadcopter_interface/avalonBus.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding packets_to_master_0 [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module packets_to_master_0
+Progress: Adding st_bytes_to_packets_0 [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module st_bytes_to_packets_0
+Progress: Adding st_packets_to_bytes_0 [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module st_packets_to_bytes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: avalonBus.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: avalonBus.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: avalonBus.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: avalonBus.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Warning: avalonBus.packets_to_master_0: packets_to_master_0.avalon_master must be connected to an Avalon-MM slave
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus.qsys --synthesis=VERILOG --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/quadcopter_interface/avalonBus/synthesis --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading quadcopter_interface/avalonBus.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding packets_to_master_0 [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module packets_to_master_0
+Progress: Adding st_bytes_to_packets_0 [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module st_bytes_to_packets_0
+Progress: Adding st_packets_to_bytes_0 [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module st_packets_to_bytes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: avalonBus.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: avalonBus.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: avalonBus.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: avalonBus.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Warning: avalonBus.packets_to_master_0: packets_to_master_0.avalon_master must be connected to an Avalon-MM slave
+Info: avalonBus: Generating avalonBus "avalonBus" for QUARTUS_SYNTH
+Info: avalon_st_adapter: Inserting channel_adapter: channel_adapter_0
+Info: avalon_st_adapter_001: Inserting channel_adapter: channel_adapter_0
+Info: packets_to_master_0: "avalonBus" instantiated altera_avalon_packets_to_master "packets_to_master_0"
+Info: st_bytes_to_packets_0: "avalonBus" instantiated altera_avalon_st_bytes_to_packets "st_bytes_to_packets_0"
+Info: st_packets_to_bytes_0: "avalonBus" instantiated altera_avalon_st_packets_to_bytes "st_packets_to_bytes_0"
+Info: avalon_st_adapter: "avalonBus" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_001: "avalonBus" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
+Info: rst_controller: "avalonBus" instantiated altera_reset_controller "rst_controller"
+Info: channel_adapter_0: "avalon_st_adapter" instantiated channel_adapter "channel_adapter_0"
+Info: channel_adapter_0: "avalon_st_adapter_001" instantiated channel_adapter "channel_adapter_0"
+Info: avalonBus: Done "avalonBus" with 9 modules, 11 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

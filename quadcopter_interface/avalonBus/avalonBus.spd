@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<simPackage>
+ <file
+   path="simulation/submodules/avalonBus_avalon_st_adapter_001_channel_adapter_0.sv"
+   type="SYSTEM_VERILOG"
+   library="channel_adapter_0" />
+ <file
+   path="simulation/submodules/avalonBus_avalon_st_adapter_channel_adapter_0.sv"
+   type="SYSTEM_VERILOG"
+   library="channel_adapter_0" />
+ <file
+   path="simulation/submodules/altera_reset_controller.v"
+   type="VERILOG"
+   library="rst_controller" />
+ <file
+   path="simulation/submodules/altera_reset_synchronizer.v"
+   type="VERILOG"
+   library="rst_controller" />
+ <file
+   path="simulation/submodules/altera_reset_controller.sdc"
+   type="SDC"
+   library="rst_controller" />
+ <file
+   path="simulation/submodules/avalonBus_avalon_st_adapter_001.v"
+   type="VERILOG"
+   library="avalon_st_adapter_001" />
+ <file
+   path="simulation/submodules/avalonBus_avalon_st_adapter.v"
+   type="VERILOG"
+   library="avalon_st_adapter" />
+ <file
+   path="simulation/submodules/altera_avalon_st_packets_to_bytes.v"
+   type="VERILOG"
+   library="st_packets_to_bytes_0" />
+ <file
+   path="simulation/submodules/altera_avalon_st_bytes_to_packets.v"
+   type="VERILOG"
+   library="st_bytes_to_packets_0" />
+ <file
+   path="simulation/submodules/altera_avalon_packets_to_master.v"
+   type="VERILOG"
+   library="packets_to_master_0" />
+ <file path="simulation/avalonBus.v" type="VERILOG" />
+ <topLevel name="avalonBus" />
+ <deviceFamily name="cyclone10lp" />
+</simPackage>
