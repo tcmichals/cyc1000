@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE 10CL025YU256C8G
 set_global_assignment -name TOP_LEVEL_ENTITY fast_serial_test
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 18.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:44:47  MARCH 30, 2019"
-set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.1 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -254,10 +254,10 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name VERILOG_FILE fast_serial_test.v
 set_global_assignment -name VERILOG_FILE ip/FASTSERIAL/clock_fastserial.v
 set_global_assignment -name VERILOG_FILE ip/FASTSERIAL/tx_fastserial.v
 set_global_assignment -name VERILOG_FILE ip/FASTSERIAL/rx_fastserial.v
 set_global_assignment -name VERILOG_FILE ../quadcopter_interface/ip/SIMPLEDIVIDER/simple_divider.v
-set_global_assignment -name VERILOG_FILE constraints/fast_serial_test.v
 set_global_assignment -name QIP_FILE PLL12M.qip
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -1,8 +1,8 @@
 
 
-module rxtx_fastserial(i_clk):
+module rxtx_fastserial();
 
 
 
 
-end module
+endmodule
