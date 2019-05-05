@@ -29,7 +29,6 @@ module quadcopter_interface(CLK12M,
 input wire CLK12M;
 input wire USER_BTN;
 
-
 input wire SEN_INT1;
 input wire SEN_INT2;
 input wire SEN_SDI;
@@ -66,14 +65,10 @@ wire tx_busy;
 wire rx_ready;
 wire o_in_bytes_stream_ready;
 
-reg [3:0] counter;
-initial counter=0;
-wire [6:0] segment_output;
-reg toggle_ready;
 
 initial tx_data = "0";
 initial tx_write = 0;
-initial toggle_ready =0;
+
 
 PLL12M	PLL12M_inst (.areset (  ),
 							.inclk0 ( CLK12M ),
@@ -102,7 +97,6 @@ tx_fastserial tx_lite(.i_clk(CLK100M_0),
 							.o_debug_0());
 
 
-decoder_7_seg segment( .CLK(CLK100M_0), .D(counter), .SEG(segment_output));							
 			
 avalonBus u0 (
 		.clk_clk                (CLK100M_0),        				//              clk.clk
@@ -117,20 +111,20 @@ avalonBus u0 (
 
 
 	
-assign AIN0 = segment_output[0];
-assign AIN1 = segment_output[1];
-assign AIN2 = segment_output[2];
-assign AIN3 = segment_output[3];
-assign AIN4 = segment_output[4];
-assign AIN5 = segment_output[5];
-assign AIN6 = segment_output[6];
+assign AIN0 = tx_busy;
+assign AIN1 = tx_write;
+assign AIN2 = tx_data[0];
+assign AIN3 = tx_data[1];
+assign AIN4 = tx_data[2];
+assign AIN5 = tx_data[3];
+assign AIN6 = tx_data[4];
 
-assign D0 = tx_busy;
-assign D1 = rx_ready;
-assign D2 = rx_data[4];
-assign D3 = rx_data[5];
-assign D4 = rx_data[6];
-assign D5 = rx_data[7];
+assign D0 = tx_data[5];
+assign D1 = 0;
+assign D2 = 0;
+assign D3 = 0;
+assign D4 = 0;
+assign D5 = 0;
 
 assign r_reset = 1'b1;
 endmodule

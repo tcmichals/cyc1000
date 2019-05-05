@@ -21,7 +21,7 @@ async def start(args):
         test = avalon.Transport(reader=reader, writer=writer)
         test.start_reader_task()
         data = bytearray()
-        test.transaction_channel_write(0, data, transaction=avalon.AvalonBus.LOOP_BACK)
+        test.transaction_channel_write(0, data, transaction=avalon.AvalonBus.LOOP_BACK, length=0x5A)
         await asyncio.sleep(1)
         test.close()
         test = None
