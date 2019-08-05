@@ -1,0 +1,16 @@
+	component led_example is
+		port (
+			blinkt_led_serial_serial_clk            : out std_logic;                                       -- serial_clk
+			blinkt_led_serial_serial_data           : out std_logic;                                       -- serial_data
+			bytes_to_packets_in_bytes_stream_ready  : out std_logic;                                       -- ready
+			bytes_to_packets_in_bytes_stream_valid  : in  std_logic                    := 'X';             -- valid
+			bytes_to_packets_in_bytes_stream_data   : in  std_logic_vector(7 downto 0) := (others => 'X'); -- data
+			clk_clk                                 : in  std_logic                    := 'X';             -- clk
+			packets_to_bytes_out_bytes_stream_ready : in  std_logic                    := 'X';             -- ready
+			packets_to_bytes_out_bytes_stream_valid : out std_logic;                                       -- valid
+			packets_to_bytes_out_bytes_stream_data  : out std_logic_vector(7 downto 0);                    -- data
+			reset_reset_n                           : in  std_logic                    := 'X';             -- reset_n
+			simple_leds_leds                        : out std_logic_vector(7 downto 0)                     -- leds
+		);
+	end component led_example;
+

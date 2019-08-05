@@ -1,0 +1,68 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/example_project/led_example.qsys --block-symbol-file --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/example_project/led_example --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading example_project/led_example.qsys
+Progress: Reading input file
+Progress: Adding bytes_to_packets [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module bytes_to_packets
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding master [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module master
+Progress: Adding packets_to_bytes [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module packets_to_bytes
+Progress: Adding simple_led_0 [simple_led 1.0]
+Progress: Parameterizing module simple_led_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: led_example.bytes_to_packets.out_packets_stream/master.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: led_example.bytes_to_packets.out_packets_stream/master.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: led_example.master.out_stream/packets_to_bytes.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: led_example.master.out_stream/packets_to_bytes.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/example_project/led_example.qsys --synthesis=VERILOG --output-directory=/media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/cyc1000/example_project/led_example/synthesis --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading example_project/led_example.qsys
+Progress: Reading input file
+Progress: Adding bytes_to_packets [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module bytes_to_packets
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding master [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module master
+Progress: Adding packets_to_bytes [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module packets_to_bytes
+Progress: Adding simple_led_0 [simple_led 1.0]
+Progress: Parameterizing module simple_led_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: led_example.bytes_to_packets.out_packets_stream/master.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: led_example.bytes_to_packets.out_packets_stream/master.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: led_example.master.out_stream/packets_to_bytes.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: led_example.master.out_stream/packets_to_bytes.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Info: led_example: Generating led_example "led_example" for QUARTUS_SYNTH
+Info: Interconnect is inserted between master master.avalon_master and slave simple_led_0.avs_s0 because the master has address signal 32 bit wide, but the slave is 4 bit wide.
+Info: Interconnect is inserted between master master.avalon_master and slave simple_led_0.avs_s0 because the master has readdatavalid signal 1 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master master.avalon_master and slave simple_led_0.avs_s0 because the master has byteenable signal 4 bit wide, but the slave is 0 bit wide.
+Info: avalon_st_adapter: Inserting channel_adapter: channel_adapter_0
+Info: avalon_st_adapter_001: Inserting channel_adapter: channel_adapter_0
+Info: bytes_to_packets: "led_example" instantiated altera_avalon_st_bytes_to_packets "bytes_to_packets"
+Info: master: "led_example" instantiated altera_avalon_packets_to_master "master"
+Info: packets_to_bytes: "led_example" instantiated altera_avalon_st_packets_to_bytes "packets_to_bytes"
+Info: simple_led_0: "led_example" instantiated simple_led "simple_led_0"
+Info: mm_interconnect_0: "led_example" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: avalon_st_adapter: "led_example" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_001: "led_example" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
+Info: rst_controller: "led_example" instantiated altera_reset_controller "rst_controller"
+Info: master_avalon_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "master_avalon_master_translator"
+Info: simple_led_0_avs_s0_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "simple_led_0_avs_s0_translator"
+Info: channel_adapter_0: "avalon_st_adapter" instantiated channel_adapter "channel_adapter_0"
+Info: channel_adapter_0: "avalon_st_adapter_001" instantiated channel_adapter "channel_adapter_0"
+Info: led_example: Done "led_example" with 13 modules, 15 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

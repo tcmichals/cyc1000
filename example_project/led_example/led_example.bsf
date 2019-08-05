@@ -1,0 +1,144 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 592 312)
+	(text "led_example" (rect 260 -1 309 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 296 20 308)(font "Arial" ))
+	(port
+		(pt 0 144)
+		(input)
+		(text "bytes_to_packets_in_bytes_stream_valid" (rect 0 0 169 12)(font "Arial" (font_size 8)))
+		(text "bytes_to_packets_in_bytes_stream_valid" (rect 4 133 232 144)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 240 144)(line_width 1))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "bytes_to_packets_in_bytes_stream_data[7..0]" (rect 0 0 188 12)(font "Arial" (font_size 8)))
+		(text "bytes_to_packets_in_bytes_stream_data[7..0]" (rect 4 149 262 160)(font "Arial" (font_size 8)))
+		(line (pt 0 160)(pt 240 160)(line_width 3))
+	)
+	(port
+		(pt 0 200)
+		(input)
+		(text "clk_clk" (rect 0 0 27 12)(font "Arial" (font_size 8)))
+		(text "clk_clk" (rect 4 189 46 200)(font "Arial" (font_size 8)))
+		(line (pt 0 200)(pt 240 200)(line_width 1))
+	)
+	(port
+		(pt 592 72)
+		(input)
+		(text "packets_to_bytes_out_bytes_stream_ready" (rect 0 0 181 12)(font "Arial" (font_size 8)))
+		(text "packets_to_bytes_out_bytes_stream_ready" (rect 371 61 605 72)(font "Arial" (font_size 8)))
+		(line (pt 592 72)(pt 336 72)(line_width 1))
+	)
+	(port
+		(pt 0 240)
+		(input)
+		(text "reset_reset_n" (rect 0 0 56 12)(font "Arial" (font_size 8)))
+		(text "reset_reset_n" (rect 4 229 82 240)(font "Arial" (font_size 8)))
+		(line (pt 0 240)(pt 240 240)(line_width 1))
+	)
+	(port
+		(pt 0 72)
+		(output)
+		(text "blinkt_led_serial_serial_clk" (rect 0 0 103 12)(font "Arial" (font_size 8)))
+		(text "blinkt_led_serial_serial_clk" (rect 4 61 172 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 240 72)(line_width 1))
+	)
+	(port
+		(pt 0 88)
+		(output)
+		(text "blinkt_led_serial_serial_data" (rect 0 0 109 12)(font "Arial" (font_size 8)))
+		(text "blinkt_led_serial_serial_data" (rect 4 77 178 88)(font "Arial" (font_size 8)))
+		(line (pt 0 88)(pt 240 88)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(output)
+		(text "bytes_to_packets_in_bytes_stream_ready" (rect 0 0 175 12)(font "Arial" (font_size 8)))
+		(text "bytes_to_packets_in_bytes_stream_ready" (rect 4 117 232 128)(font "Arial" (font_size 8)))
+		(line (pt 0 128)(pt 240 128)(line_width 1))
+	)
+	(port
+		(pt 592 88)
+		(output)
+		(text "packets_to_bytes_out_bytes_stream_valid" (rect 0 0 175 12)(font "Arial" (font_size 8)))
+		(text "packets_to_bytes_out_bytes_stream_valid" (rect 377 77 611 88)(font "Arial" (font_size 8)))
+		(line (pt 592 88)(pt 336 88)(line_width 1))
+	)
+	(port
+		(pt 592 104)
+		(output)
+		(text "packets_to_bytes_out_bytes_stream_data[7..0]" (rect 0 0 194 12)(font "Arial" (font_size 8)))
+		(text "packets_to_bytes_out_bytes_stream_data[7..0]" (rect 354 93 618 104)(font "Arial" (font_size 8)))
+		(line (pt 592 104)(pt 336 104)(line_width 3))
+	)
+	(port
+		(pt 0 280)
+		(output)
+		(text "simple_leds_leds[7..0]" (rect 0 0 87 12)(font "Arial" (font_size 8)))
+		(text "simple_leds_leds[7..0]" (rect 4 269 136 280)(font "Arial" (font_size 8)))
+		(line (pt 0 280)(pt 240 280)(line_width 3))
+	)
+	(drawing
+		(text "blinkt_led_serial" (rect 145 43 392 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "serial_clk" (rect 245 67 550 144)(font "Arial" (color 0 0 0)))
+		(text "serial_data" (rect 245 83 556 176)(font "Arial" (color 0 0 0)))
+		(text "bytes_to_packets_in_bytes_stream" (rect 32 99 256 211)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "ready" (rect 245 123 520 256)(font "Arial" (color 0 0 0)))
+		(text "valid" (rect 245 139 520 288)(font "Arial" (color 0 0 0)))
+		(text "data" (rect 245 155 514 320)(font "Arial" (color 0 0 0)))
+		(text "clk" (rect 225 171 468 355)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 245 195 508 400)(font "Arial" (color 0 0 0)))
+		(text "packets_to_bytes_out_bytes_stream" (rect 337 43 872 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "ready" (rect 308 67 646 144)(font "Arial" (color 0 0 0)))
+		(text "valid" (rect 313 83 656 176)(font "Arial" (color 0 0 0)))
+		(text "data" (rect 315 99 654 208)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 211 211 452 435)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset_n" (rect 245 235 532 480)(font "Arial" (color 0 0 0)))
+		(text "simple_leds" (rect 171 251 408 515)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "leds" (rect 245 275 514 560)(font "Arial" (color 0 0 0)))
+		(text " led_example " (rect 536 296 1150 602)(font "Arial" ))
+		(line (pt 240 32)(pt 336 32)(line_width 1))
+		(line (pt 336 32)(pt 336 296)(line_width 1))
+		(line (pt 240 296)(pt 336 296)(line_width 1))
+		(line (pt 240 32)(pt 240 296)(line_width 1))
+		(line (pt 241 52)(pt 241 92)(line_width 1))
+		(line (pt 242 52)(pt 242 92)(line_width 1))
+		(line (pt 241 108)(pt 241 164)(line_width 1))
+		(line (pt 242 108)(pt 242 164)(line_width 1))
+		(line (pt 241 180)(pt 241 204)(line_width 1))
+		(line (pt 242 180)(pt 242 204)(line_width 1))
+		(line (pt 335 52)(pt 335 108)(line_width 1))
+		(line (pt 334 52)(pt 334 108)(line_width 1))
+		(line (pt 241 220)(pt 241 244)(line_width 1))
+		(line (pt 242 220)(pt 242 244)(line_width 1))
+		(line (pt 241 260)(pt 241 284)(line_width 1))
+		(line (pt 242 260)(pt 242 284)(line_width 1))
+		(line (pt 0 0)(pt 592 0)(line_width 1))
+		(line (pt 592 0)(pt 592 312)(line_width 1))
+		(line (pt 0 312)(pt 592 312)(line_width 1))
+		(line (pt 0 0)(pt 0 312)(line_width 1))
+	)
+)
