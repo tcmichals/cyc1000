@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at kit_sequencer.v(15): always construct contains both blocking and non-blocking assignments File: /media/tcmichals/workingDiskHS/cyclone-10/cyc1000/github/github/cyc1000/cyc1000_template/kit_sequencer.v Line: 15

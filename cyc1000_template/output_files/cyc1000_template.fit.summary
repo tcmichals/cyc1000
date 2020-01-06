@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun Mar 17 20:29:34 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : cyc1000_template
+Top-level Entity Name : cyc1000_template
+Family : Cyclone 10 LP
+Device : 10CL025YU256C8G
+Timing Models : Final
+Total logic elements : 159 / 24,624 ( < 1 % )
+    Total combinational functions : 158 / 24,624 ( < 1 % )
+    Dedicated logic registers : 111 / 24,624 ( < 1 % )
+Total registers : 111
+Total pins : 40 / 151 ( 26 % )
+Total virtual pins : 0
+Total memory bits : 0 / 608,256 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 132 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )

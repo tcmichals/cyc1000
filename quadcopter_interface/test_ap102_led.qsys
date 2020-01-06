@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags=""
+   categories="" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element ap102_led_0
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
+   element clk_0
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+   element mm_master_bfm_0
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="device" value="10CL025YU256C8G" />
+ <parameter name="deviceFamily" value="Cyclone 10 LP" />
+ <parameter name="deviceSpeedGrade" value="8" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="hideFromIPCatalog" value="false" />
+ <parameter name="lockedInterfaceDefinition" value="" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="0" />
+ <parameter name="testBenchDutName" value="" />
+ <parameter name="timeStamp" value="0" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
+ <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <module name="ap102_led_0" kind="ap102_led" version="1.0" enabled="1">
+  <parameter name="number_leds" value="8" />
+ </module>
+ <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
+  <parameter name="clockFrequency" value="50000000" />
+  <parameter name="clockFrequencyKnown" value="true" />
+  <parameter name="inputClockFrequency" value="0" />
+  <parameter name="resetSynchronousEdges" value="NONE" />
+ </module>
+ <module
+   name="mm_master_bfm_0"
+   kind="altera_avalon_mm_master_bfm"
+   version="18.1"
+   enabled="1">
+  <parameter name="ADDRESS_UNITS" value="SYMBOLS" />
+  <parameter name="ASSERT_HIGH_ARBITERLOCK" value="1" />
+  <parameter name="ASSERT_HIGH_BYTEENABLE" value="1" />
+  <parameter name="ASSERT_HIGH_LOCK" value="1" />
+  <parameter name="ASSERT_HIGH_READ" value="1" />
+  <parameter name="ASSERT_HIGH_READDATAVALID" value="1" />
+  <parameter name="ASSERT_HIGH_RESET" value="1" />
+  <parameter name="ASSERT_HIGH_WAITREQUEST" value="1" />
+  <parameter name="ASSERT_HIGH_WRITE" value="1" />
+  <parameter name="AV_ADDRESS_W" value="32" />
+  <parameter name="AV_ALWAYS_BURST_MAX_BURST" value="0" />
+  <parameter name="AV_BURSTCOUNT_W" value="3" />
+  <parameter name="AV_BURST_BNDR_ONLY" value="1" />
+  <parameter name="AV_BURST_LINEWRAP" value="1" />
+  <parameter name="AV_CONSTANT_BURST_BEHAVIOR" value="1" />
+  <parameter name="AV_FIX_READ_LATENCY" value="1" />
+  <parameter name="AV_MAX_PENDING_READS" value="0" />
+  <parameter name="AV_MAX_PENDING_WRITES" value="0" />
+  <parameter name="AV_NUMSYMBOLS" value="4" />
+  <parameter name="AV_READRESPONSE_W" value="8" />
+  <parameter name="AV_READ_WAIT_TIME" value="1" />
+  <parameter name="AV_REGISTERINCOMINGSIGNALS" value="0" />
+  <parameter name="AV_SYMBOL_W" value="8" />
+  <parameter name="AV_WRITERESPONSE_W" value="8" />
+  <parameter name="AV_WRITE_WAIT_TIME" value="0" />
+  <parameter name="REGISTER_WAITREQUEST" value="0" />
+  <parameter name="USE_ADDRESS" value="1" />
+  <parameter name="USE_ARBITERLOCK" value="0" />
+  <parameter name="USE_BEGIN_BURST_TRANSFER" value="0" />
+  <parameter name="USE_BEGIN_TRANSFER" value="0" />
+  <parameter name="USE_BURSTCOUNT" value="1" />
+  <parameter name="USE_BYTE_ENABLE" value="1" />
+  <parameter name="USE_CLKEN" value="0" />
+  <parameter name="USE_DEBUGACCESS" value="0" />
+  <parameter name="USE_LOCK" value="0" />
+  <parameter name="USE_READ" value="1" />
+  <parameter name="USE_READRESPONSE" value="0" />
+  <parameter name="USE_READ_DATA" value="1" />
+  <parameter name="USE_READ_DATA_VALID" value="1" />
+  <parameter name="USE_TRANSACTIONID" value="0" />
+  <parameter name="USE_WAIT_REQUEST" value="1" />
+  <parameter name="USE_WRITE" value="1" />
+  <parameter name="USE_WRITERESPONSE" value="0" />
+  <parameter name="USE_WRITE_DATA" value="1" />
+  <parameter name="VHDL_ID" value="0" />
+ </module>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="mm_master_bfm_0.m0"
+   end="ap102_led_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_0.clk"
+   end="mm_master_bfm_0.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="ap102_led_0.clock" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="mm_master_bfm_0.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="ap102_led_0.reset" />
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
+ <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+</system>

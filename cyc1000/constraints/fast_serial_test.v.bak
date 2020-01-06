@@ -1,0 +1,38 @@
+`default_nettype 	none
+
+
+module fast_serial_test(
+	input CLK12M,
+	output [7:0] LED,
+	input USER_BTN,
+	
+	/* accelerometer */
+	//FTDI serial port Async RS232
+	output BDBUS0,   	//FSDI
+	output BDBUS1,  	//RX
+	input BDBUS2,   //FSDO 
+	input BDBUS3,    //FSCTS
+	output BDBUS4,    //DTR
+	input BDBUS5,    //DSR
+	
+	output [8:0] AIN,
+	output MEM_CLK
+);
+
+wire nreset;
+assign nreset = ~USER_BTN;
+
+
+wire CLK100M;
+
+//setup a PLL more of this later
+PLL12M pllinst(.areset(nreset),
+					.inclk0(CLK12M),
+					.c0(MEM_CLK),
+					.c1(CLK100M),
+					.locked());
+
+
+
+
+endmodule

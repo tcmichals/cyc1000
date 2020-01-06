@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sun Mar 17 20:29:28 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : cyc1000_template
+Top-level Entity Name : cyc1000_template
+Family : Cyclone 10 LP
+Total logic elements : 158
+    Total combinational functions : 158
+    Dedicated logic registers : 111
+Total registers : 111
+Total pins : 40
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 1

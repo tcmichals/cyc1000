@@ -1,0 +1,2 @@
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+https://www.google.com/search?client=ubuntu&channel=fs&q=github+branching+strategy&ie=utf-8&oe=utf-8
