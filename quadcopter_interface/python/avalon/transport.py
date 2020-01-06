@@ -90,7 +90,7 @@ class Transport:
     def handle_data(self):
         pass
 
-    def packet_channel_send_packet(self, data_buffer=bytearray()):
+    def packet_channel_send_packet(self, data_buffer=bytearray(), channel_number=0):
 
         try:
             """
@@ -109,9 +109,12 @@ class Transport:
             // ------------------------------------
             """
             packet_to_send = bytearray()
-            packet_to_send.append(SOP)
+            # TCM     packet_to_send.append(SOP)
+
             packet_to_send.append(CHANNEL)
-            packet_to_send.append(0)
+            packet_to_send.append(channel_number)
+
+            packet_to_send.append(SOP)
             logging.debug("packet len %d" % (len(packet_to_send)))
 
             for offset in range(len(data_buffer)):
@@ -125,9 +128,8 @@ class Transport:
                 else:
                     packet_to_send.append(current_byte)
 
-
             logging.debug("packet " + bytes(packet_to_send).hex() + " len is " + str(len(packet_to_send)))
-            pkt = bytearray();
+            pkt = bytearray()
             pkt.append(packet_to_send[0])
             self.writer.write(packet_to_send)
             # self.writer.write(pkt)
@@ -136,17 +138,19 @@ class Transport:
             logging.ERROR("packet_channel_send_packet:" + str(ex))
             return False, str(ex)
 
-    def transaction_channel_write(self, addr,  data_buffer=bytearray(), transaction=AvalonBus.LOOP_BACK, length=-1):
-        return self.do_transaction(trans_type=transaction, address=addr, data=data_buffer, length=length)
+    def transaction_channel_write(self, addr,  channel_number=0, data_buffer=bytearray(), transaction=AvalonBus.LOOP_BACK, length=-1):
+        return self.do_transaction(trans_type=transaction, address=addr, channel_number=channel_number, data=data_buffer, length=length)
 
-    def transaction_channel_read(self, address, burst_length, data_buffer=bytearray(), transaction=AvalonBus.LOOP_BACK):
-        pass
+    def transaction_channel_read(self, addr, channel_number=0, burst_length=4, transaction=AvalonBus.LOOP_BACK):
+        return self.do_transaction(trans_type=transaction, address=addr, channel_number=channel_number,
+                                   data=bytearray(), length=burst_length)
 
-    def do_transaction(self, trans_type, address, data=bytearray(), length=-1):
+    def do_transaction(self, trans_type, address, channel_number=0, data=bytearray(), length=-1):
         """
 
         :param trans_type:
         :param address:
+        :param channel_number:
         :param data:
         :param length:
         :return:
@@ -172,16 +176,16 @@ class Transport:
         # 1
         packet.append(0)
 
-        if length == -1:
-            # 2
-            packet.append(len(data) >> 8 & 0xff)
-            # 3
-            packet.append(len(data) & 0xff)
-        else:
+        if (length != -1) or (len(data) == 0):
             # 2
             packet.append(length >> 8 & 0xff)
             # 3
             packet.append(length & 0xff)
+        else:
+            # 2
+            packet.append(len(data) >> 8 & 0xff)
+            # 3
+            packet.append(len(data) & 0xff)
 
         # 4
         packet.append((address >> 24) & 0xff)
@@ -195,15 +199,15 @@ class Transport:
         if trans_type == AvalonBus.WRITE_NON_INCREMENTING or trans_type == AvalonBus.WRITE_INCREMENTING \
                 or trans_type == 0x5 or trans_type == 0x08 or trans_type == 0x09 or trans_type == 0x0A:
             packet.extend(data)
-            self.packet_channel_send_packet(data)
+            self.packet_channel_send_packet(packet, channel_number=channel_number)
 
         elif trans_type == AvalonBus.READ_INCREMENTING or trans_type == AvalonBus.READ_NON_INCREMENTING \
                 or trans_type == 0x15 or trans_type == 0x18 or trans_type == 0x19 or trans_type == 0x1A:
             packet.extend(data)
-            self.packet_channel_send_packet(packet)
+            self.packet_channel_send_packet(packet, channel_number=channel_number)
         else:
             packet.extend(data)
-            self.packet_channel_send_packet(packet)
+            self.packet_channel_send_packet(packet, channel_number=channel_number)
 
 
 # eof

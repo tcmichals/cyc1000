@@ -1,22 +1,22 @@
 `default_nettype 	none
 
-module simple_divider( input wire i_clk,
-							  input i_reset,
-							  input  [23:0] maxCount,
-							  output o_clk);
+module simple_divider( input wire 	i_clk,
+							  input wire 	i_reset,
+							  input wire 	[23:0] maxCount,
+							  output wire 	o_clk);
 							  
 
 
-reg [31:0] counter;
-wire [31:0] r_next;
+reg [23:0] counter;
+wire [23:0] r_next;
 reg div_clk;
 
 initial div_clk =0;
 initial counter = 0;
 
-always @(posedge i_reset or posedge i_clk)
+always @(negedge i_reset or posedge i_clk)
 begin 
-	if (i_reset) begin
+	if (!i_reset) begin
 		counter <= 'b0;
 		div_clk <= 0;
 	end

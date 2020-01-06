@@ -3,38 +3,33 @@
 module simple_divider( input wire i_clk,
 							  input i_reset,
 							  input  [23:0] maxCount,
-							  output wire o_clk);
+							  output o_clk);
 							  
 
 
+reg [31:0] counter;
+wire [31:0] r_next;
 reg div_clk;
-reg [32:0] counter;
+
 initial div_clk =0;
 initial counter = 0;
 
-always @(posedge i_clk,  posedge i_reset)
+always @(posedge i_reset or posedge i_clk)
 begin 
-	if (i_reset) 
-		begin
-			counter <= 'b0;
-			div_clk <= 'b0;
+	if (i_reset) begin
+		counter <= 'b0;
+		div_clk <= 0;
+	end
+	else if (r_next == maxCount) begin
+			counter <=0;
+			div_clk <= ~div_clk;
 		end
-	else
-		begin
-			if (counter == maxCount) 
-			begin
-				counter <= 'b0;
-				div_clk <= 1'b1;
-			end 
-			else 
-				begin
-					counter <= counter + 1;
-					div_clk <= 1'b0;
-				end
-		end
+	else begin
+			counter <= r_next;
+	end
 end	
 
+assign r_next = counter + 1;
 assign o_clk = div_clk;	
- 							  
 endmodule
 

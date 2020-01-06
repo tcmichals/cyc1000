@@ -62,6 +62,16 @@ async def test_led(args, loop):
                 test.transaction_channel_write(0, channel_number=0, data_buffer=data, transaction=avalon.AvalonBus.WRITE_NON_INCREMENTING)
                 await asyncio.sleep(.01)
         """
+        data = bytearray()
+        test.transaction_channel_read(0x60, channel_number=0,  transaction=avalon.AvalonBus.READ_INCREMENTING)
+        await asyncio.sleep(1)
+
+        led_value = 0x00
+        x_bytes = led_value.to_bytes(4, byteorder='little')
+        data.extend(x_bytes)
+        test.transaction_channel_write(0x050, channel_number=0, data_buffer=data,
+                                       transaction=avalon.AvalonBus.WRITE_NON_INCREMENTING)
+
         led_index = 0
         for y in range(0, 10000):
             led_index += 1
@@ -75,15 +85,15 @@ async def test_led(args, loop):
                     led_value = 0xFF000000
                 x_bytes = led_value.to_bytes(4, byteorder='little')
                 data.extend(x_bytes)
-                test.transaction_channel_write(0x40 + (x * 4), channel_number=0, data_buffer=data,
+                test.transaction_channel_write(0x0 + (x * 4), channel_number=0, data_buffer=data,
                                            transaction=avalon.AvalonBus.WRITE_NON_INCREMENTING)
-                await asyncio.sleep(.01)
+                await asyncio.sleep(.1)
 
             data = bytearray()
             led_value = 0x00000000
             x_bytes = led_value.to_bytes(4, byteorder='little')
             data.extend(x_bytes)
-            test.transaction_channel_write(0x40 + (8*4), channel_number=0, data_buffer=data, transaction=avalon.AvalonBus.WRITE_NON_INCREMENTING)
+            test.transaction_channel_write(0x0 + (8*4), channel_number=0, data_buffer=data, transaction=avalon.AvalonBus.WRITE_NON_INCREMENTING)
             await asyncio.sleep(.01)
 
         test.close()

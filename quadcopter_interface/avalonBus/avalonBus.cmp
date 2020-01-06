@@ -1,13 +1,34 @@
 	component avalonBus is
 		port (
-			clk_clk                : in  std_logic                    := 'X';             -- clk
-			in_bytes_stream_ready  : out std_logic;                                       -- ready
-			in_bytes_stream_valid  : in  std_logic                    := 'X';             -- valid
-			in_bytes_stream_data   : in  std_logic_vector(7 downto 0) := (others => 'X'); -- data
-			out_bytes_stream_ready : in  std_logic                    := 'X';             -- ready
-			out_bytes_stream_valid : out std_logic;                                       -- valid
-			out_bytes_stream_data  : out std_logic_vector(7 downto 0);                    -- data
-			reset_reset_n          : in  std_logic                    := 'X'              -- reset_n
+			ap102_led_outputs_sclk     : out std_logic;                                       -- sclk
+			ap102_led_outputs_sdo      : out std_logic;                                       -- sdo
+			clk_clk                    : in  std_logic                    := 'X';             -- clk
+			gpio_led_outputs_led_0     : out std_logic;                                       -- led_0
+			gpio_led_outputs_led_1     : out std_logic;                                       -- led_1
+			gpio_led_outputs_led_2     : out std_logic;                                       -- led_2
+			gpio_led_outputs_led_3     : out std_logic;                                       -- led_3
+			gpio_led_outputs_led_4     : out std_logic;                                       -- led_4
+			gpio_led_outputs_led_5     : out std_logic;                                       -- led_5
+			gpio_led_outputs_led_6     : out std_logic;                                       -- led_6
+			gpio_led_outputs_led_7     : out std_logic;                                       -- led_7
+			in_bytes_stream_ready      : out std_logic;                                       -- ready
+			in_bytes_stream_valid      : in  std_logic                    := 'X';             -- valid
+			in_bytes_stream_data       : in  std_logic_vector(7 downto 0) := (others => 'X'); -- data
+			out_bytes_stream_ready     : in  std_logic                    := 'X';             -- ready
+			out_bytes_stream_valid     : out std_logic;                                       -- valid
+			out_bytes_stream_data      : out std_logic_vector(7 downto 0);                    -- data
+			pwm_decoder_inputs_pwm_1   : in  std_logic                    := 'X';             -- pwm_1
+			pwm_decoder_inputs_pwm_2   : in  std_logic                    := 'X';             -- pwm_2
+			pwm_decoder_inputs_pwm_3   : in  std_logic                    := 'X';             -- pwm_3
+			pwm_decoder_inputs_pwm_4   : in  std_logic                    := 'X';             -- pwm_4
+			pwm_decoder_inputs_pwm_5   : in  std_logic                    := 'X';             -- pwm_5
+			pwm_decoder_inputs_pwm_6   : in  std_logic                    := 'X';             -- pwm_6
+			pwm_decoder_inputs_debug_0 : out std_logic;                                       -- debug_0
+			pwm_dshot_motors_motor_1   : out std_logic;                                       -- motor_1
+			pwm_dshot_motors_motor_2   : out std_logic;                                       -- motor_2
+			pwm_dshot_motors_motor_3   : out std_logic;                                       -- motor_3
+			pwm_dshot_motors_motor_4   : out std_logic;                                       -- motor_4
+			reset_reset_n              : in  std_logic                    := 'X'              -- reset_n
 		);
 	end component avalonBus;
 

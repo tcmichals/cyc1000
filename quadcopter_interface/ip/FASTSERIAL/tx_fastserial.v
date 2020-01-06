@@ -114,7 +114,7 @@ always @(posedge i_clk) begin
       WAIT_FOR_FCTS: begin
      /* wait for FSCTS to drop then start sending data */
     	if ( !q_fscts && i_fsclk) begin
-				state <= state +1;
+				state <= state + 1'b1;
 				
           end
        end    
@@ -122,7 +122,7 @@ always @(posedge i_clk) begin
        BIT_DEST: begin
 				if ( !q_fscts && i_fsclk) begin
 					fsdi <= DEST_PORT;
-					state <= state +1;
+					state <= state + 1'b1;
 					debug_0 <= ~debug_0;
 				end
        end
@@ -139,7 +139,7 @@ always @(posedge i_clk) begin
 				if ( state >= BIT_ZERO && state <= BIT_SEVEN) begin
 				/* wait for FSCTS to drop then start sending data */
 					if ( i_fsclk) begin
-						state <= state +1;
+						state <= state + 1'b1;
 						fsdi <= lcl_data[0];
                   lcl_data <= { 1'b1, lcl_data[7:1] };
 						debug_0 <= ~debug_0;

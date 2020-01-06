@@ -3,11 +3,13 @@
  <debug showDebugMenu="0" />
  <systemtable filter="All Interfaces">
   <columns>
-   <connections preferredWidth="111" />
+   <connections preferredWidth="127" />
    <irq preferredWidth="34" />
+   <name preferredWidth="190" />
+   <description preferredWidth="299" />
   </columns>
  </systemtable>
- <library
-   expandedCategories="Library/Basic Functions/Simulation; Debug and Verification/Simulation,Library/Basic Functions,Library/Processors and Peripherals/Peripherals,Library/Basic Functions/DMA,Library/Basic Functions/Simulation; Debug and Verification,Project,Library/Basic Functions/Bridges and Adaptors,Library/Qsys Interconnect/Memory-Mapped,Library/Interface Protocols/Serial,Library/Qsys Interconnect,Library/Interface Protocols,Library/Basic Functions/Simulation; Debug and Verification/Debug and Performance,Library/Basic Functions/DMA/mSGDMA Sub-core,Library/Basic Functions/Bridges and Adaptors/Streaming,Library,Library/Processors and Peripherals/Co-Processors/Nios II Custom Instructions,Library/Processors and Peripherals/Co-Processors,Library/Processors and Peripherals,Library/Basic Functions/Bridges and Adaptors/Memory Mapped" />
- <window width="1572" height="800" x="2028" y="183" />
+ <library expandedCategories="Library,Project" />
+ <window width="1657" height="941" x="201" y="381" />
+ <hdlexample language="VERILOG" />
 </preferences>

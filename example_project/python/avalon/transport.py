@@ -26,16 +26,7 @@ class AvalonBus(IntEnum):
 HEADER_LEN = 8
 
 
-class MessageTransaction(object, transport):
 
-    def __init__(self, port):
-        pass
-
-    def __enter__(self):
-        pass
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        pass
 
 def xor_20(val):
     """
@@ -56,7 +47,7 @@ class Transport:
         self.reader_task = None
         self.stopAllThreads = False
         self.rx_pktData = bytearray()
-        self.callback = map()
+        #self.callback = map()
 
     def __del__(self):
         if self.reader_task:
@@ -123,15 +114,13 @@ class Transport:
             // ------------------------------------
             """
             packet_to_send = bytearray()
-            # TCM     packet_to_send.append(SOP)
+            #packet_to_send.append(SOP)
+
 
             if channel_number is not -1:
                 packet_to_send.append(CHANNEL)
                 packet_to_send.append(channel_number)
-
             packet_to_send.append(SOP)
-
-            logging.debug("packet len %d" % (len(packet_to_send)))
 
             for offset in range(len(data_buffer)):
                 if offset == len(data_buffer)-1:

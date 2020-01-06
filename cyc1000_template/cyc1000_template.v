@@ -19,10 +19,10 @@ module cyc1000_template(
 	input [7:0]	PIO,
 	
 	//FTDI serial port Async RS232
-	input BDBUS0,   	//TX
+	output BDBUS0,   	//FSDI
 	output BDBUS1,  	//RX
-	output BDBUS2,   //RTS
-	input BDBUS3,    //CTS
+	input BDBUS2,   //FSDO 
+	input BDBUS3,    //FSCTS
 	output BDBUS4,    //DTR
 	input BDBUS5,    //DSR
 	
@@ -46,18 +46,24 @@ PLL12M pllinst(.areset(nreset),
 
 wire div_1ms;
 wire div_250ms;
-
+wire div_1mhz;
+reg out;
+initial out = 1;
 simple_divider div1ms(.i_clk(CLK100M),
 							.i_reset(nreset),
-							.maxCount(100000),
+							.maxCount(50000),
 							.o_clk(div_1ms));
 							
 
 simple_divider div250ms(.i_clk(div_1ms),
 							.i_reset(nreset),
-							.maxCount(250),
+							.maxCount(125),
 							.o_clk(div_250ms));
 
+simple_divider div10(.i_clk(CLK100M),
+							.i_reset(nreset),
+							.maxCount(25),
+							.o_clk(div_1mhz));
 
 							
 kit_sequencer kit(.i_clk(div_250ms),
@@ -71,13 +77,21 @@ kit_sequencer kit(.i_clk(div_250ms),
 thruwire a0(.i_wire(BDBUS0), .o_wire(AIN[0]));
 
 //Take TX and send it to RX
-thruwire a0_tx(.i_wire(BDBUS0), .o_wire(BDBUS1));
-thruwire a1(.i_wire(BDBUS0), .o_wire(AIN[1]));
+//thruwire a0_tx(.i_wire(BDBUS0), .o_wire(BDBUS2));
 
+thruwire a1(.i_wire(BDBUS1), .o_wire(AIN[1]));
+thruwire a11(.i_wire(div_1mhz), .o_wire(BDBUS1));
 
 thruwire a2(.i_wire(BDBUS2), .o_wire(AIN[2]));
 thruwire a3(.i_wire(BDBUS3), .o_wire(AIN[3]));
 thruwire a4(.i_wire(BDBUS4), .o_wire(AIN[4]));
 thruwire a5(.i_wire(BDBUS5), .o_wire(AIN[5]));
 
+always @(*)
+begin
+
+ //AIN[1] <= div_1ms;
+// BDBUS0 <= 0;
+end
+assign  BDBUS0 = out;
 endmodule

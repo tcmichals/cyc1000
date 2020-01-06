@@ -6,9 +6,246 @@
    version="1.0"
    description=""
    tags=""
-   categories="" />
+   categories="System" />
  <parameter name="bonusData"><![CDATA[bonusData 
 {
+   element ap102_led_0
+   {
+      datum _sortIndex
+      {
+         value = "4";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
+   element avalonBus
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
    element clk_0
    {
       datum _sortIndex
@@ -17,11 +254,45 @@
          type = "int";
       }
    }
+   element gpio_led_0
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
    element packets_to_master_0
    {
       datum _sortIndex
       {
+         value = "3";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
          value = "1";
+         type = "boolean";
+      }
+   }
+   element pwm_decoder_0
+   {
+      datum _sortIndex
+      {
+         value = "7";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+   element pwm_dshot_0
+   {
+      datum _sortIndex
+      {
+         value = "9";
          type = "int";
       }
    }
@@ -29,16 +300,52 @@
    {
       datum _sortIndex
       {
-         value = "2";
+         value = "1";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
       }
    }
    element st_packets_to_bytes_0
    {
       datum _sortIndex
       {
-         value = "3";
+         value = "2";
          type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+   element sysid_qsys_0
+   {
+      datum _sortIndex
+      {
+         value = "6";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+   element timer_0
+   {
+      datum _sortIndex
+      {
+         value = "5";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "0";
+         type = "boolean";
       }
    }
 }
@@ -55,14 +362,24 @@
  <parameter name="hideFromIPCatalog" value="false" />
  <parameter name="lockedInterfaceDefinition" value="" />
  <parameter name="maxAdditionalLatency" value="1" />
- <parameter name="projectName" value="" />
+ <parameter name="projectName">quadcopter_interface.qpf</parameter>
  <parameter name="sopcBorderPoints" value="false" />
  <parameter name="systemHash" value="0" />
  <parameter name="testBenchDutName" value="" />
  <parameter name="timeStamp" value="0" />
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
+ <interface
+   name="ap102_led_outputs"
+   internal="ap102_led_0.led_block"
+   type="conduit"
+   dir="end" />
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
+ <interface
+   name="gpio_led_outputs"
+   internal="gpio_led_0.conduit_end"
+   type="conduit"
+   dir="end" />
  <interface
    name="in_bytes_stream"
    internal="st_bytes_to_packets_0.in_bytes_stream"
@@ -73,21 +390,41 @@
    internal="st_packets_to_bytes_0.out_bytes_stream"
    type="avalon_streaming"
    dir="start" />
+ <interface
+   name="pwm_decoder_inputs"
+   internal="pwm_decoder_0.conduit_end"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="pwm_dshot_motors"
+   internal="pwm_dshot_0.motor_block"
+   type="conduit"
+   dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
+ <module name="ap102_led_0" kind="ap102_led" version="1.0" enabled="1">
+  <parameter name="number_leds" value="8" />
+ </module>
  <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
-  <parameter name="clockFrequency" value="50000000" />
+  <parameter name="clockFrequency" value="10000000" />
   <parameter name="clockFrequencyKnown" value="true" />
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
+ <module name="gpio_led_0" kind="gpio_led" version="1.1" enabled="1" />
  <module
    name="packets_to_master_0"
    kind="altera_avalon_packets_to_master"
    version="18.1"
    enabled="1">
   <parameter name="EXPORT_MASTER_SIGNALS" value="0" />
-  <parameter name="FAST_VER" value="0" />
+  <parameter name="FAST_VER" value="1" />
   <parameter name="FIFO_DEPTHS" value="2" />
+ </module>
+ <module name="pwm_decoder_0" kind="pwm_decoder" version="1.0" enabled="1">
+  <parameter name="clockFrequency" value="10000000" />
+ </module>
+ <module name="pwm_dshot_0" kind="pwm_dshot" version="1.0" enabled="1">
+  <parameter name="motors_supported" value="4" />
  </module>
  <module
    name="st_bytes_to_packets_0"
@@ -105,6 +442,79 @@
   <parameter name="CHANNEL_WIDTH" value="8" />
   <parameter name="ENCODING" value="0" />
  </module>
+ <module
+   name="sysid_qsys_0"
+   kind="altera_avalon_sysid_qsys"
+   version="18.1"
+   enabled="1">
+  <parameter name="id" value="287454020" />
+ </module>
+ <module name="timer_0" kind="altera_avalon_timer" version="18.1" enabled="1">
+  <parameter name="alwaysRun" value="true" />
+  <parameter name="counterSize" value="32" />
+  <parameter name="fixedPeriod" value="false" />
+  <parameter name="period" value="1" />
+  <parameter name="periodUnits" value="USEC" />
+  <parameter name="resetOutput" value="false" />
+  <parameter name="snapshot" value="true" />
+  <parameter name="systemFrequency" value="10000000" />
+  <parameter name="timeoutPulseOutput" value="false" />
+  <parameter name="watchdogPulse" value="2" />
+ </module>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="packets_to_master_0.avalon_master"
+   end="ap102_led_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="packets_to_master_0.avalon_master"
+   end="pwm_decoder_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00a0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="packets_to_master_0.avalon_master"
+   end="pwm_dshot_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x00c0" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="packets_to_master_0.avalon_master"
+   end="gpio_led_0.avs_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0050" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="packets_to_master_0.avalon_master"
+   end="sysid_qsys_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0060" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="packets_to_master_0.avalon_master"
+   end="timer_0.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0080" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
  <connection
    kind="avalon_streaming"
    version="18.1"
@@ -119,17 +529,27 @@
    kind="clock"
    version="18.1"
    start="clk_0.clk"
+   end="st_bytes_to_packets_0.clk" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_0.clk"
    end="st_packets_to_bytes_0.clk" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
    end="packets_to_master_0.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="timer_0.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="sysid_qsys_0.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="ap102_led_0.clock" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
-   end="st_bytes_to_packets_0.clk" />
+   end="pwm_decoder_0.clock" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="gpio_led_0.clock" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="pwm_dshot_0.clock" />
  <connection
    kind="reset"
    version="18.1"
@@ -145,8 +565,51 @@
    version="18.1"
    start="clk_0.clk_reset"
    end="packets_to_master_0.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="ap102_led_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="timer_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="sysid_qsys_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="pwm_decoder_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="gpio_led_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="pwm_dshot_0.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.enableInstrumentation" value="TRUE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+ <interconnectRequirement
+   for="ap102_led_0.avs_s0"
+   name="qsys_mm.insertPerformanceMonitor"
+   value="FALSE" />
+ <interconnectRequirement
+   for="packets_to_master_0.avalon_master"
+   name="qsys_mm.insertPerformanceMonitor"
+   value="FALSE" />
+ <interconnectRequirement
+   for="timer_0.s1"
+   name="qsys_mm.insertPerformanceMonitor"
+   value="FALSE" />
 </system>

@@ -254,7 +254,14 @@ set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_RO
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VERILOG_FILE ip/DECODER_7_SEG/decoder_7_seg.v
+set_global_assignment -name TIMING_ANALYZER_MULTICORNER_ANALYSIS ON
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -section_id eda_simulation
+set_global_assignment -name ENABLE_SIGNALTAP OFF
+set_global_assignment -name USE_SIGNALTAP_FILE ledTrace.stp
+set_global_assignment -name VERILOG_FILE ip/PWM/pwm_output.v
+set_global_assignment -name VERILOG_FILE pwm_dshot.v
+set_global_assignment -name VERILOG_FILE ip/SERIAL_TX/serial_tx.v
 set_global_assignment -name QSYS_FILE avalonBus.qsys
 set_global_assignment -name VERILOG_FILE ip/FASTSERIAL/rx_fastserial.v
 set_global_assignment -name VERILOG_FILE ip/FASTSERIAL/tx_fastserial.v
@@ -265,4 +272,5 @@ set_global_assignment -name VERILOG_FILE ip/CLOCK_DIVIDER/simple_divider.v
 set_global_assignment -name VERILOG_FILE ip/CLOCK_DIVIDER/n2_divider.v
 set_global_assignment -name QIP_FILE PLL12M.qip
 set_global_assignment -name VERILOG_FILE quadcopter_interface.v
+set_global_assignment -name VERILOG_FILE ap102_component.v
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
