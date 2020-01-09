@@ -43,11 +43,11 @@ void tick(boost::asio::deadline_timer *async_timer,
     }
     else
     {
-  
-     pwmOut->postPWMOut(MIN_ON + speed_inc);
     speed_inc +=20;
+     pwmOut->postPWMOut(MIN_ON + speed_inc);
+
     if ((MIN_ON + speed_inc) > MID_ON)
-        speed_inc = 0;
+        speed_inc = 100;
 
     }
     std::cout << __PRETTY_FUNCTION__ << " " << __LINE__ << std::endl;
