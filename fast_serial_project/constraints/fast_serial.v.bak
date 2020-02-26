@@ -1,0 +1,23 @@
+
+
+module fast_serial(input CLK12M, 
+						 input USER_BTN,
+						  input wire BDBUS2,   //FSDO 
+						  input wire BDBUS3,    //FSCTS
+						 output wire BDBUS0,   //FSDI
+						 output wire BDBUS1,  //FSCLK
+						 output wire BDBUS4,   //DTR
+						  output [7:0] LED);
+						 
+
+wire CLK_C0_50Mhz;
+						 
+PLL12	PLL12_inst (.inclk0 ( CLK12M ),
+						.c0 ( CLK_C0_50Mhz ));
+
+
+
+
+endmodule;
+
+//eof

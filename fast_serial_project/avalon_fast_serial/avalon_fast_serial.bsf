@@ -1,0 +1,125 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2019  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 0 0 384 256)
+	(text "avalon_fast_serial" (rect 139 -1 212 11)(font "Arial" (font_size 10)))
+	(text "inst" (rect 8 240 20 252)(font "Arial" ))
+	(port
+		(pt 0 72)
+		(input)
+		(text "clk_clk" (rect 0 0 27 12)(font "Arial" (font_size 8)))
+		(text "clk_clk" (rect 4 61 46 72)(font "Arial" (font_size 8)))
+		(line (pt 0 72)(pt 144 72)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "in_bytes_stream_valid" (rect 0 0 92 12)(font "Arial" (font_size 8)))
+		(text "in_bytes_stream_valid" (rect 4 117 130 128)(font "Arial" (font_size 8)))
+		(line (pt 0 128)(pt 144 128)(line_width 1))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "in_bytes_stream_data[7..0]" (rect 0 0 110 12)(font "Arial" (font_size 8)))
+		(text "in_bytes_stream_data[7..0]" (rect 4 133 160 144)(font "Arial" (font_size 8)))
+		(line (pt 0 144)(pt 144 144)(line_width 3))
+	)
+	(port
+		(pt 384 72)
+		(input)
+		(text "out_bytes_stream_ready" (rect 0 0 103 12)(font "Arial" (font_size 8)))
+		(text "out_bytes_stream_ready" (rect 258 61 390 72)(font "Arial" (font_size 8)))
+		(line (pt 384 72)(pt 224 72)(line_width 1))
+	)
+	(port
+		(pt 0 224)
+		(input)
+		(text "reset_reset_n" (rect 0 0 56 12)(font "Arial" (font_size 8)))
+		(text "reset_reset_n" (rect 4 213 82 224)(font "Arial" (font_size 8)))
+		(line (pt 0 224)(pt 144 224)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(output)
+		(text "in_bytes_stream_ready" (rect 0 0 97 12)(font "Arial" (font_size 8)))
+		(text "in_bytes_stream_ready" (rect 4 101 130 112)(font "Arial" (font_size 8)))
+		(line (pt 0 112)(pt 144 112)(line_width 1))
+	)
+	(port
+		(pt 0 184)
+		(output)
+		(text "led_gpio_led[7..0]" (rect 0 0 68 12)(font "Arial" (font_size 8)))
+		(text "led_gpio_led[7..0]" (rect 4 173 112 184)(font "Arial" (font_size 8)))
+		(line (pt 0 184)(pt 144 184)(line_width 3))
+	)
+	(port
+		(pt 384 88)
+		(output)
+		(text "out_bytes_stream_valid" (rect 0 0 97 12)(font "Arial" (font_size 8)))
+		(text "out_bytes_stream_valid" (rect 264 77 396 88)(font "Arial" (font_size 8)))
+		(line (pt 384 88)(pt 224 88)(line_width 1))
+	)
+	(port
+		(pt 384 104)
+		(output)
+		(text "out_bytes_stream_data[7..0]" (rect 0 0 116 12)(font "Arial" (font_size 8)))
+		(text "out_bytes_stream_data[7..0]" (rect 241 93 403 104)(font "Arial" (font_size 8)))
+		(line (pt 384 104)(pt 224 104)(line_width 3))
+	)
+	(drawing
+		(text "clk" (rect 129 43 276 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "clk" (rect 149 67 316 144)(font "Arial" (color 0 0 0)))
+		(text "in_bytes_stream" (rect 47 83 184 179)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "ready" (rect 149 107 328 224)(font "Arial" (color 0 0 0)))
+		(text "valid" (rect 149 123 328 256)(font "Arial" (color 0 0 0)))
+		(text "data" (rect 149 139 322 288)(font "Arial" (color 0 0 0)))
+		(text "led_gpio" (rect 96 155 240 323)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "led" (rect 149 179 316 368)(font "Arial" (color 0 0 0)))
+		(text "out_bytes_stream" (rect 225 43 546 99)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "ready" (rect 196 67 422 144)(font "Arial" (color 0 0 0)))
+		(text "valid" (rect 201 83 432 176)(font "Arial" (color 0 0 0)))
+		(text "data" (rect 203 99 430 208)(font "Arial" (color 0 0 0)))
+		(text "reset" (rect 115 195 260 403)(font "Arial" (color 128 0 0)(font_size 9)))
+		(text "reset_n" (rect 149 219 340 448)(font "Arial" (color 0 0 0)))
+		(text " avalon_fast_serial " (rect 301 240 722 490)(font "Arial" ))
+		(line (pt 144 32)(pt 224 32)(line_width 1))
+		(line (pt 224 32)(pt 224 240)(line_width 1))
+		(line (pt 144 240)(pt 224 240)(line_width 1))
+		(line (pt 144 32)(pt 144 240)(line_width 1))
+		(line (pt 145 52)(pt 145 76)(line_width 1))
+		(line (pt 146 52)(pt 146 76)(line_width 1))
+		(line (pt 145 92)(pt 145 148)(line_width 1))
+		(line (pt 146 92)(pt 146 148)(line_width 1))
+		(line (pt 145 164)(pt 145 188)(line_width 1))
+		(line (pt 146 164)(pt 146 188)(line_width 1))
+		(line (pt 223 52)(pt 223 108)(line_width 1))
+		(line (pt 222 52)(pt 222 108)(line_width 1))
+		(line (pt 145 204)(pt 145 228)(line_width 1))
+		(line (pt 146 204)(pt 146 228)(line_width 1))
+		(line (pt 0 0)(pt 384 0)(line_width 1))
+		(line (pt 384 0)(pt 384 256)(line_width 1))
+		(line (pt 0 256)(pt 384 256)(line_width 1))
+		(line (pt 0 0)(pt 0 256)(line_width 1))
+	)
+)

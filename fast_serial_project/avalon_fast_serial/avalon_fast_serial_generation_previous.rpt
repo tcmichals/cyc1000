@@ -1,0 +1,70 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate /home/tcmichals/sata-projects/projects/home/cyc1000/github/cyc1000/fast_serial_project/avalon_fast_serial.qsys --block-symbol-file --output-directory=/home/tcmichals/sata-projects/projects/home/cyc1000/github/cyc1000/fast_serial_project/avalon_fast_serial --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading fast_serial_project/avalon_fast_serial.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding led_gpio_0 [led_gpio 1.0]
+Progress: Parameterizing module led_gpio_0
+Progress: Adding packets_to_master_0 [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module packets_to_master_0
+Progress: Adding st_bytes_to_packets_0 [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module st_bytes_to_packets_0
+Progress: Adding st_packets_to_bytes_0 [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module st_packets_to_bytes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: avalon_fast_serial.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: avalon_fast_serial.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: avalon_fast_serial.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: avalon_fast_serial.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate /home/tcmichals/sata-projects/projects/home/cyc1000/github/cyc1000/fast_serial_project/avalon_fast_serial.qsys --synthesis=VERILOG --output-directory=/home/tcmichals/sata-projects/projects/home/cyc1000/github/cyc1000/fast_serial_project/avalon_fast_serial/synthesis --family="Cyclone 10 LP" --part=10CL025YU256C8G
+Progress: Loading fast_serial_project/avalon_fast_serial.qsys
+Progress: Reading input file
+Progress: Adding clk_0 [clock_source 18.1]
+Progress: Parameterizing module clk_0
+Progress: Adding led_gpio_0 [led_gpio 1.0]
+Progress: Parameterizing module led_gpio_0
+Progress: Adding packets_to_master_0 [altera_avalon_packets_to_master 18.1]
+Progress: Parameterizing module packets_to_master_0
+Progress: Adding st_bytes_to_packets_0 [altera_avalon_st_bytes_to_packets 18.1]
+Progress: Parameterizing module st_bytes_to_packets_0
+Progress: Adding st_packets_to_bytes_0 [altera_avalon_st_packets_to_bytes 18.1]
+Progress: Parameterizing module st_packets_to_bytes_0
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: avalon_fast_serial.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: Max channel is 255 for source and 0 for sink. Avalon-ST Adapter will be inserted..
+Info: avalon_fast_serial.st_bytes_to_packets_0.out_packets_stream/packets_to_master_0.in_stream: The source has a channel signal of 8 bits, but the sink does not. Avalon-ST Adapter will be inserted.
+Info: avalon_fast_serial.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: Max channel is 0 for source and 255 for sink. Avalon-ST Adapter will be inserted..
+Info: avalon_fast_serial.packets_to_master_0.out_stream/st_packets_to_bytes_0.in_packets_stream: The sink has a channel signal of 8 bits, but the source does not. Avalon-ST Adapter will be inserted.
+Info: avalon_fast_serial: Generating avalon_fast_serial "avalon_fast_serial" for QUARTUS_SYNTH
+Info: Interconnect is inserted between master packets_to_master_0.avalon_master and slave led_gpio_0.avs_s0 because the master has address signal 32 bit wide, but the slave is 4 bit wide.
+Info: Interconnect is inserted between master packets_to_master_0.avalon_master and slave led_gpio_0.avs_s0 because the master has readdata signal 32 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master packets_to_master_0.avalon_master and slave led_gpio_0.avs_s0 because the master has read signal 1 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master packets_to_master_0.avalon_master and slave led_gpio_0.avs_s0 because the master has readdatavalid signal 1 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master packets_to_master_0.avalon_master and slave led_gpio_0.avs_s0 because the master has byteenable signal 4 bit wide, but the slave is 0 bit wide.
+Info: avalon_st_adapter: Inserting channel_adapter: channel_adapter_0
+Info: avalon_st_adapter_001: Inserting channel_adapter: channel_adapter_0
+Info: led_gpio_0: "avalon_fast_serial" instantiated led_gpio "led_gpio_0"
+Info: packets_to_master_0: "avalon_fast_serial" instantiated altera_avalon_packets_to_master "packets_to_master_0"
+Info: st_bytes_to_packets_0: "avalon_fast_serial" instantiated altera_avalon_st_bytes_to_packets "st_bytes_to_packets_0"
+Info: st_packets_to_bytes_0: "avalon_fast_serial" instantiated altera_avalon_st_packets_to_bytes "st_packets_to_bytes_0"
+Info: mm_interconnect_0: "avalon_fast_serial" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: avalon_st_adapter: "avalon_fast_serial" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: avalon_st_adapter_001: "avalon_fast_serial" instantiated altera_avalon_st_adapter "avalon_st_adapter_001"
+Info: rst_controller: "avalon_fast_serial" instantiated altera_reset_controller "rst_controller"
+Info: packets_to_master_0_avalon_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "packets_to_master_0_avalon_master_translator"
+Info: led_gpio_0_avs_s0_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "led_gpio_0_avs_s0_translator"
+Info: channel_adapter_0: "avalon_st_adapter" instantiated channel_adapter "channel_adapter_0"
+Info: channel_adapter_0: "avalon_st_adapter_001" instantiated channel_adapter "channel_adapter_0"
+Info: avalon_fast_serial: Done "avalon_fast_serial" with 13 modules, 15 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis
