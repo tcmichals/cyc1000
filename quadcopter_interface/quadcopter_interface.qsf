@@ -259,6 +259,7 @@ set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
 set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -section_id eda_simulation
 set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name USE_SIGNALTAP_FILE ledTrace.stp
+set_global_assignment -name VERILOG_FILE ip/PWM/dshot_out.v
 set_global_assignment -name VERILOG_FILE ip/PWM/pwm_output.v
 set_global_assignment -name VERILOG_FILE pwm_dshot.v
 set_global_assignment -name VERILOG_FILE ip/SERIAL_TX/serial_tx.v

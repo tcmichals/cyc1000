@@ -8,9 +8,10 @@
 #include "sysid.h"
 #include "gpioled.h"
 #include "pwmdecoder.h"
-#include "pwmOut.h"
+//#include "pwmOut.h"
+#include "dshot.h"
 
-
+#if 0
 static boost::asio::io_context gIOService(1);
 std::size_t wait_count;
 uint16_t speed_inc=0;
@@ -20,7 +21,7 @@ void tick(boost::asio::deadline_timer *async_timer,
         gpioAvalon *gpioLED,
         uint8_t *ledValue, 
         pwmDecoderAvalon *pwmDecoder,
-        pwmOutAvalon *pwmOut) {
+        dshotAvalon *pwmOut) {
 
 
     async_timer->expires_at(async_timer->expires_at() + *interval);
@@ -38,14 +39,14 @@ void tick(boost::asio::deadline_timer *async_timer,
     if ( wait_count < WAIT)
     {
         wait_count++;
-        pwmOut->postPWMOut(MIN_ON );
+        pwmOut->postDshotOut(0 );
         std::cout << "Waiting " << wait_count <<std::endl;
     }
     else
     {
     speed_inc +=20;
-     pwmOut->postPWMOut(MIN_ON + speed_inc);
-
+    // pwmOut->postDshotOut(MIN_ON + speed_inc);
+     pwmOut->postDshotOut(158);
     if ((MIN_ON + speed_inc) > MID_ON)
         speed_inc = 100;
 
@@ -68,14 +69,15 @@ int main(int argc, char **argv)
         std::cerr << "Error: cannot open(" << portName << ")" << std::endl;
         return -1;
     }
-    boost::posix_time::millisec interval(500);  // 1 second
+    boost::posix_time::millisec interval(5);  // 1 second
     boost::asio::deadline_timer async_timer(gIOService, interval);
 
     sysIDAvalon sysid(transPort);
     avalonTimer timer(transPort);
     gpioAvalon gpioLED(transPort);
     pwmDecoderAvalon pwmDecoder(transPort);
-    pwmOutAvalon pwmOut(transPort);
+    //pwmOutAvalon pwmOut(transPort);
+     dshotAvalon   pwmOut(transPort);
 
  //   boost::asio::post(gIOService, [&sysid](){ sysid.postReadID();});
  //   boost::asio::post(gIOService, [&timer](){  timer.isTimerRunning(); });
@@ -89,7 +91,7 @@ int main(int argc, char **argv)
                             &pwmDecoder,
                             &pwmOut);
     boost::asio::post(gIOService, [&gpioLED, &ledValue](){  gpioLED.postLED(ledValue++); });
-    boost::asio::post(gIOService, [&pwmOut](){  pwmOut.postPWMOut(MIN_ON); });
+    boost::asio::post(gIOService, [&pwmOut](){  pwmOut.postDshotOut(MIN_ON); });
 
     async_timer.async_wait(func);
 
@@ -98,5 +100,40 @@ int main(int argc, char **argv)
     transPort.dumpTimes();
 
 }
+#else
+
+
+int main(int argc, char **argv)
+{
+    ftdiTransPort transPort;
+
+    if (false == transPort.start())
+    {
+        std::cerr << "Error: cannot open()" << std::endl;
+        return -1;
+    }
+
+
+    sysIDAvalon sysid(transPort);
+    avalonTimer timer(transPort);
+    gpioAvalon gpioLED(transPort);
+    pwmDecoderAvalon pwmDecoder(transPort);
+    //pwmOutAvalon pwmOut(transPort);
+     dshotAvalon   pwmOut(transPort);
+
+    uint8_t ledValue = 0;
+    int timeout = 10000;
+    
+    do 
+    {
+        std::this_thread::sleep_for(std::chrono::microseconds(100));
+        gpioLED.postLED(ledValue++);
+
+    }while(true);
+      
+
+
+}
+#endif
 
 //eof

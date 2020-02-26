@@ -8,7 +8,7 @@
 // This file will not be automatically regenerated.  You should check it in
 // to your version control system if you want to keep it.
 
-`timescale 1 ps / 1 ps
+`timescale 1 ns / 1 ns
 module pwm_dshot #(
 		parameter motors_supported = 4
 	) (
@@ -49,6 +49,9 @@ end
 
 assign avs_s0_waitrequest= 0;
 
+`ifdef PWM
+ 
+
 pwm_output motor_out_1(.i_clk(clock_clk),
 						.i_reset(reset_reset),
 						.i_pwm_low_value(motor_low),
@@ -75,7 +78,39 @@ pwm_output motor_out_4(.i_clk(clock_clk),
 						.i_pwm_low_value(motor_low),
 						.i_pwm_high_value(motor_high),
 						.i_write(motor_4_write),
-						.o_pwm(motor_4));			
+						.o_pwm(motor_4));		
+`else
+
+
+dhot_output motor_out_1(.i_clk(clock_clk),
+						.i_reset(reset_reset),
+						.i_pwm_low_value(motor_low),
+						.i_pwm_high_value(motor_high),
+						.i_write(motor_1_write),
+						.o_pwm(motor_1));
+			
+dhot_output motor_out_2(.i_clk(clock_clk),
+						.i_reset(reset_reset),
+						.i_pwm_low_value(motor_low),
+						.i_pwm_high_value(motor_high),
+						.i_write(motor_2_write),
+						.o_pwm(motor_2));
+			
+dhot_output motor_out_3(.i_clk(clock_clk),
+						.i_reset(reset_reset),
+						.i_pwm_low_value(motor_low),
+						.i_pwm_high_value(motor_high),
+						.i_write(motor_3_write),
+						.o_pwm(motor_3));
+			
+dhot_output motor_out_4(.i_clk(clock_clk),
+						.i_reset(reset_reset),
+						.i_pwm_low_value(motor_low),
+						.i_pwm_high_value(motor_high),
+						.i_write(motor_4_write),
+						.o_pwm(motor_4));		
+					
+`endif					
 						
 always @(posedge clock_clk or posedge reset_reset) begin	
 
