@@ -15,102 +15,104 @@ module avalon_fast_serial (
 		input  wire       reset_reset_n           //            reset.reset_n
 	);
 
-	wire  [31:0] packets_to_master_0_avalon_master_readdata;             // mm_interconnect_0:packets_to_master_0_avalon_master_readdata -> packets_to_master_0:readdata
-	wire         packets_to_master_0_avalon_master_waitrequest;          // mm_interconnect_0:packets_to_master_0_avalon_master_waitrequest -> packets_to_master_0:waitrequest
-	wire  [31:0] packets_to_master_0_avalon_master_address;              // packets_to_master_0:address -> mm_interconnect_0:packets_to_master_0_avalon_master_address
-	wire         packets_to_master_0_avalon_master_read;                 // packets_to_master_0:read -> mm_interconnect_0:packets_to_master_0_avalon_master_read
-	wire   [3:0] packets_to_master_0_avalon_master_byteenable;           // packets_to_master_0:byteenable -> mm_interconnect_0:packets_to_master_0_avalon_master_byteenable
-	wire         packets_to_master_0_avalon_master_readdatavalid;        // mm_interconnect_0:packets_to_master_0_avalon_master_readdatavalid -> packets_to_master_0:readdatavalid
-	wire         packets_to_master_0_avalon_master_write;                // packets_to_master_0:write -> mm_interconnect_0:packets_to_master_0_avalon_master_write
-	wire  [31:0] packets_to_master_0_avalon_master_writedata;            // packets_to_master_0:writedata -> mm_interconnect_0:packets_to_master_0_avalon_master_writedata
-	wire         mm_interconnect_0_led_gpio_0_avs_s0_chipselect;         // mm_interconnect_0:led_gpio_0_avs_s0_chipselect -> led_gpio_0:avs_s0_chipselect
-	wire         mm_interconnect_0_led_gpio_0_avs_s0_waitrequest;        // led_gpio_0:avs_s0_waitrequest -> mm_interconnect_0:led_gpio_0_avs_s0_waitrequest
-	wire   [3:0] mm_interconnect_0_led_gpio_0_avs_s0_address;            // mm_interconnect_0:led_gpio_0_avs_s0_address -> led_gpio_0:avs_s0_address
-	wire         mm_interconnect_0_led_gpio_0_avs_s0_write;              // mm_interconnect_0:led_gpio_0_avs_s0_write -> led_gpio_0:avs_s0_write
-	wire  [31:0] mm_interconnect_0_led_gpio_0_avs_s0_writedata;          // mm_interconnect_0:led_gpio_0_avs_s0_writedata -> led_gpio_0:avs_s0_writedata
-	wire         st_bytes_to_packets_0_out_packets_stream_valid;         // st_bytes_to_packets_0:out_valid -> avalon_st_adapter:in_0_valid
-	wire   [7:0] st_bytes_to_packets_0_out_packets_stream_data;          // st_bytes_to_packets_0:out_data -> avalon_st_adapter:in_0_data
-	wire         st_bytes_to_packets_0_out_packets_stream_ready;         // avalon_st_adapter:in_0_ready -> st_bytes_to_packets_0:out_ready
-	wire   [7:0] st_bytes_to_packets_0_out_packets_stream_channel;       // st_bytes_to_packets_0:out_channel -> avalon_st_adapter:in_0_channel
-	wire         st_bytes_to_packets_0_out_packets_stream_startofpacket; // st_bytes_to_packets_0:out_startofpacket -> avalon_st_adapter:in_0_startofpacket
-	wire         st_bytes_to_packets_0_out_packets_stream_endofpacket;   // st_bytes_to_packets_0:out_endofpacket -> avalon_st_adapter:in_0_endofpacket
-	wire         avalon_st_adapter_out_0_valid;                          // avalon_st_adapter:out_0_valid -> packets_to_master_0:in_valid
-	wire   [7:0] avalon_st_adapter_out_0_data;                           // avalon_st_adapter:out_0_data -> packets_to_master_0:in_data
-	wire         avalon_st_adapter_out_0_ready;                          // packets_to_master_0:in_ready -> avalon_st_adapter:out_0_ready
-	wire         avalon_st_adapter_out_0_startofpacket;                  // avalon_st_adapter:out_0_startofpacket -> packets_to_master_0:in_startofpacket
-	wire         avalon_st_adapter_out_0_endofpacket;                    // avalon_st_adapter:out_0_endofpacket -> packets_to_master_0:in_endofpacket
-	wire         packets_to_master_0_out_stream_valid;                   // packets_to_master_0:out_valid -> avalon_st_adapter_001:in_0_valid
-	wire   [7:0] packets_to_master_0_out_stream_data;                    // packets_to_master_0:out_data -> avalon_st_adapter_001:in_0_data
-	wire         packets_to_master_0_out_stream_ready;                   // avalon_st_adapter_001:in_0_ready -> packets_to_master_0:out_ready
-	wire         packets_to_master_0_out_stream_startofpacket;           // packets_to_master_0:out_startofpacket -> avalon_st_adapter_001:in_0_startofpacket
-	wire         packets_to_master_0_out_stream_endofpacket;             // packets_to_master_0:out_endofpacket -> avalon_st_adapter_001:in_0_endofpacket
-	wire         avalon_st_adapter_001_out_0_valid;                      // avalon_st_adapter_001:out_0_valid -> st_packets_to_bytes_0:in_valid
-	wire   [7:0] avalon_st_adapter_001_out_0_data;                       // avalon_st_adapter_001:out_0_data -> st_packets_to_bytes_0:in_data
-	wire         avalon_st_adapter_001_out_0_ready;                      // st_packets_to_bytes_0:in_ready -> avalon_st_adapter_001:out_0_ready
-	wire   [7:0] avalon_st_adapter_001_out_0_channel;                    // avalon_st_adapter_001:out_0_channel -> st_packets_to_bytes_0:in_channel
-	wire         avalon_st_adapter_001_out_0_startofpacket;              // avalon_st_adapter_001:out_0_startofpacket -> st_packets_to_bytes_0:in_startofpacket
-	wire         avalon_st_adapter_001_out_0_endofpacket;                // avalon_st_adapter_001:out_0_endofpacket -> st_packets_to_bytes_0:in_endofpacket
-	wire         rst_controller_reset_out_reset;                         // rst_controller:reset_out -> [avalon_st_adapter:in_rst_0_reset, avalon_st_adapter_001:in_rst_0_reset, led_gpio_0:reset_reset, mm_interconnect_0:packets_to_master_0_clk_reset_reset_bridge_in_reset_reset, packets_to_master_0:reset_n, st_bytes_to_packets_0:reset_n, st_packets_to_bytes_0:reset_n]
+	wire  [31:0] master_avalon_master_readdata;                         // mm_interconnect_0:master_avalon_master_readdata -> master:readdata
+	wire         master_avalon_master_waitrequest;                      // mm_interconnect_0:master_avalon_master_waitrequest -> master:waitrequest
+	wire  [31:0] master_avalon_master_address;                          // master:address -> mm_interconnect_0:master_avalon_master_address
+	wire         master_avalon_master_read;                             // master:read -> mm_interconnect_0:master_avalon_master_read
+	wire   [3:0] master_avalon_master_byteenable;                       // master:byteenable -> mm_interconnect_0:master_avalon_master_byteenable
+	wire         master_avalon_master_readdatavalid;                    // mm_interconnect_0:master_avalon_master_readdatavalid -> master:readdatavalid
+	wire         master_avalon_master_write;                            // master:write -> mm_interconnect_0:master_avalon_master_write
+	wire  [31:0] master_avalon_master_writedata;                        // master:writedata -> mm_interconnect_0:master_avalon_master_writedata
+	wire         mm_interconnect_0_led_gpio_slave_avs_s0_chipselect;    // mm_interconnect_0:led_gpio_slave_avs_s0_chipselect -> led_gpio_slave:avs_s0_chipselect
+	wire         mm_interconnect_0_led_gpio_slave_avs_s0_waitrequest;   // led_gpio_slave:avs_s0_waitrequest -> mm_interconnect_0:led_gpio_slave_avs_s0_waitrequest
+	wire   [3:0] mm_interconnect_0_led_gpio_slave_avs_s0_address;       // mm_interconnect_0:led_gpio_slave_avs_s0_address -> led_gpio_slave:avs_s0_address
+	wire         mm_interconnect_0_led_gpio_slave_avs_s0_write;         // mm_interconnect_0:led_gpio_slave_avs_s0_write -> led_gpio_slave:avs_s0_write
+	wire  [31:0] mm_interconnect_0_led_gpio_slave_avs_s0_writedata;     // mm_interconnect_0:led_gpio_slave_avs_s0_writedata -> led_gpio_slave:avs_s0_writedata
+	wire  [31:0] mm_interconnect_0_sysid_qsys_0_control_slave_readdata; // sysid_qsys_0:readdata -> mm_interconnect_0:sysid_qsys_0_control_slave_readdata
+	wire   [0:0] mm_interconnect_0_sysid_qsys_0_control_slave_address;  // mm_interconnect_0:sysid_qsys_0_control_slave_address -> sysid_qsys_0:address
+	wire         in_bytes_to_packets_out_packets_stream_valid;          // in_bytes_to_packets:out_valid -> avalon_st_adapter:in_0_valid
+	wire   [7:0] in_bytes_to_packets_out_packets_stream_data;           // in_bytes_to_packets:out_data -> avalon_st_adapter:in_0_data
+	wire         in_bytes_to_packets_out_packets_stream_ready;          // avalon_st_adapter:in_0_ready -> in_bytes_to_packets:out_ready
+	wire   [7:0] in_bytes_to_packets_out_packets_stream_channel;        // in_bytes_to_packets:out_channel -> avalon_st_adapter:in_0_channel
+	wire         in_bytes_to_packets_out_packets_stream_startofpacket;  // in_bytes_to_packets:out_startofpacket -> avalon_st_adapter:in_0_startofpacket
+	wire         in_bytes_to_packets_out_packets_stream_endofpacket;    // in_bytes_to_packets:out_endofpacket -> avalon_st_adapter:in_0_endofpacket
+	wire         avalon_st_adapter_out_0_valid;                         // avalon_st_adapter:out_0_valid -> master:in_valid
+	wire   [7:0] avalon_st_adapter_out_0_data;                          // avalon_st_adapter:out_0_data -> master:in_data
+	wire         avalon_st_adapter_out_0_ready;                         // master:in_ready -> avalon_st_adapter:out_0_ready
+	wire         avalon_st_adapter_out_0_startofpacket;                 // avalon_st_adapter:out_0_startofpacket -> master:in_startofpacket
+	wire         avalon_st_adapter_out_0_endofpacket;                   // avalon_st_adapter:out_0_endofpacket -> master:in_endofpacket
+	wire         master_out_stream_valid;                               // master:out_valid -> avalon_st_adapter_001:in_0_valid
+	wire   [7:0] master_out_stream_data;                                // master:out_data -> avalon_st_adapter_001:in_0_data
+	wire         master_out_stream_ready;                               // avalon_st_adapter_001:in_0_ready -> master:out_ready
+	wire         master_out_stream_startofpacket;                       // master:out_startofpacket -> avalon_st_adapter_001:in_0_startofpacket
+	wire         master_out_stream_endofpacket;                         // master:out_endofpacket -> avalon_st_adapter_001:in_0_endofpacket
+	wire         avalon_st_adapter_001_out_0_valid;                     // avalon_st_adapter_001:out_0_valid -> out_packets_to_bytes:in_valid
+	wire   [7:0] avalon_st_adapter_001_out_0_data;                      // avalon_st_adapter_001:out_0_data -> out_packets_to_bytes:in_data
+	wire         avalon_st_adapter_001_out_0_ready;                     // out_packets_to_bytes:in_ready -> avalon_st_adapter_001:out_0_ready
+	wire   [7:0] avalon_st_adapter_001_out_0_channel;                   // avalon_st_adapter_001:out_0_channel -> out_packets_to_bytes:in_channel
+	wire         avalon_st_adapter_001_out_0_startofpacket;             // avalon_st_adapter_001:out_0_startofpacket -> out_packets_to_bytes:in_startofpacket
+	wire         avalon_st_adapter_001_out_0_endofpacket;               // avalon_st_adapter_001:out_0_endofpacket -> out_packets_to_bytes:in_endofpacket
+	wire         rst_controller_reset_out_reset;                        // rst_controller:reset_out -> [avalon_st_adapter:in_rst_0_reset, avalon_st_adapter_001:in_rst_0_reset, in_bytes_to_packets:reset_n, led_gpio_slave:reset_reset, master:reset_n, mm_interconnect_0:master_clk_reset_reset_bridge_in_reset_reset, out_packets_to_bytes:reset_n, sysid_qsys_0:reset_n]
 
-	led_gpio led_gpio_0 (
-		.avs_s0_address     (mm_interconnect_0_led_gpio_0_avs_s0_address),     //  avs_s0.address
-		.avs_s0_write       (mm_interconnect_0_led_gpio_0_avs_s0_write),       //        .write
-		.avs_s0_writedata   (mm_interconnect_0_led_gpio_0_avs_s0_writedata),   //        .writedata
-		.avs_s0_waitrequest (mm_interconnect_0_led_gpio_0_avs_s0_waitrequest), //        .waitrequest
-		.avs_s0_chipselect  (mm_interconnect_0_led_gpio_0_avs_s0_chipselect),  //        .chipselect
-		.clock_clk          (clk_clk),                                         //   clock.clk
-		.reset_reset        (rst_controller_reset_out_reset),                  //   reset.reset
-		.LED                (led_gpio_led)                                     // conduit.led
+	altera_avalon_st_bytes_to_packets #(
+		.CHANNEL_WIDTH (8),
+		.ENCODING      (0)
+	) in_bytes_to_packets (
+		.clk               (clk_clk),                                              //                clk.clk
+		.reset_n           (~rst_controller_reset_out_reset),                      //          clk_reset.reset_n
+		.out_channel       (in_bytes_to_packets_out_packets_stream_channel),       // out_packets_stream.channel
+		.out_ready         (in_bytes_to_packets_out_packets_stream_ready),         //                   .ready
+		.out_valid         (in_bytes_to_packets_out_packets_stream_valid),         //                   .valid
+		.out_data          (in_bytes_to_packets_out_packets_stream_data),          //                   .data
+		.out_startofpacket (in_bytes_to_packets_out_packets_stream_startofpacket), //                   .startofpacket
+		.out_endofpacket   (in_bytes_to_packets_out_packets_stream_endofpacket),   //                   .endofpacket
+		.in_ready          (in_bytes_stream_ready),                                //    in_bytes_stream.ready
+		.in_valid          (in_bytes_stream_valid),                                //                   .valid
+		.in_data           (in_bytes_stream_data)                                  //                   .data
+	);
+
+	led_gpio led_gpio_slave (
+		.avs_s0_address     (mm_interconnect_0_led_gpio_slave_avs_s0_address),     //  avs_s0.address
+		.avs_s0_write       (mm_interconnect_0_led_gpio_slave_avs_s0_write),       //        .write
+		.avs_s0_writedata   (mm_interconnect_0_led_gpio_slave_avs_s0_writedata),   //        .writedata
+		.avs_s0_waitrequest (mm_interconnect_0_led_gpio_slave_avs_s0_waitrequest), //        .waitrequest
+		.avs_s0_chipselect  (mm_interconnect_0_led_gpio_slave_avs_s0_chipselect),  //        .chipselect
+		.clock_clk          (clk_clk),                                             //   clock.clk
+		.reset_reset        (rst_controller_reset_out_reset),                      //   reset.reset
+		.LED                (led_gpio_led)                                         // conduit.led
 	);
 
 	altera_avalon_packets_to_master #(
 		.FAST_VER    (0),
 		.FIFO_DEPTHS (2),
 		.FIFO_WIDTHU (1)
-	) packets_to_master_0 (
-		.clk               (clk_clk),                                         //           clk.clk
-		.reset_n           (~rst_controller_reset_out_reset),                 //     clk_reset.reset_n
-		.out_ready         (packets_to_master_0_out_stream_ready),            //    out_stream.ready
-		.out_valid         (packets_to_master_0_out_stream_valid),            //              .valid
-		.out_data          (packets_to_master_0_out_stream_data),             //              .data
-		.out_startofpacket (packets_to_master_0_out_stream_startofpacket),    //              .startofpacket
-		.out_endofpacket   (packets_to_master_0_out_stream_endofpacket),      //              .endofpacket
-		.in_ready          (avalon_st_adapter_out_0_ready),                   //     in_stream.ready
-		.in_valid          (avalon_st_adapter_out_0_valid),                   //              .valid
-		.in_data           (avalon_st_adapter_out_0_data),                    //              .data
-		.in_startofpacket  (avalon_st_adapter_out_0_startofpacket),           //              .startofpacket
-		.in_endofpacket    (avalon_st_adapter_out_0_endofpacket),             //              .endofpacket
-		.address           (packets_to_master_0_avalon_master_address),       // avalon_master.address
-		.readdata          (packets_to_master_0_avalon_master_readdata),      //              .readdata
-		.read              (packets_to_master_0_avalon_master_read),          //              .read
-		.write             (packets_to_master_0_avalon_master_write),         //              .write
-		.writedata         (packets_to_master_0_avalon_master_writedata),     //              .writedata
-		.waitrequest       (packets_to_master_0_avalon_master_waitrequest),   //              .waitrequest
-		.readdatavalid     (packets_to_master_0_avalon_master_readdatavalid), //              .readdatavalid
-		.byteenable        (packets_to_master_0_avalon_master_byteenable)     //              .byteenable
-	);
-
-	altera_avalon_st_bytes_to_packets #(
-		.CHANNEL_WIDTH (8),
-		.ENCODING      (0)
-	) st_bytes_to_packets_0 (
-		.clk               (clk_clk),                                                //                clk.clk
-		.reset_n           (~rst_controller_reset_out_reset),                        //          clk_reset.reset_n
-		.out_channel       (st_bytes_to_packets_0_out_packets_stream_channel),       // out_packets_stream.channel
-		.out_ready         (st_bytes_to_packets_0_out_packets_stream_ready),         //                   .ready
-		.out_valid         (st_bytes_to_packets_0_out_packets_stream_valid),         //                   .valid
-		.out_data          (st_bytes_to_packets_0_out_packets_stream_data),          //                   .data
-		.out_startofpacket (st_bytes_to_packets_0_out_packets_stream_startofpacket), //                   .startofpacket
-		.out_endofpacket   (st_bytes_to_packets_0_out_packets_stream_endofpacket),   //                   .endofpacket
-		.in_ready          (in_bytes_stream_ready),                                  //    in_bytes_stream.ready
-		.in_valid          (in_bytes_stream_valid),                                  //                   .valid
-		.in_data           (in_bytes_stream_data)                                    //                   .data
+	) master (
+		.clk               (clk_clk),                               //           clk.clk
+		.reset_n           (~rst_controller_reset_out_reset),       //     clk_reset.reset_n
+		.out_ready         (master_out_stream_ready),               //    out_stream.ready
+		.out_valid         (master_out_stream_valid),               //              .valid
+		.out_data          (master_out_stream_data),                //              .data
+		.out_startofpacket (master_out_stream_startofpacket),       //              .startofpacket
+		.out_endofpacket   (master_out_stream_endofpacket),         //              .endofpacket
+		.in_ready          (avalon_st_adapter_out_0_ready),         //     in_stream.ready
+		.in_valid          (avalon_st_adapter_out_0_valid),         //              .valid
+		.in_data           (avalon_st_adapter_out_0_data),          //              .data
+		.in_startofpacket  (avalon_st_adapter_out_0_startofpacket), //              .startofpacket
+		.in_endofpacket    (avalon_st_adapter_out_0_endofpacket),   //              .endofpacket
+		.address           (master_avalon_master_address),          // avalon_master.address
+		.readdata          (master_avalon_master_readdata),         //              .readdata
+		.read              (master_avalon_master_read),             //              .read
+		.write             (master_avalon_master_write),            //              .write
+		.writedata         (master_avalon_master_writedata),        //              .writedata
+		.waitrequest       (master_avalon_master_waitrequest),      //              .waitrequest
+		.readdatavalid     (master_avalon_master_readdatavalid),    //              .readdatavalid
+		.byteenable        (master_avalon_master_byteenable)        //              .byteenable
 	);
 
 	altera_avalon_st_packets_to_bytes #(
 		.CHANNEL_WIDTH (8),
 		.ENCODING      (0)
-	) st_packets_to_bytes_0 (
+	) out_packets_to_bytes (
 		.clk              (clk_clk),                                   //               clk.clk
 		.reset_n          (~rst_controller_reset_out_reset),           //         clk_reset.reset_n
 		.in_ready         (avalon_st_adapter_001_out_0_ready),         // in_packets_stream.ready
@@ -124,22 +126,31 @@ module avalon_fast_serial (
 		.out_data         (out_bytes_stream_data)                      //                  .data
 	);
 
+	avalon_fast_serial_sysid_qsys_0 sysid_qsys_0 (
+		.clock    (clk_clk),                                               //           clk.clk
+		.reset_n  (~rst_controller_reset_out_reset),                       //         reset.reset_n
+		.readdata (mm_interconnect_0_sysid_qsys_0_control_slave_readdata), // control_slave.readdata
+		.address  (mm_interconnect_0_sysid_qsys_0_control_slave_address)   //              .address
+	);
+
 	avalon_fast_serial_mm_interconnect_0 mm_interconnect_0 (
-		.clk_0_clk_clk                                             (clk_clk),                                         //                                           clk_0_clk.clk
-		.packets_to_master_0_clk_reset_reset_bridge_in_reset_reset (rst_controller_reset_out_reset),                  // packets_to_master_0_clk_reset_reset_bridge_in_reset.reset
-		.packets_to_master_0_avalon_master_address                 (packets_to_master_0_avalon_master_address),       //                   packets_to_master_0_avalon_master.address
-		.packets_to_master_0_avalon_master_waitrequest             (packets_to_master_0_avalon_master_waitrequest),   //                                                    .waitrequest
-		.packets_to_master_0_avalon_master_byteenable              (packets_to_master_0_avalon_master_byteenable),    //                                                    .byteenable
-		.packets_to_master_0_avalon_master_read                    (packets_to_master_0_avalon_master_read),          //                                                    .read
-		.packets_to_master_0_avalon_master_readdata                (packets_to_master_0_avalon_master_readdata),      //                                                    .readdata
-		.packets_to_master_0_avalon_master_readdatavalid           (packets_to_master_0_avalon_master_readdatavalid), //                                                    .readdatavalid
-		.packets_to_master_0_avalon_master_write                   (packets_to_master_0_avalon_master_write),         //                                                    .write
-		.packets_to_master_0_avalon_master_writedata               (packets_to_master_0_avalon_master_writedata),     //                                                    .writedata
-		.led_gpio_0_avs_s0_address                                 (mm_interconnect_0_led_gpio_0_avs_s0_address),     //                                   led_gpio_0_avs_s0.address
-		.led_gpio_0_avs_s0_write                                   (mm_interconnect_0_led_gpio_0_avs_s0_write),       //                                                    .write
-		.led_gpio_0_avs_s0_writedata                               (mm_interconnect_0_led_gpio_0_avs_s0_writedata),   //                                                    .writedata
-		.led_gpio_0_avs_s0_waitrequest                             (mm_interconnect_0_led_gpio_0_avs_s0_waitrequest), //                                                    .waitrequest
-		.led_gpio_0_avs_s0_chipselect                              (mm_interconnect_0_led_gpio_0_avs_s0_chipselect)   //                                                    .chipselect
+		.clk_0_clk_clk                                (clk_clk),                                               //                              clk_0_clk.clk
+		.master_clk_reset_reset_bridge_in_reset_reset (rst_controller_reset_out_reset),                        // master_clk_reset_reset_bridge_in_reset.reset
+		.master_avalon_master_address                 (master_avalon_master_address),                          //                   master_avalon_master.address
+		.master_avalon_master_waitrequest             (master_avalon_master_waitrequest),                      //                                       .waitrequest
+		.master_avalon_master_byteenable              (master_avalon_master_byteenable),                       //                                       .byteenable
+		.master_avalon_master_read                    (master_avalon_master_read),                             //                                       .read
+		.master_avalon_master_readdata                (master_avalon_master_readdata),                         //                                       .readdata
+		.master_avalon_master_readdatavalid           (master_avalon_master_readdatavalid),                    //                                       .readdatavalid
+		.master_avalon_master_write                   (master_avalon_master_write),                            //                                       .write
+		.master_avalon_master_writedata               (master_avalon_master_writedata),                        //                                       .writedata
+		.led_gpio_slave_avs_s0_address                (mm_interconnect_0_led_gpio_slave_avs_s0_address),       //                  led_gpio_slave_avs_s0.address
+		.led_gpio_slave_avs_s0_write                  (mm_interconnect_0_led_gpio_slave_avs_s0_write),         //                                       .write
+		.led_gpio_slave_avs_s0_writedata              (mm_interconnect_0_led_gpio_slave_avs_s0_writedata),     //                                       .writedata
+		.led_gpio_slave_avs_s0_waitrequest            (mm_interconnect_0_led_gpio_slave_avs_s0_waitrequest),   //                                       .waitrequest
+		.led_gpio_slave_avs_s0_chipselect             (mm_interconnect_0_led_gpio_slave_avs_s0_chipselect),    //                                       .chipselect
+		.sysid_qsys_0_control_slave_address           (mm_interconnect_0_sysid_qsys_0_control_slave_address),  //             sysid_qsys_0_control_slave.address
+		.sysid_qsys_0_control_slave_readdata          (mm_interconnect_0_sysid_qsys_0_control_slave_readdata)  //                                       .readdata
 	);
 
 	avalon_fast_serial_avalon_st_adapter #(
@@ -160,19 +171,19 @@ module avalon_fast_serial (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter (
-		.in_clk_0_clk        (clk_clk),                                                // in_clk_0.clk
-		.in_rst_0_reset      (rst_controller_reset_out_reset),                         // in_rst_0.reset
-		.in_0_data           (st_bytes_to_packets_0_out_packets_stream_data),          //     in_0.data
-		.in_0_valid          (st_bytes_to_packets_0_out_packets_stream_valid),         //         .valid
-		.in_0_ready          (st_bytes_to_packets_0_out_packets_stream_ready),         //         .ready
-		.in_0_startofpacket  (st_bytes_to_packets_0_out_packets_stream_startofpacket), //         .startofpacket
-		.in_0_endofpacket    (st_bytes_to_packets_0_out_packets_stream_endofpacket),   //         .endofpacket
-		.in_0_channel        (st_bytes_to_packets_0_out_packets_stream_channel),       //         .channel
-		.out_0_data          (avalon_st_adapter_out_0_data),                           //    out_0.data
-		.out_0_valid         (avalon_st_adapter_out_0_valid),                          //         .valid
-		.out_0_ready         (avalon_st_adapter_out_0_ready),                          //         .ready
-		.out_0_startofpacket (avalon_st_adapter_out_0_startofpacket),                  //         .startofpacket
-		.out_0_endofpacket   (avalon_st_adapter_out_0_endofpacket)                     //         .endofpacket
+		.in_clk_0_clk        (clk_clk),                                              // in_clk_0.clk
+		.in_rst_0_reset      (rst_controller_reset_out_reset),                       // in_rst_0.reset
+		.in_0_data           (in_bytes_to_packets_out_packets_stream_data),          //     in_0.data
+		.in_0_valid          (in_bytes_to_packets_out_packets_stream_valid),         //         .valid
+		.in_0_ready          (in_bytes_to_packets_out_packets_stream_ready),         //         .ready
+		.in_0_startofpacket  (in_bytes_to_packets_out_packets_stream_startofpacket), //         .startofpacket
+		.in_0_endofpacket    (in_bytes_to_packets_out_packets_stream_endofpacket),   //         .endofpacket
+		.in_0_channel        (in_bytes_to_packets_out_packets_stream_channel),       //         .channel
+		.out_0_data          (avalon_st_adapter_out_0_data),                         //    out_0.data
+		.out_0_valid         (avalon_st_adapter_out_0_valid),                        //         .valid
+		.out_0_ready         (avalon_st_adapter_out_0_ready),                        //         .ready
+		.out_0_startofpacket (avalon_st_adapter_out_0_startofpacket),                //         .startofpacket
+		.out_0_endofpacket   (avalon_st_adapter_out_0_endofpacket)                   //         .endofpacket
 	);
 
 	avalon_fast_serial_avalon_st_adapter_001 #(
@@ -193,19 +204,19 @@ module avalon_fast_serial (
 		.outUseReady     (1),
 		.outReadyLatency (0)
 	) avalon_st_adapter_001 (
-		.in_clk_0_clk        (clk_clk),                                      // in_clk_0.clk
-		.in_rst_0_reset      (rst_controller_reset_out_reset),               // in_rst_0.reset
-		.in_0_data           (packets_to_master_0_out_stream_data),          //     in_0.data
-		.in_0_valid          (packets_to_master_0_out_stream_valid),         //         .valid
-		.in_0_ready          (packets_to_master_0_out_stream_ready),         //         .ready
-		.in_0_startofpacket  (packets_to_master_0_out_stream_startofpacket), //         .startofpacket
-		.in_0_endofpacket    (packets_to_master_0_out_stream_endofpacket),   //         .endofpacket
-		.out_0_data          (avalon_st_adapter_001_out_0_data),             //    out_0.data
-		.out_0_valid         (avalon_st_adapter_001_out_0_valid),            //         .valid
-		.out_0_ready         (avalon_st_adapter_001_out_0_ready),            //         .ready
-		.out_0_startofpacket (avalon_st_adapter_001_out_0_startofpacket),    //         .startofpacket
-		.out_0_endofpacket   (avalon_st_adapter_001_out_0_endofpacket),      //         .endofpacket
-		.out_0_channel       (avalon_st_adapter_001_out_0_channel)           //         .channel
+		.in_clk_0_clk        (clk_clk),                                   // in_clk_0.clk
+		.in_rst_0_reset      (rst_controller_reset_out_reset),            // in_rst_0.reset
+		.in_0_data           (master_out_stream_data),                    //     in_0.data
+		.in_0_valid          (master_out_stream_valid),                   //         .valid
+		.in_0_ready          (master_out_stream_ready),                   //         .ready
+		.in_0_startofpacket  (master_out_stream_startofpacket),           //         .startofpacket
+		.in_0_endofpacket    (master_out_stream_endofpacket),             //         .endofpacket
+		.out_0_data          (avalon_st_adapter_001_out_0_data),          //    out_0.data
+		.out_0_valid         (avalon_st_adapter_001_out_0_valid),         //         .valid
+		.out_0_ready         (avalon_st_adapter_001_out_0_ready),         //         .ready
+		.out_0_startofpacket (avalon_st_adapter_001_out_0_startofpacket), //         .startofpacket
+		.out_0_endofpacket   (avalon_st_adapter_001_out_0_endofpacket),   //         .endofpacket
+		.out_0_channel       (avalon_st_adapter_001_out_0_channel)        //         .channel
 	);
 
 	altera_reset_controller #(

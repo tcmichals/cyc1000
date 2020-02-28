@@ -25,23 +25,7 @@
          type = "int";
       }
    }
-   element led_gpio_0
-   {
-      datum _sortIndex
-      {
-         value = "4";
-         type = "int";
-      }
-   }
-   element packets_to_master_0
-   {
-      datum _sortIndex
-      {
-         value = "1";
-         type = "int";
-      }
-   }
-   element st_bytes_to_packets_0
+   element in_bytes_to_packets
    {
       datum _sortIndex
       {
@@ -49,11 +33,35 @@
          type = "int";
       }
    }
-   element st_packets_to_bytes_0
+   element led_gpio_slave
+   {
+      datum _sortIndex
+      {
+         value = "4";
+         type = "int";
+      }
+   }
+   element master
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
+   element out_packets_to_bytes
    {
       datum _sortIndex
       {
          value = "3";
+         type = "int";
+      }
+   }
+   element sysid_qsys_0
+   {
+      datum _sortIndex
+      {
+         value = "5";
          type = "int";
       }
    }
@@ -81,17 +89,17 @@
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
  <interface
    name="in_bytes_stream"
-   internal="st_bytes_to_packets_0.in_bytes_stream"
+   internal="in_bytes_to_packets.in_bytes_stream"
    type="avalon_streaming"
    dir="end" />
  <interface
    name="led_gpio"
-   internal="led_gpio_0.conduit"
+   internal="led_gpio_slave.conduit"
    type="conduit"
    dir="end" />
  <interface
    name="out_bytes_stream"
-   internal="st_packets_to_bytes_0.out_bytes_stream"
+   internal="out_packets_to_bytes.out_bytes_stream"
    type="avalon_streaming"
    dir="start" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
@@ -101,9 +109,17 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
- <module name="led_gpio_0" kind="led_gpio" version="1.0" enabled="1" />
  <module
-   name="packets_to_master_0"
+   name="in_bytes_to_packets"
+   kind="altera_avalon_st_bytes_to_packets"
+   version="18.1"
+   enabled="1">
+  <parameter name="CHANNEL_WIDTH" value="8" />
+  <parameter name="ENCODING" value="0" />
+ </module>
+ <module name="led_gpio_slave" kind="led_gpio" version="1.0" enabled="1" />
+ <module
+   name="master"
    kind="altera_avalon_packets_to_master"
    version="18.1"
    enabled="1">
@@ -112,76 +128,90 @@
   <parameter name="FIFO_DEPTHS" value="2" />
  </module>
  <module
-   name="st_bytes_to_packets_0"
-   kind="altera_avalon_st_bytes_to_packets"
-   version="18.1"
-   enabled="1">
-  <parameter name="CHANNEL_WIDTH" value="8" />
-  <parameter name="ENCODING" value="0" />
- </module>
- <module
-   name="st_packets_to_bytes_0"
+   name="out_packets_to_bytes"
    kind="altera_avalon_st_packets_to_bytes"
    version="18.1"
    enabled="1">
   <parameter name="CHANNEL_WIDTH" value="8" />
   <parameter name="ENCODING" value="0" />
  </module>
+ <module
+   name="sysid_qsys_0"
+   kind="altera_avalon_sysid_qsys"
+   version="18.1"
+   enabled="1">
+  <parameter name="id" value="287454020" />
+ </module>
  <connection
    kind="avalon"
    version="18.1"
-   start="packets_to_master_0.avalon_master"
-   end="led_gpio_0.avs_s0">
+   start="master.avalon_master"
+   end="led_gpio_slave.avs_s0">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0000" />
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection
-   kind="avalon_streaming"
+   kind="avalon"
    version="18.1"
-   start="st_bytes_to_packets_0.out_packets_stream"
-   end="packets_to_master_0.in_stream" />
+   start="master.avalon_master"
+   end="sysid_qsys_0.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0040" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
  <connection
    kind="avalon_streaming"
    version="18.1"
-   start="packets_to_master_0.out_stream"
-   end="st_packets_to_bytes_0.in_packets_stream" />
+   start="in_bytes_to_packets.out_packets_stream"
+   end="master.in_stream" />
+ <connection
+   kind="avalon_streaming"
+   version="18.1"
+   start="master.out_stream"
+   end="out_packets_to_bytes.in_packets_stream" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="master.clk" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
-   end="packets_to_master_0.clk" />
+   end="in_bytes_to_packets.clk" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
-   end="st_bytes_to_packets_0.clk" />
+   end="out_packets_to_bytes.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="sysid_qsys_0.clk" />
  <connection
    kind="clock"
    version="18.1"
    start="clk_0.clk"
-   end="st_packets_to_bytes_0.clk" />
- <connection kind="clock" version="18.1" start="clk_0.clk" end="led_gpio_0.clock" />
+   end="led_gpio_slave.clock" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
-   end="packets_to_master_0.clk_reset" />
+   end="master.clk_reset" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
-   end="st_bytes_to_packets_0.clk_reset" />
+   end="in_bytes_to_packets.clk_reset" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
-   end="st_packets_to_bytes_0.clk_reset" />
+   end="out_packets_to_bytes.clk_reset" />
  <connection
    kind="reset"
    version="18.1"
    start="clk_0.clk_reset"
-   end="led_gpio_0.reset" />
+   end="led_gpio_slave.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="sysid_qsys_0.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

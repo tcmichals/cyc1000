@@ -67,7 +67,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
   </table>
   <table class="blueBar">
    <tr>
-    <td class="l">2020.02.26.11:45:42</td>
+    <td class="l">2020.02.27.22:06:29</td>
     <td class="r">Datasheet</td>
    </tr>
   </table>
@@ -88,8 +88,11 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
    <div style="display:inline-block ; text-align:left"><span>
      <br/>All Components
      <br/>&#160;&#160;
-     <a href="#module_led_gpio_0"><b>led_gpio_0</b>
-     </a> led_gpio 1.0</span>
+     <a href="#module_led_gpio_slave"><b>led_gpio_slave</b>
+     </a> led_gpio 1.0
+     <br/>&#160;&#160;
+     <a href="#module_sysid_qsys_0"><b>sysid_qsys_0</b>
+     </a> altera_avalon_sysid_qsys 18.1</span>
    </div>
   </div>
   <div style="width:100% ;  height:10px"> </div>
@@ -98,7 +101,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
    <tr>
     <td class="empty" rowspan="2"></td>
     <td class="mastermodule" colspan="1">
-     <a href="#module_packets_to_master_0"><b>packets_to_master_0</b>
+     <a href="#module_master"><b>master</b>
      </a>
     </td>
    </tr>
@@ -107,7 +110,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
    </tr>
    <tr>
     <td class="slavemodule">&#160;
-     <a href="#module_led_gpio_0"><b>led_gpio_0</b>
+     <a href="#module_led_gpio_slave"><b>led_gpio_slave</b>
      </a>
     </td>
     <td class="empty"></td>
@@ -115,6 +118,17 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
    <tr>
     <td class="slaveb">avs_s0&#160;</td>
     <td class="addr"><span style="color:#989898">0x</span>00000000</td>
+   </tr>
+   <tr>
+    <td class="slavemodule">&#160;
+     <a href="#module_sysid_qsys_0"><b>sysid_qsys_0</b>
+     </a>
+    </td>
+    <td class="empty"></td>
+   </tr>
+   <tr>
+    <td class="slaveb">control_slave&#160;</td>
+    <td class="addr"><span style="color:#989898">0x</span>00000040</td>
    </tr>
   </table>
   <a name="module_clk_0"> </a>
@@ -164,19 +178,95 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
-  <a name="module_led_gpio_0"> </a>
+  <a name="module_in_bytes_to_packets"> </a>
   <div>
    <hr/>
-   <h2>led_gpio_0</h2>led_gpio v1.0
+   <h2>in_bytes_to_packets</h2>altera_avalon_st_bytes_to_packets v18.1
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_clk_0">clk_0</a>
+      </td>
+      <td class="from">clk&#160;&#160;</td>
+      <td class="main" rowspan="6">in_bytes_to_packets</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clk</td>
+     </tr>
+     <tr>
+      <td class="from">clk_reset&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clk_reset</td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="from">out_packets_stream&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_master">master</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;in_stream</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">CHANNEL_WIDTH</td>
+        <td class="parametervalue">8</td>
+       </tr>
+       <tr>
+        <td class="parametername">CHANNEL_WIDTH_DERIVED</td>
+        <td class="parametervalue">8</td>
+       </tr>
+       <tr>
+        <td class="parametername">ENCODING</td>
+        <td class="parametervalue">0</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">UNKNOWN</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>(none)</td>
+    </tr>
+   </table>
+  </div>
+  <a name="module_led_gpio_slave"> </a>
+  <div>
+   <hr/>
+   <h2>led_gpio_slave</h2>led_gpio v1.0
    <br/>
    <div class="greydiv">
     <table class="connectionboxes">
      <tr>
       <td class="neighbor" rowspan="2">
-       <a href="#module_packets_to_master_0">packets_to_master_0</a>
+       <a href="#module_master">master</a>
       </td>
       <td class="from">avalon_master&#160;&#160;</td>
-      <td class="main" rowspan="7">led_gpio_0</td>
+      <td class="main" rowspan="7">led_gpio_slave</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;avs_s0</td>
@@ -227,19 +317,19 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
-  <a name="module_packets_to_master_0"> </a>
+  <a name="module_master"> </a>
   <div>
    <hr/>
-   <h2>packets_to_master_0</h2>altera_avalon_packets_to_master v18.1
+   <h2>master</h2>altera_avalon_packets_to_master v18.1
    <br/>
    <div class="greydiv">
     <table class="connectionboxes">
      <tr>
       <td class="neighbor" rowspan="2">
-       <a href="#module_st_bytes_to_packets_0">st_bytes_to_packets_0</a>
+       <a href="#module_in_bytes_to_packets">in_bytes_to_packets</a>
       </td>
       <td class="from">out_packets_stream&#160;&#160;</td>
-      <td class="main" rowspan="12">packets_to_master_0</td>
+      <td class="main" rowspan="15">master</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;in_stream</td>
@@ -267,7 +357,7 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
       <td></td>
       <td class="from">avalon_master&#160;&#160;</td>
       <td class="neighbor" rowspan="2">
-       <a href="#module_led_gpio_0">led_gpio_0</a>
+       <a href="#module_led_gpio_slave">led_gpio_slave</a>
       </td>
      </tr>
      <tr>
@@ -281,9 +371,25 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
      <tr>
       <td></td>
       <td></td>
+      <td class="from">avalon_master&#160;&#160;</td>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_sysid_qsys_0">sysid_qsys_0</a>
+      </td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
+      <td class="to">&#160;&#160;control_slave</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td></td>
+      <td></td>
       <td class="from">out_stream&#160;&#160;</td>
       <td class="neighbor" rowspan="2">
-       <a href="#module_st_packets_to_bytes_0">st_packets_to_bytes_0</a>
+       <a href="#module_out_packets_to_bytes">out_packets_to_bytes</a>
       </td>
      </tr>
      <tr>
@@ -335,95 +441,19 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
-  <a name="module_st_bytes_to_packets_0"> </a>
+  <a name="module_out_packets_to_bytes"> </a>
   <div>
    <hr/>
-   <h2>st_bytes_to_packets_0</h2>altera_avalon_st_bytes_to_packets v18.1
-   <br/>
-   <div class="greydiv">
-    <table class="connectionboxes">
-     <tr>
-      <td class="neighbor" rowspan="4">
-       <a href="#module_clk_0">clk_0</a>
-      </td>
-      <td class="from">clk&#160;&#160;</td>
-      <td class="main" rowspan="6">st_bytes_to_packets_0</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;clk</td>
-     </tr>
-     <tr>
-      <td class="from">clk_reset&#160;&#160;</td>
-     </tr>
-     <tr>
-      <td class="to">&#160;&#160;clk_reset</td>
-     </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td class="from">out_packets_stream&#160;&#160;</td>
-      <td class="neighbor" rowspan="2">
-       <a href="#module_packets_to_master_0">packets_to_master_0</a>
-      </td>
-     </tr>
-     <tr>
-      <td></td>
-      <td></td>
-      <td class="to">&#160;&#160;in_stream</td>
-     </tr>
-    </table>
-   </div>
-   <br/>
-   <br/>
-   <table class="flowbox">
-    <tr>
-     <td class="parametersbox">
-      <h2>Parameters</h2>
-      <table>
-       <tr>
-        <td class="parametername">CHANNEL_WIDTH</td>
-        <td class="parametervalue">8</td>
-       </tr>
-       <tr>
-        <td class="parametername">CHANNEL_WIDTH_DERIVED</td>
-        <td class="parametervalue">8</td>
-       </tr>
-       <tr>
-        <td class="parametername">ENCODING</td>
-        <td class="parametervalue">0</td>
-       </tr>
-       <tr>
-        <td class="parametername">deviceFamily</td>
-        <td class="parametervalue">UNKNOWN</td>
-       </tr>
-       <tr>
-        <td class="parametername">generateLegacySim</td>
-        <td class="parametervalue">false</td>
-       </tr>
-      </table>
-     </td>
-    </tr>
-   </table>&#160;&#160;
-   <table class="flowbox">
-    <tr>
-     <td class="parametersbox">
-      <h2>Software Assignments</h2>(none)</td>
-    </tr>
-   </table>
-  </div>
-  <a name="module_st_packets_to_bytes_0"> </a>
-  <div>
-   <hr/>
-   <h2>st_packets_to_bytes_0</h2>altera_avalon_st_packets_to_bytes v18.1
+   <h2>out_packets_to_bytes</h2>altera_avalon_st_packets_to_bytes v18.1
    <br/>
    <div class="greydiv">
     <table class="connectionboxes">
      <tr>
       <td class="neighbor" rowspan="2">
-       <a href="#module_packets_to_master_0">packets_to_master_0</a>
+       <a href="#module_master">master</a>
       </td>
       <td class="from">out_stream&#160;&#160;</td>
-      <td class="main" rowspan="7">st_packets_to_bytes_0</td>
+      <td class="main" rowspan="7">out_packets_to_bytes</td>
      </tr>
      <tr>
       <td class="to">&#160;&#160;in_packets_stream</td>
@@ -486,10 +516,92 @@ div.greydiv { vertical-align:top ; text-align:center ; background:#eeeeee ; bord
     </tr>
    </table>
   </div>
+  <a name="module_sysid_qsys_0"> </a>
+  <div>
+   <hr/>
+   <h2>sysid_qsys_0</h2>altera_avalon_sysid_qsys v18.1
+   <br/>
+   <div class="greydiv">
+    <table class="connectionboxes">
+     <tr>
+      <td class="neighbor" rowspan="2">
+       <a href="#module_master">master</a>
+      </td>
+      <td class="from">avalon_master&#160;&#160;</td>
+      <td class="main" rowspan="7">sysid_qsys_0</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;control_slave</td>
+     </tr>
+     <tr style="height:6px">
+      <td></td>
+     </tr>
+     <tr>
+      <td class="neighbor" rowspan="4">
+       <a href="#module_clk_0">clk_0</a>
+      </td>
+      <td class="from">clk&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;clk</td>
+     </tr>
+     <tr>
+      <td class="from">clk_reset&#160;&#160;</td>
+     </tr>
+     <tr>
+      <td class="to">&#160;&#160;reset</td>
+     </tr>
+    </table>
+   </div>
+   <br/>
+   <br/>
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Parameters</h2>
+      <table>
+       <tr>
+        <td class="parametername">id</td>
+        <td class="parametervalue">287454020</td>
+       </tr>
+       <tr>
+        <td class="parametername">timestamp</td>
+        <td class="parametervalue">1582862789</td>
+       </tr>
+       <tr>
+        <td class="parametername">deviceFamily</td>
+        <td class="parametervalue">UNKNOWN</td>
+       </tr>
+       <tr>
+        <td class="parametername">generateLegacySim</td>
+        <td class="parametervalue">false</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>&#160;&#160;
+   <table class="flowbox">
+    <tr>
+     <td class="parametersbox">
+      <h2>Software Assignments</h2>
+      <table>
+       <tr>
+        <td class="parametername">ID</td>
+        <td class="parametervalue">287454020</td>
+       </tr>
+       <tr>
+        <td class="parametername">TIMESTAMP</td>
+        <td class="parametervalue">1582862789</td>
+       </tr>
+      </table>
+     </td>
+    </tr>
+   </table>
+  </div>
   <table class="blueBar">
    <tr>
     <td class="l">generation took 0.00 seconds</td>
-    <td class="r">rendering took 0.02 seconds</td>
+    <td class="r">rendering took 0.01 seconds</td>
    </tr>
   </table>
  </body>
