@@ -1,0 +1,113 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "BDBUS0",
+					"strict" : false
+				},
+				{
+					"name" : "BDBUS1",
+					"strict" : false
+				},
+				{
+					"name" : "AIN0",
+					"strict" : false
+				},
+				{
+					"name" : "AIN1",
+					"strict" : false
+				},
+				{
+					"name" : "AIN2",
+					"strict" : false
+				},
+				{
+					"name" : "AIN3",
+					"strict" : false
+				},
+				{
+					"name" : "AIN4",
+					"strict" : false
+				},
+				{
+					"name" : "AIN5",
+					"strict" : false
+				},
+				{
+					"name" : "LED[0]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[1]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[2]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[3]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[4]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[5]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[6]",
+					"strict" : false
+				},
+				{
+					"name" : "LED[7]",
+					"strict" : false
+				},
+				{
+					"name" : "D4",
+					"strict" : false
+				},
+				{
+					"name" : "D5",
+					"strict" : false
+				},
+				{
+					"name" : "BDBUS2",
+					"strict" : false
+				},
+				{
+					"name" : "BDBUS3",
+					"strict" : false
+				},
+				{
+					"name" : "D11",
+					"strict" : false
+				},
+				{
+					"name" : "D7",
+					"strict" : false
+				},
+				{
+					"name" : "D8",
+					"strict" : false
+				},
+				{
+					"name" : "D6",
+					"strict" : false
+				},
+				{
+					"name" : "D9",
+					"strict" : false
+				},
+				{
+					"name" : "D10",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

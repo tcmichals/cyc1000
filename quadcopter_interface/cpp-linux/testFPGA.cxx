@@ -8,8 +8,8 @@
 #include "sysid.h"
 #include "gpioled.h"
 #include "pwmdecoder.h"
-//#include "pwmOut.h"
-#include "dshot.h"
+#include "pwmOut.h"
+//#include "dshot.h"
 
 #if 0
 static boost::asio::io_context gIOService(1);
@@ -118,19 +118,78 @@ int main(int argc, char **argv)
     avalonTimer timer(transPort);
     gpioAvalon gpioLED(transPort);
     pwmDecoderAvalon pwmDecoder(transPort);
-    //pwmOutAvalon pwmOut(transPort);
-     dshotAvalon   pwmOut(transPort);
+    pwmOutAvalon pwmOut(transPort);
+    // dshotAvalon   pwmOut(transPort);
 
     uint8_t ledValue = 0;
-    int timeout = 10000;
-    
+    int timeout = 0;
+    uint16_t pwmValue = MIN_ON;
+    #define ARM_COUNT 1000
+    #define SPEED_INC  100
+    typedef enum
+    {
+        NOT_ARMED = 0,
+        ARM_ARMED =1,
+    }state_t;
+    int state = NOT_ARMED;
+
     do 
     {
-        std::this_thread::sleep_for(std::chrono::microseconds(100));
+        std::this_thread::sleep_for(std::chrono::milliseconds(2));
         gpioLED.postLED(ledValue++);
+      //  pwmOut.postPWMOut(pwmValue);
 
+        timeout++;
+        switch(state)
+        {
+
+            case NOT_ARMED:
+                pwmValue = MIN_ON;
+                if (timeout > ARM_COUNT)
+                {
+                    timeout = 0;
+                    state = ARM_ARMED;
+                    std::cout << "ARMED" << std::endl;
+                }
+            break;
+
+            case ARM_ARMED:
+                if ( timeout > SPEED_INC )
+                {
+                    timeout = 0;
+                    pwmValue++;
+                    if (pwmValue > 150)
+                    {
+                        timeout =0;
+                        state = NOT_ARMED;
+                          std::cout << "DISARMED" << std::endl;
+                    }
+                }
+
+
+
+            break;
+        }
+        #if 0
+        if ( timeout++ > COUNT)
+        {
+            if (pwmValue == MIN_ON)
+            {
+                pwmValue = MID_ON;
+                std::cout << " MID_ON:" << pwmValue << std::endl;
+            }
+            else
+            {
+                pwmValue = MIN_ON;
+                std::cout << "MIN_ON:" << pwmValue << std::endl;
+
+            }
+            timeout = 0;
+        }
+        #endif
+        
     }while(true);
-      
+
 
 
 }

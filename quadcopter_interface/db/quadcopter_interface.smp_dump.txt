@@ -1,0 +1,69 @@
+
+State Machine - |quadcopter_interface|avalonBus:u0|pwm_dshot:pwm_dshot_0|pwm_output:motor_out_4|state
+Name state.GUARD_TIME state.PWM_HIGH state.PWM_LOW 
+state.PWM_HIGH 0 0 0 
+state.PWM_LOW 0 1 1 
+state.GUARD_TIME 1 1 0 
+
+State Machine - |quadcopter_interface|avalonBus:u0|pwm_dshot:pwm_dshot_0|pwm_output:motor_out_3|state
+Name state.GUARD_TIME state.PWM_HIGH state.PWM_LOW 
+state.PWM_HIGH 0 0 0 
+state.PWM_LOW 0 1 1 
+state.GUARD_TIME 1 1 0 
+
+State Machine - |quadcopter_interface|avalonBus:u0|pwm_dshot:pwm_dshot_0|pwm_output:motor_out_2|state
+Name state.GUARD_TIME state.PWM_HIGH state.PWM_LOW 
+state.PWM_HIGH 0 0 0 
+state.PWM_LOW 0 1 1 
+state.GUARD_TIME 1 1 0 
+
+State Machine - |quadcopter_interface|avalonBus:u0|pwm_dshot:pwm_dshot_0|pwm_output:motor_out_1|state
+Name state.GUARD_TIME state.PWM_HIGH state.PWM_LOW 
+state.PWM_HIGH 0 0 0 
+state.PWM_LOW 0 1 1 
+state.GUARD_TIME 1 1 0 
+
+State Machine - |quadcopter_interface|avalonBus:u0|altera_avalon_packets_to_master:packets_to_master_0|fifo_buffer:fb|fifo_buffer_scfifo_with_controls:the_scfifo_with_controls|fifo_buffer_single_clock_fifo:the_scfifo|scfifo:single_clock_fifo|a_fffifo:subfifo|a_fefifo:fifo_state|sm_emptyfull
+Name state_middle state_full state_empty 
+state_empty 0 0 0 
+state_middle 1 0 1 
+state_full 0 1 1 
+
+State Machine - |quadcopter_interface|avalonBus:u0|altera_avalon_packets_to_master:packets_to_master_0|fifo_to_packet:f2p|state
+Name state.READ_SEND_ISSUE state.FIFO_DATA_WAIT state.POP_FIFO_WAIT state.00 
+state.00 0 0 0 0 
+state.POP_FIFO_WAIT 0 0 1 1 
+state.FIFO_DATA_WAIT 0 1 0 1 
+state.READ_SEND_ISSUE 1 0 0 1 
+
+State Machine - |quadcopter_interface|avalonBus:u0|altera_avalon_packets_to_master:packets_to_master_0|packets_to_fifo:p2f|state
+Name state.FIFO_CMD_WAIT state.PUSH_FIFO_WAIT state.PUSH_FIFO state.READ_DATA_WAIT state.READ_CMD_WAIT state.READ_ASSERT state.WRITE_WAIT state.GET_WRITE_DATA state.GET_ADDR4 state.GET_ADDR3 state.GET_ADDR2 state.GET_ADDR1 state.GET_SIZE2 state.GET_SIZE1 state.GET_EXTRA state.0000 
+state.0000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.GET_EXTRA 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.GET_SIZE1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.GET_SIZE2 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.GET_ADDR1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.GET_ADDR2 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.GET_ADDR3 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.GET_ADDR4 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.GET_WRITE_DATA 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.WRITE_WAIT 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.READ_ASSERT 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.READ_CMD_WAIT 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_DATA_WAIT 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.PUSH_FIFO 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.PUSH_FIFO_WAIT 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.FIFO_CMD_WAIT 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |quadcopter_interface|avalonBus:u0|ap102_component:ap102_led_0|state
+Name state.WAIT state.START state.INIT state.IDLE 
+state.IDLE 0 0 0 0 
+state.INIT 0 0 1 1 
+state.START 0 1 0 1 
+state.WAIT 1 0 0 1 
+
+State Machine - |quadcopter_interface|avalonBus:u0|ap102_component:ap102_led_0|serial_tx:tx|state
+Name state.START state.DONE state.IDLE 
+state.IDLE 0 0 0 
+state.START 1 0 1 
+state.DONE 0 1 1 

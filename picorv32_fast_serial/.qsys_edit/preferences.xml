@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preferences>
+ <debug showDebugMenu="0" />
+ <systemtable filter="All Interfaces">
+  <columns>
+   <connections preferredWidth="95" />
+   <irq preferredWidth="34" />
+   <name preferredWidth="247" />
+  </columns>
+ </systemtable>
+ <library
+   expandedCategories="Library/Processors and Peripherals,Library/Processors and Peripherals/Inter-Process Communication,Library,Project" />
+ <window width="1613" height="981" x="-70" y="324" />
+ <hdlexample language="VERILOG" />
+ <generation greybox="0" />
+</preferences>

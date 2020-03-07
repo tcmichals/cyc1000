@@ -1,0 +1,9 @@
+TX: 7C 00 7A 00 00 00 01 00 00 00 50 7B 1F
+RX: 7C 00 7A 80 00 00 7B 01
+
+
+ setserial /dev/ttyUSB0 low_latency
+
+ioctl(fd, TIOCGSERIAL, &serial);
+serial.flags |= ASYNC_LOW_LATENCY;
+ioctl(fd, TIOCSSERIAL, &serial);

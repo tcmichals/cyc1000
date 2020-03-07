@@ -49,7 +49,7 @@ module avalon_fast_serial_sysid_qsys_0 (
 
   wire    [ 31: 0] readdata;
   //control_slave, which is an e_avalon_slave
-  assign readdata = address ? 1582862789 : 287454020;
+  assign readdata = address ? 1582920102 : 287454020;
 
 endmodule
 

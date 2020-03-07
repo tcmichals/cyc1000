@@ -5,11 +5,18 @@
 #include "avalonProtocol.h"
 #include "transport.h"
 
-#define MIN_ON (1 * 1000)
-#define MID_ON (1500)
-#define MAX_ON (19 * 100)
-#define MIN_OFF ( 2000)  /* 500us */
-#define MAX_TOTAL ( MAX_ON + MIN_OFF)
+#ifdef STANDARD_PWM
+    #define MIN_ON (1 * 1000)
+    #define MID_ON (1500)
+    #define MAX_ON (19 * 100)
+    #define MIN_OFF ( 2000)  /* 500us */
+    #define MAX_TOTAL ( MAX_ON + MIN_OFF)
+#else
+    #define MIN_ON (125)
+    #define MAX_ON (250)
+    #define MID_ON ((MIN_ON/2) + MIN_ON)
+
+#endif
 
 class pwmOutAvalon
 {
@@ -79,11 +86,11 @@ bool pwmOutAvalon::postPWMOut(  const uint16_t pwmOut_1,
     uint32_t val = pwmOut_1;
 
     if ( pwmOut_1 > MAX_ON)
-        val = MAX_TOTAL;
+        val = MAX_ON;
     else if ( pwmOut_1 < MIN_ON)
         val = MIN_ON;
 
-    val = (val << 16) | (MAX_TOTAL - val);
+    val = (val << 16) | (MAX_ON);
 
     data.push_back(val & 0xFF);
     data.push_back(val >>8 & 0xFF);

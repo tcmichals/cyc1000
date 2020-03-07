@@ -12,6 +12,8 @@
 
 #include <boost/asio.hpp>
 #include <libftdi1/ftdi.h>
+#include <libusb-1.0/libusb.h>
+
 
 #include "transport.h"
 #include "avalonProtocol.h"
@@ -21,7 +23,7 @@
 class transaction_item
 {
 public:
-    typedef std::chrono::duration<int, std::milli> milliseconds_t;
+    typedef std::chrono::duration<int, std::micro> microseconds_t;
     enum class state
     {
         idle,
@@ -33,8 +35,8 @@ public:
 
 public:
     std::chrono::time_point<std::chrono::high_resolution_clock> m_startTime;
-    milliseconds_t m_txComplete;
-    milliseconds_t m_rxComplete;
+    microseconds_t m_txComplete;
+    microseconds_t m_rxComplete;
 
     transportAvalon::array_t rx_packet;
     transportAvalon::array_t tx_packet;
@@ -75,13 +77,13 @@ inline void transaction_item::updateStartTime()
 
 inline void transaction_item::updateTxDoneTime()
 {
-    m_txComplete = std::chrono::duration_cast<std::chrono::milliseconds>(
+    m_txComplete = std::chrono::duration_cast<std::chrono::microseconds>(
         std::chrono::high_resolution_clock::now() - m_startTime);
 }
 
 inline void transaction_item::updateRxDoneTime()
 {
-    m_rxComplete = std::chrono::duration_cast<std::chrono::milliseconds>(
+    m_rxComplete = std::chrono::duration_cast<std::chrono::microseconds>(
         std::chrono::high_resolution_clock::now() - m_startTime);
 }
 
@@ -105,8 +107,8 @@ protected:
     transaction_item m_inWork;
     size_t m_next;
 
-    transaction_item::milliseconds_t m_txMaxComplete;
-    transaction_item::milliseconds_t m_rxMaxComplete;
+    transaction_item::microseconds_t m_txMaxComplete;
+    transaction_item::microseconds_t m_rxMaxComplete;
 
     void start_read(void);
     void do_write(void);
@@ -392,13 +394,14 @@ protected:
     };
 
     std::array<uint8_t, buffer_size> m_rxBuffer;
+    std::mutex m_condMutex;
     std::mutex m_mutex;
     std::size_t m_numBytesSent;
     std::deque<transaction_item> m_queue;
     transaction_item m_inWork;
     size_t m_next;
-    transaction_item::milliseconds_t m_txMaxComplete;
-    transaction_item::milliseconds_t m_rxMaxComplete;
+    transaction_item::microseconds_t m_txMaxComplete;
+    transaction_item::microseconds_t m_rxMaxComplete;
     struct ftdi_transfer_control *m_tc_read;
     std::unique_ptr<std::thread> m_thread;
     std::condition_variable     m_txReady;
@@ -457,11 +460,14 @@ inline bool ftdiTransPort::send()
         }
         else
         {
+            std::cerr << "ERROR:" << __PRETTY_FUNCTION__ << " " << __LINE__ << std::endl;
             return false;
+
         }
     }
     else
     {
+         std::cerr << "ERROR:" << __PRETTY_FUNCTION__ << " " << __LINE__ << std::endl;
         return false;
     }
 
@@ -472,41 +478,52 @@ inline bool ftdiTransPort::send()
 
 #define MAX_LOOP_COUNT 10
 inline void ftdiTransPort::readThread()
-{
+{  
     size_t loopMaxCount = MAX_LOOP_COUNT;
     while (!m_exit)
     {
-
+       
+        if (m_queue.size()==0)
         {
             std::unique_lock<std::mutex> lk(m_mutex);
             m_txReady.wait(lk, [this]{return m_queue.size();});
         }
         send();
 
-        m_tc_read = ftdi_read_data_submit(m_ftdi->get(), m_rxBuffer.data(), m_rxBuffer.size());
-        if (m_tc_read == nullptr)
+        bool read_not_done = false;
+        do
         {
-            std::cerr << __PRETTY_FUNCTION__ << " " << __LINE__ << std::endl;
-            loopMaxCount--;
-            if (loopMaxCount == 0)
-                break;
-            else
-                continue;
-        }
+#define USE_ASYNC_FTDI 1
+            #ifdef USE_ASYNC_FTDI
+                std::chrono::time_point<std::chrono::high_resolution_clock> startTime = std::chrono::high_resolution_clock::now();
+                m_tc_read = ftdi_read_data_submit(m_ftdi->get(), m_rxBuffer.data(), m_rxBuffer.size());
 
-        loopMaxCount = MAX_LOOP_COUNT;
-        int length = ftdi_transfer_data_done(m_tc_read);
+                loopMaxCount = MAX_LOOP_COUNT;
+                int bytes_read = ftdi_transfer_data_done(m_tc_read);
+            #else
+                int bytes_read = ftdi_read_data(m_ftdi->get(), m_rxBuffer.data(), 1);
 
-        if (length >= 1)
-        {
+                if (bytes_read < 1)
+                {
+                    std::cerr << __PRETTY_FUNCTION__ << " " << __LINE__ << " bytes_read:" << bytes_read<< std::endl;
+                    loopMaxCount--;
+                    if (loopMaxCount == 0)
+                        break;
+                    else
+                        continue;
+                }
+            #endif        
             if (m_inWork.m_state != transaction_item::state::idle)
             {
+
                 bool isDone = avalonProtocol::read(m_inWork.rx_packet,
-                                                   m_inWork.m_rxBytesProcessed,
-                                                   m_inWork.m_rxState,
-                                                   m_rxBuffer.data(), length);
+                                                    m_inWork.m_rxBytesProcessed,
+                                                    m_inWork.m_rxState,
+                                                    m_rxBuffer.data(), bytes_read);
+                                                    
                 if (isDone)
                 {
+                  
                     m_inWork.updateRxDoneTime();
                     if (m_inWork.rx_callBack)
                         m_inWork.rx_callBack(0, m_inWork.rx_packet);
@@ -522,22 +539,20 @@ inline void ftdiTransPort::readThread()
                     }
 
                     m_inWork = transaction_item();
-                    if (m_queue.size())
-                        m_queue.pop_front();
 
-                    //post back to drain the work queue
-                    continue;
+                    if (m_queue.size())
+                    {
+                        m_queue.pop_front();
+                    }
+                    break;
                 }
             }
-            else
-            {
-                std::cerr << "trash" << std::endl;
-            }
-        }
 
-        /* code */
-    } 
-}
+
+        }while(read_not_done==false);
+    }//while 
+ 
+ }
 
 inline bool ftdiTransPort::start()
 {
@@ -604,15 +619,16 @@ inline bool ftdiTransPort::postTransaction(const array_t &txPacket,
         item.rx_callBack = rxCallback;
         item.updateStartTime();
         item.m_majic = m_next++;
+
         if (m_queue.size() < 30)
         {
             m_queue.push_back(item);
-            m_txReady.notify_one();
         }
         else
         {
             std::cerr << "too much" << std::endl;
         }
+        m_txReady.notify_one();
     }
 
     //send();
@@ -630,9 +646,6 @@ inline void ftdiTransPort::do_write()
         m_numBytesSent += length;
         if (m_numBytesSent == m_inWork.tx_packet.size())
         {
-            m_numBytesSent = 0;
-            m_inWork.m_state = transaction_item::state::startRx;
-            m_inWork.updateTxDoneTime();
             if (m_inWork.tx_callBack)
             {
                 m_inWork.tx_callBack(0, m_numBytesSent);
@@ -640,6 +653,10 @@ inline void ftdiTransPort::do_write()
             break;
         }
     }while (m_inWork.tx_packet.size() != m_numBytesSent);
+
+    m_numBytesSent = 0;
+    m_inWork.m_state = transaction_item::state::startRx;
+    m_inWork.updateTxDoneTime();
 
 }
 

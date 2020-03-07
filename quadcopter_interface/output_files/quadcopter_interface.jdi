@@ -1,0 +1,16 @@
+<sld_project_info>
+  <project>
+    <hash md5_digest_80b="1c62a94369e17a6993d7"/>
+  </project>
+  <file_info>
+    <file device="10CL025YU256C8G" path="quadcopter_interface.sof" usercode="0xFFFFFFFF"/>
+  </file_info>
+  <sld_infos>
+    <sld_info hpath="avalonBus:u0" name="u0">
+      <assignment_values>
+        <assignment_value text="QSYS_NAME avalonBus HAS_SOPCINFO 1 GENERATION_ID 1583117138"/>
+      </assignment_values>
+      <parameters/>
+    </sld_info>
+  </sld_infos>
+</sld_project_info>

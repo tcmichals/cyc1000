@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sun Mar  1 20:45:54 2020
+Quartus Prime Version : 18.1.1 Build 646 04/11/2019 SJ Lite Edition
+Revision Name : quadcopter_interface
+Top-level Entity Name : quadcopter_interface
+Family : Cyclone 10 LP
+Total logic elements : 2,697
+    Total combinational functions : 2,211
+    Dedicated logic registers : 1,667
+Total registers : 1667
+Total pins : 41
+Total virtual pins : 0
+Total memory bits : 352
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 1

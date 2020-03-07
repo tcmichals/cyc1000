@@ -4,3 +4,22 @@ gpio_led		0x5 - 5F
 pwm_decoder		0x40 - 4F
 sys_id			0x60 - x67
 timer			0x80 - 0x90
+
+https://www.intel.com/content/www/us/en/programmable/documentation/mwh1410805299012.html
+
+How to program FPGA SPI flash
+Converting .sof to .jic Files in the Intel Quartus Prime Software
+To convert a .sof to a .jic file, perform the following steps:
+On the File menu, select Convert Programming Files.
+In the Convert Programming Files dialog box, select JTAG Indirect Configuration File (.jic) from the Programming file type drop down menu.
+In the Configuration device field, specify the targeted serial configuration device.
+In the File name field, browse to the target directory and specify an output file name.
+Highlight the SOF Data in the Input files to convert window.
+Click Add File.
+Select the .sof file that you want to convert to a .jic file.
+Click OK.
+Highlight Flash Loader and click Add Device.
+In the Select Devices dialog box, select the targeted FPGA that you are using to program the serial configuration device.
+Click OK.
+Click Generate.
+Note: The Memory Map File check box is checked by default. The Intel® Quartus® Prime programmer generates the memory allocation mapping file along with the .jic file. You can turn off this option by turning off the check box.

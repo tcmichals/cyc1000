@@ -1,0 +1,16 @@
+<sld_project_info>
+  <project>
+    <hash md5_digest_80b="8b8c2fcf89efaeee6afb"/>
+  </project>
+  <file_info>
+    <file device="10CL025YU256C8G" path="picorv32_fast_serial.sof" usercode="0xFFFFFFFF"/>
+  </file_info>
+  <sld_infos>
+    <sld_info hpath="picorv32_soc:soc|picorv32_soc_avalon:soc" name="soc">
+      <assignment_values>
+        <assignment_value text="QSYS_NAME picorv32_soc_avalon HAS_SOPCINFO 1 GENERATION_ID 1582929943"/>
+      </assignment_values>
+      <parameters/>
+    </sld_info>
+  </sld_infos>
+</sld_project_info>

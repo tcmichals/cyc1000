@@ -15,9 +15,10 @@ module pwm_output #(
 	
 
 
-localparam [3:0] PWM_HIGH   = 4'h1,
-	         PWM_LOW    = 4'h2,
-		 GUARD_TIME = 4'h3;
+localparam [3:0]	IDLE	     = 4'h0,
+						PWM_HIGH   = 4'h1,
+	         		PWM_LOW    = 4'h2,
+						GUARD_TIME = 4'h3;
 						 
 localparam [15:0] max_time = 50;
 
@@ -100,7 +101,7 @@ always @(posedge i_clk or posedge i_reset) begin
 						pwm_low <= pwm_low + 1'b1;
 					end
 					else begin
-						state <= PWM_HIGH;
+						state <= GUARD_TIME;
 						pwm_high <= 0;
 						pwm_low <= 0;
 					end
