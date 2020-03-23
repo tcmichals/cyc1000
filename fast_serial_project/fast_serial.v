@@ -1,11 +1,29 @@
 
 `default_nettype none
 `timescale 1 ns / 1 ns
+/*
+           
+PMOD 1 - PIO0 - F13 - 
+PMOD 2 - PIO1 - F15
+PMOD 3 - PIO2- F16
+PMOD 4 - PIO3 - D16
+PMOD 7 - PIO4 - D15
+PMOD 8 - PIO5 - C15
+PMOD 9 - PIO6   B16
+PMOD10 - PIO7 - C16
+
+*/
 
 module fast_serial(input CLK12M, 
 						 input USER_BTN,
 						 input wire BDBUS2,   //FSDO 
 						 input wire BDBUS3,    //FSCTS
+						 input wire PIO0, 
+						 input wire PIO1,
+						 input wire PIO2,
+						 input wire PIO3,
+						 input wire PIO4,
+						 input wire PIO5,
 						 output wire BDBUS0,   //FSDI
 						 output wire BDBUS1,  //FSCLK
 						 output wire BDBUS4,   //DTR
@@ -71,6 +89,12 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 		.out_bytes_stream_ready (!tx_busy), // out_bytes_stream.ready
 		.out_bytes_stream_valid (tx_write), //                 .valid
 		.out_bytes_stream_data  (tx_data),  //                 .data
+		.pwm_signals_pwm_1(PIO0),
+		.pwm_signals_pwm_2(PIO1),
+		.pwm_signals_pwm_3(PIO2),
+		.pwm_signals_pwm_4(PIO3),
+		.pwm_signals_pwm_5(PIO4),
+		.pwm_signals_pwm_6(PIO5),		
 		.reset_reset_n          (r_reset)          //            reset.reset_n
 
 	);
