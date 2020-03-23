@@ -1,6 +1,4 @@
 `default_nettype none
-
-
 `timescale 1 ns/10 ps  // time-unit = 1 us, precision = 10 ps
 
 module pwm_decode_tb;
