@@ -20,7 +20,7 @@ module pwm_decode_tb;
                               .o_pwm_value(pwm_value));
 
 always begin
-        #50 clk =!clk;
+    #50 clk =!clk;
 end
 
 localparam GUARD_ERROR 	= 16'h8000;
@@ -52,10 +52,10 @@ always @(posedge clk)
 begin
     if (pwm_complete) begin
         if ( pwm_value & GUARD_ERROR) begin
-           $display("PWM ERROR %d %dus", (pwm_value & ~GUARD_ERROR), $realtime - currentTime );
+           $display("PWM ERROR %dus", (pwm_value & ~GUARD_ERROR));
 	end
         else
-           $display("PWM length %d %dus", pwm_value, $time/1000);
+           $display("PWM length %dus", pwm_value);
 
     end
 end
