@@ -30,6 +30,9 @@ localparam NO_ERROR = 16'h0;
 localparam GUARD_TIME_ON_MAX = 16'hA28; //2600
 localparam GUARD_TIME_ON_MIN = 16'h320; //800
 
+
+
+
 initial begin
     pwm_ready = 0;
     state = MEASURING_OFF;
@@ -55,7 +58,9 @@ always @(posedge i_clk or posedge i_reset) begin
     else begin
         //synchronize FF
         pwm_sig = {pwm_sig[0], i_pwm};
+
         case (state)
+
             MEASURING_OFF: begin 
                 if (pwm_sig[1] == 0) begin
                     if (clk_counter < CLK_DIVIDER )
@@ -64,8 +69,12 @@ always @(posedge i_clk or posedge i_reset) begin
                         clk_counter <= 0;
                         if (pwm_off_count < GUARD_TIME_ON_MAX)
                             pwm_off_count <= pwm_off_count + 1;
-                        else
-                            pwm_off_count <= pwm_off_count | GUARD_ERROR;
+                        else begin
+			    /* use pwm_off_count greater then 26ms, notify pwm*/
+                            pwm_on_count <= 0 | GUARD_ERROR; 
+		            pwm_ready <= 1;
+                    	    state <= MEASURE_COMPLETE;
+                        end
                     end
                 end
                 else begin
@@ -76,7 +85,7 @@ always @(posedge i_clk or posedge i_reset) begin
                 end
             end
 
-            MEASURING_ON: begin 
+            MEASURING_ON: begin /* measure on */
                 if (pwm_sig[1]) begin
                     if (clk_counter < CLK_DIVIDER )
                         clk_counter <= clk_counter + 1;
@@ -95,7 +104,8 @@ always @(posedge i_clk or posedge i_reset) begin
                     state <= MEASURE_COMPLETE;
                 end
             end
-            MEASURE_COMPLETE: begin 
+
+            MEASURE_COMPLETE: begin /* restart measurement */
                 clk_counter <= 0;
                 pwm_ready <= 0;
                 state <= MEASURING_OFF;

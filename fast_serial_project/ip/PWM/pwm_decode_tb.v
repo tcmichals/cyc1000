@@ -8,6 +8,7 @@ module pwm_decode_tb;
     reg clk = 1;
     reg pwm_signal = 0;
     reg reset = 0;
+    time currentTime = 0;
     wire pwm_complete;
     wire [15:0]pwm_value;
 
@@ -29,23 +30,32 @@ localparam GUARD_ERROR 	= 16'h8000;
 initial begin
     $dumpfile("pwm_decode_tb.vcd");
     $dumpvars(0,pwm_decode_tb);
-    #1000000 pwm_signal <= 1;
+   
+    /* measure 1999us */
+    #0001000 pwm_signal <= 1;
     #2000000 pwm_signal <= 0;
 
-    #1000000 pwm_signal <= 1;
-    #5000000 pwm_signal <= 0;
+    /* measure 2600ms (guard time is 2600max), should result in ERROR*/
+    #0010000 pwm_signal <= 1;
+    currentTime = $realtime;
+    #2700000 pwm_signal <= 0;
 
-    #1000000 pwm_signal <= 1;
+    /* measure 699us, should result in ERROR*/
+    #0001000 pwm_signal <= 1;
+    currentTime = $realtime;
     #0700000 pwm_signal <= 0;
 
-    #7000000 $finish;
+   currentTime = $realtime;
+    /* should result in error locked low */
+    #2610000 $finish;
 end
         
 always @(posedge clk)
 begin
     if (pwm_complete) begin
-        if ( pwm_value & GUARD_ERROR)
-           $display("PWM ERROR %d %dus", (pwm_value & ~GUARD_ERROR), $time/1000);
+        if ( pwm_value & GUARD_ERROR) begin
+           $display("PWM ERROR %d %dus", (pwm_value & ~GUARD_ERROR), $realtime - currentTime );
+	end
         else
            $display("PWM length %d %dus", pwm_value, $time/1000);
 
