@@ -71,16 +71,8 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 		.out_bytes_stream_ready (!tx_busy), // out_bytes_stream.ready
 		.out_bytes_stream_valid (tx_write), //                 .valid
 		.out_bytes_stream_data  (tx_data),  //                 .data
-		.reset_reset_n          (r_reset),          //            reset.reset_n
-		.riscv_pico_0_reset_reset          (r_reset),          //    riscv_pico_0_reset.reset
-		.riscv_pico_0_inr_irq0_irq         (inr_irq0_irq),         // riscv_pico_0_inr_irq0.irq
-		.riscv_pico_0_avm_m0_1_address     (avm_m0_address),     // riscv_pico_0_avm_m0_1.address
-		.riscv_pico_0_avm_m0_1_read        (avm_m0_read),        //                      .read
-		.riscv_pico_0_avm_m0_1_waitrequest (avm_m0_waitrequest), //                      .waitrequest
-		.riscv_pico_0_avm_m0_1_readdata    (avm_m0_readdata),    //                      .readdata
-		.riscv_pico_0_avm_m0_1_write       (avm_m0_write),       //                      .write
-		.riscv_pico_0_avm_m0_1_writedata   (avm_m0_writedata),   //                      .writedata
-		.riscv_pico_0_avm_m0_1_chipselect  (avm_m0_1_chipselect)   //                      .chipselect
+		.reset_reset_n          (r_reset)          //            reset.reset_n
+
 	);
 							
 reg [31:0] reset_count;
