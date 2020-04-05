@@ -10,7 +10,7 @@
 
 `timescale 1 ps / 1 ps
 module gpio_led (
-		input  wire [7:0]  avs_s0_address,     //      avs_s0.address
+		input  wire [1:0]  avs_s0_address,     //      avs_s0.address
 		input  wire        avs_s0_write,       //            .write
 		input  wire [31:0] avs_s0_writedata,   //            .writedata
 		output wire        avs_s0_waitrequest, //            .waitrequest
@@ -28,8 +28,8 @@ initial begin
 	led_reg = 0;  //just a test to validate the FPGA loaded
 end
 
-	always @(posedge clock_clk or posedge reset_reset) begin
-		if (reset_reset) begin
+	always @(posedge clock_clk or negedge reset_reset) begin
+		if (!reset_reset) begin
 			led_reg <= 0;
 		end
 		else begin

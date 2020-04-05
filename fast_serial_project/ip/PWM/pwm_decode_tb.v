@@ -5,7 +5,7 @@ module pwm_decode_tb;
 
     reg clk = 1;
     reg pwm_signal = 0;
-    reg reset = 0;
+    reg reset = 1;
     time currentTime = 0;
     wire pwm_complete;
     wire [15:0]pwm_value;

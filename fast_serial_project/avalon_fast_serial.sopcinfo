@@ -5,11 +5,11 @@
  version="1.0"
  fabric="QSYS">
  <!-- Format version 18.1 646 (Future versions may contain additional information.) -->
- <!-- 2020.03.23.16:36:28 -->
+ <!-- 2020.04.04.17:48:17 -->
  <!-- A collection of modules and connections -->
  <parameter name="AUTO_GENERATION_ID">
   <type>java.lang.Integer</type>
-  <value>1584999388</value>
+  <value>1586040497</value>
   <derived>false</derived>
   <enabled>true</enabled>
   <visible>false</visible>
@@ -927,7 +927,7 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="addressSpan">
     <type>java.math.BigInteger</type>
-    <value>64</value>
+    <value>16</value>
     <derived>true</derived>
     <enabled>true</enabled>
     <visible>false</visible>
@@ -1226,7 +1226,7 @@ parameters are a RESULT of the module parameters. -->
    <port>
     <name>avs_s0_address</name>
     <direction>Input</direction>
-    <width>4</width>
+    <width>2</width>
     <role>address</role>
    </port>
    <port>
@@ -2165,14 +2165,14 @@ parameters are a RESULT of the module parameters. -->
     <slaveName>avs_s0</slaveName>
     <name>led_gpio_slave.avs_s0</name>
     <baseAddress>0</baseAddress>
-    <span>64</span>
+    <span>16</span>
    </memoryBlock>
    <memoryBlock>
     <isBridge>false</isBridge>
     <moduleName>pwm_decoder_0</moduleName>
     <slaveName>avs_s0</slaveName>
     <name>pwm_decoder_0.avs_s0</name>
-    <baseAddress>128</baseAddress>
+    <baseAddress>32</baseAddress>
     <span>32</span>
    </memoryBlock>
    <memoryBlock>
@@ -2180,7 +2180,7 @@ parameters are a RESULT of the module parameters. -->
     <moduleName>sysid_qsys_0</moduleName>
     <slaveName>control_slave</slaveName>
     <name>sysid_qsys_0.control_slave</name>
-    <baseAddress>64</baseAddress>
+    <baseAddress>16</baseAddress>
     <span>8</span>
    </memoryBlock>
   </interface>
@@ -2828,9 +2828,9 @@ parameters are a RESULT of the module parameters. -->
    </parameter>
    <parameter name="maximumPendingReadTransactions">
     <type>int</type>
-    <value>1</value>
+    <value>0</value>
     <derived>false</derived>
-    <enabled>true</enabled>
+    <enabled>false</enabled>
     <visible>true</visible>
     <valid>true</valid>
    </parameter>
@@ -2862,7 +2862,7 @@ parameters are a RESULT of the module parameters. -->
     <type>int</type>
     <value>0</value>
     <derived>false</derived>
-    <enabled>false</enabled>
+    <enabled>true</enabled>
     <visible>true</visible>
     <valid>true</valid>
    </parameter>
@@ -2991,12 +2991,6 @@ parameters are a RESULT of the module parameters. -->
     <role>readdata</role>
    </port>
    <port>
-    <name>avs_s0_readdatavalid</name>
-    <direction>Output</direction>
-    <width>1</width>
-    <role>readdatavalid</role>
-   </port>
-   <port>
     <name>avs_s0_waitrequest</name>
     <direction>Output</direction>
     <width>1</width>
@@ -3093,7 +3087,7 @@ parameters are a RESULT of the module parameters. -->
     <role>reset</role>
    </port>
   </interface>
-  <interface name="pwm_signals" kind="conduit_end" version="18.1">
+  <interface name="conduit_end" kind="conduit_end" version="18.1">
    <!-- The connection points exposed by a module instance for the
 particular module parameters. Connection points and their
 parameters are a RESULT of the module parameters. -->
@@ -3182,7 +3176,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.CMacro.TIMESTAMP</name>
-   <value>1584999388</value>
+   <value>1586040497</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.compatible</name>
@@ -3202,7 +3196,7 @@ the requested settings for a module instance. -->
   </assignment>
   <assignment>
    <name>embeddedsw.dts.params.timestamp</name>
-   <value>1584999388</value>
+   <value>1586040497</value>
   </assignment>
   <assignment>
    <name>embeddedsw.dts.vendor</name>
@@ -3218,7 +3212,7 @@ the requested settings for a module instance. -->
   </parameter>
   <parameter name="timestamp">
    <type>int</type>
-   <value>1584999388</value>
+   <value>1586040497</value>
    <derived>true</derived>
    <enabled>false</enabled>
    <visible>false</visible>
@@ -3742,7 +3736,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0080</value>
+   <value>0x0020</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>
@@ -3793,7 +3787,7 @@ parameters are a RESULT of the module parameters. -->
   </parameter>
   <parameter name="baseAddress">
    <type>java.math.BigInteger</type>
-   <value>0x0040</value>
+   <value>0x0010</value>
    <derived>false</derived>
    <enabled>true</enabled>
    <visible>true</visible>

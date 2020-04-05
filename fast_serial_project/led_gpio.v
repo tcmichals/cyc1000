@@ -29,8 +29,8 @@ module led_gpio (
 		led_output = 8'b00000000;
 	end
 
-	always @(posedge clock_clk or posedge reset_reset) begin
-		if (reset_reset) begin
+	always @(posedge clock_clk or negedge reset_reset) begin
+		if (!reset_reset) begin
 			led_output <= 0;
 		end
 		else begin

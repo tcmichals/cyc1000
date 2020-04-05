@@ -1,0 +1,55 @@
+
+State Machine - |fast_serial|avalon_fast_serial:u0|pwm_decoder:pwm_decoder_0|pwm_decode:p6|state
+Name state.MEASURING_OFF state.MEASURE_COMPLETE state.MEASURING_ON 
+state.MEASURING_OFF 0 0 0 
+state.MEASURING_ON 1 0 1 
+state.MEASURE_COMPLETE 1 1 0 
+
+State Machine - |fast_serial|avalon_fast_serial:u0|pwm_decoder:pwm_decoder_0|pwm_decode:p5|state
+Name state.MEASURING_OFF state.MEASURE_COMPLETE state.MEASURING_ON 
+state.MEASURING_OFF 0 0 0 
+state.MEASURING_ON 1 0 1 
+state.MEASURE_COMPLETE 1 1 0 
+
+State Machine - |fast_serial|avalon_fast_serial:u0|pwm_decoder:pwm_decoder_0|pwm_decode:p4|state
+Name state.MEASURING_OFF state.MEASURE_COMPLETE state.MEASURING_ON 
+state.MEASURING_OFF 0 0 0 
+state.MEASURING_ON 1 0 1 
+state.MEASURE_COMPLETE 1 1 0 
+
+State Machine - |fast_serial|avalon_fast_serial:u0|pwm_decoder:pwm_decoder_0|pwm_decode:p3|state
+Name state.MEASURING_OFF state.MEASURE_COMPLETE state.MEASURING_ON 
+state.MEASURING_OFF 0 0 0 
+state.MEASURING_ON 1 0 1 
+state.MEASURE_COMPLETE 1 1 0 
+
+State Machine - |fast_serial|avalon_fast_serial:u0|pwm_decoder:pwm_decoder_0|pwm_decode:p2|state
+Name state.MEASURING_OFF state.MEASURE_COMPLETE state.MEASURING_ON 
+state.MEASURING_OFF 0 0 0 
+state.MEASURING_ON 1 0 1 
+state.MEASURE_COMPLETE 1 1 0 
+
+State Machine - |fast_serial|avalon_fast_serial:u0|pwm_decoder:pwm_decoder_0|pwm_decode:p1|state
+Name state.MEASURING_OFF state.MEASURE_COMPLETE state.MEASURING_ON 
+state.MEASURING_OFF 0 0 0 
+state.MEASURING_ON 1 0 1 
+state.MEASURE_COMPLETE 1 1 0 
+
+State Machine - |fast_serial|avalon_fast_serial:u0|altera_avalon_packets_to_master:master|packets_to_master:p2m|state
+Name state.READ_SEND_WAIT state.READ_SEND_ISSUE state.READ_DATA_WAIT state.READ_CMD_WAIT state.READ_ASSERT state.RETURN_PACKET state.WRITE_WAIT state.GET_WRITE_DATA state.GET_ADDR4 state.GET_ADDR3 state.GET_ADDR2 state.GET_ADDR1 state.GET_SIZE2 state.GET_SIZE1 state.GET_EXTRA state.0000 
+state.0000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.GET_EXTRA 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.GET_SIZE1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.GET_SIZE2 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.GET_ADDR1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.GET_ADDR2 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.GET_ADDR3 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.GET_ADDR4 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.GET_WRITE_DATA 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.WRITE_WAIT 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.RETURN_PACKET 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.READ_ASSERT 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_CMD_WAIT 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_DATA_WAIT 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_SEND_ISSUE 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.READ_SEND_WAIT 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 

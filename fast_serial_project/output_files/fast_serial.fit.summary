@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sat Apr  4 18:11:54 2020
+Quartus Prime Version : 18.1.1 Build 646 04/11/2019 SJ Lite Edition
+Revision Name : fast_serial
+Top-level Entity Name : fast_serial
+Family : Cyclone 10 LP
+Device : 10CL025YU256C8G
+Timing Models : Final
+Total logic elements : 1,448 / 24,624 ( 6 % )
+    Total combinational functions : 1,425 / 24,624 ( 6 % )
+    Dedicated logic registers : 642 / 24,624 ( 3 % )
+Total registers : 642
+Total pins : 22 / 151 ( 15 % )
+Total virtual pins : 0
+Total memory bits : 0 / 608,256 ( 0 % )
+Embedded Multiplier 9-bit elements : 0 / 132 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )

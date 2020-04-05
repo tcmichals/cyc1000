@@ -26,7 +26,6 @@ module fast_serial(input CLK12M,
 						 input wire PIO5,
 						 output wire BDBUS0,   //FSDI
 						 output wire BDBUS1,  //FSCLK
-						 output wire BDBUS4,   //DTR
 						 output [7:0] LED,
 						 output wire D4,
 						 output wire D5);
@@ -89,21 +88,20 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 		.out_bytes_stream_ready (!tx_busy), // out_bytes_stream.ready
 		.out_bytes_stream_valid (tx_write), //                 .valid
 		.out_bytes_stream_data  (tx_data),  //                 .data
-		.pwm_signals_pwm_1(PIO0),
-		.pwm_signals_pwm_2(PIO1),
-		.pwm_signals_pwm_3(PIO2),
-		.pwm_signals_pwm_4(PIO3),
-		.pwm_signals_pwm_5(PIO4),
-		.pwm_signals_pwm_6(PIO5),		
-		.reset_reset_n          (r_reset)          //            reset.reset_n
-
+		.pwm_pwm_1(PIO0),
+		.pwm_pwm_2(PIO1),
+		.pwm_pwm_3(PIO2),
+		.pwm_pwm_4(PIO3),
+		.pwm_pwm_5(PIO4),
+		.pwm_pwm_6(PIO5),
+		.reset_reset_n(r_reset),          //            reset.reset_n
 	);
-							
+			
 reg [31:0] reset_count;
 reg reset_reg;
 assign r_reset = reset_reg;
 initial reset_count = 0;
-initial reset_reg = 0;
+initial reset_reg = 1;
 localparam RESET_COUNT = 32'hFFF;
 
 always @(posedge CLK_C0_50Mhz) begin
@@ -117,6 +115,7 @@ always @(posedge CLK_C0_50Mhz) begin
 	end
 end	
 	
+				  
 
 endmodule
 
