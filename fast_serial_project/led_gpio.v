@@ -29,11 +29,8 @@ module led_gpio (
 		led_output = 8'b00000000;
 	end
 
-	always @(posedge clock_clk or negedge reset_reset) begin
-		if (!reset_reset) begin
-			led_output <= 0;
-		end
-		else begin
+	always @(posedge clock_clk ) begin
+
 			if (avs_s0_write && avs_s0_address == 0 && avs_s0_chipselect) begin
 				led_output <= {avs_s0_writedata[7:0]};
 				`ifdef VERILATOR
@@ -52,7 +49,6 @@ module led_gpio (
 					$display("LED:register(%x)", led_output );
 				`endif
 			end
-		end 
 	end
 
 endmodule

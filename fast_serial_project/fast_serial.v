@@ -80,22 +80,21 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 		reg [4:0]  avm_m0_1_chipselect;  //         .chipselect
 	
 	avalon_fast_serial u0 (
-		.clk_clk                (CLK_C0_50Mhz),                //              clk.clk
-		.in_bytes_stream_ready  (o_in_bytes_stream_ready),  //  in_bytes_stream.ready
-		.in_bytes_stream_valid  (rx_ready),  //                 .valid
-		.in_bytes_stream_data   (rx_data),   //                 .data
-		.led_gpio_led           (LED),            //         led_gpio.led
-		.out_bytes_stream_ready (!tx_busy), // out_bytes_stream.ready
-		.out_bytes_stream_valid (tx_write), //                 .valid
-		.out_bytes_stream_data  (tx_data),  //                 .data
+		.clk_clk                (CLK_C0_50Mhz),             
+		.in_bytes_stream_ready  (o_in_bytes_stream_ready), 
+		.in_bytes_stream_valid  (rx_ready), 
+		.in_bytes_stream_data   (rx_data),  
+		.led_gpio_led           (LED),          
+		.out_bytes_stream_ready (!tx_busy), 
+		.out_bytes_stream_valid (tx_write), 
+		.out_bytes_stream_data  (tx_data),
 		.pwm_pwm_1(PIO0),
 		.pwm_pwm_2(PIO1),
 		.pwm_pwm_3(PIO2),
 		.pwm_pwm_4(PIO3),
 		.pwm_pwm_5(PIO4),
 		.pwm_pwm_6(PIO5),
-		.reset_reset_n(r_reset),          //            reset.reset_n
-	);
+		.reset_reset_n(r_reset));
 			
 reg [31:0] reset_count;
 reg reset_reg;

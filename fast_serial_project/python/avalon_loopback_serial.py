@@ -92,7 +92,7 @@ async def pwm_id(args):
         test = avalon.Transport(reader=reader, writer=writer)
         test.start_reader_task()
 
-        for i in range(0, 1000):
+        for i in range(0, 10):
             test.transaction_channel_read(0x20, channel_number=0, burst_length=4*6,
                                       transaction=avalon.AvalonBus.READ_INCREMENTING)
 
@@ -107,7 +107,7 @@ async def pwm_id(args):
 
             print("pwm_1 0x{:08x}  0x{:08x}  0x{:08x} 0x{:08x} 0x{:08x} 0x{:08x}".
                   format(pwm_1, pwm_2, pwm_3, pwm_4, pwm_5, pwm_6), end='\r', flush=True)
-            await asyncio.sleep(1)
+            await asyncio.sleep(.1)
 
         test.close()
         writer.close()
@@ -131,10 +131,10 @@ def main(args):
 
 if __name__ == "__main__":
 
-    """logging.basicConfig(
+    logging.basicConfig(
         format="%(asctime)-15s [%(levelname)s] %(funcName)s: %(message)s",
         level=logging.DEBUG)
-    """
+
 
     # define the program description
     text = 'This is a test program. It demonstrates how to use the argparse module with a program description.'

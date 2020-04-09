@@ -28,11 +28,8 @@ initial begin
 	led_reg = 0;  //just a test to validate the FPGA loaded
 end
 
-	always @(posedge clock_clk or negedge reset_reset) begin
-		if (!reset_reset) begin
-			led_reg <= 0;
-		end
-		else begin
+	always @(posedge clock_clk  ) begin
+
 			if (avs_s0_write && avs_s0_address == 0 && avs_s0_chipselect) begin
 				led_reg <= avs_s0_writedata;
 				`ifdef VERILATOR
@@ -51,7 +48,7 @@ end
 					$display("LED:register(%x)", led_reg );
 				`endif
 			end
-		end
+
 	end
 
 

@@ -1,0 +1,21 @@
+{
+  "name": "PWM Decoder",
+  "main": "index.html",
+  "window": {
+    "title": "PWM Decoder",
+    "frame": true,
+    "width": 1000,
+    "height": 700,
+    "position": "mouse",
+    "min_width": 400,
+    "min_height": 200
+  },
+
+  "dependencies": {
+  
+
+  
+  
+  }
+}
+

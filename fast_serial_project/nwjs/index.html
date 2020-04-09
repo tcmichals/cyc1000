@@ -1,0 +1,294 @@
+<html>
+
+<head>
+<meta charset="utf-8" />
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+<script language="javascript" type="text/javascript" src="js/serialport.js"></script>
+<script language="javascript" type="text/javascript" src="js/avalonTransport.js"></script>
+<script language="javascript" type="text/javascript" src="js/workerthread.js"></script>
+
+
+<script language="javascript" type="text/javascript">
+
+var serialPort = new SerialPort();
+var bus = new AvalonBus();
+var PWM_Slider = [];
+var PWMTimer = null;
+
+var isThreadsSupported  =  false;
+function pullSerialPort(id)
+{
+    chrome.serial.getDevices( function(ports)
+    {
+
+        if (id)
+        {
+            ports.forEach(element => {
+                let entry = document.createElement('option');
+                entry.text = element.path;
+                id.add(entry)
+                
+            });
+        }
+
+    });
+}
+
+function addPWMSlider(index)
+{
+    var idSlider = "PWM" + (index) + ".Slider"
+    var slider = document.getElementById(idSlider);
+
+    var output = document.getElementById(idSlider + ".value");
+    slider.oninput = function() 
+    {
+        output.innerHTML = this.value;
+    }
+
+    slider.onchange = function() 
+    {
+        output.innerHTML = this.value;
+    }
+
+    output.innerHTML = slider.value;
+    PWM_Slider.push({slider: slider, text: output});
+
+
+}
+
+var worker = null;
+
+function sayHI() {
+    worker.postMessage({'cmd': 'start', 'msg': 'Hi'});
+  }
+
+  function stop() {
+    // worker.terminate() from this script would also stop the worker.
+    worker.postMessage({'cmd': 'stop', 'msg': 'Bye'});
+  }
+
+  function unknownCmd() {
+    worker.postMessage({'cmd': 'foobard', 'msg': '???'});
+  }
+
+window.addEventListener("load", function (event) {
+
+    pullSerialPort(document.getElementById("serialPort.Paths"));
+
+    let slider = document.getElementById("ledSlider");
+    let output = document.getElementById("ledSlider.value");
+    slider.oninput = function() 
+    {
+        output.innerHTML = this.value;
+        writeLED(1 << this.value);
+    }
+
+    output.innerHTML = slider.value;
+
+    addPWMSlider(1);
+    addPWMSlider(2);
+    addPWMSlider(3);
+    addPWMSlider(4);
+    addPWMSlider(5);
+    addPWMSlider(6);
+
+    //isThreadsSupported = isWorkerSupported();
+
+    try
+    {
+      worker = new Worker("js/workerthread.js");
+      worker.addEventListener('message', function(e) 
+      {
+        console.log("got message");
+        }, false);
+
+    }
+    catch(err)
+    {
+      console.log("Error creating thread" + err);
+    }
+    
+
+});
+
+
+
+
+function openSerialPort()
+{
+    let id = document.getElementById("serialPort.Paths");
+    let index = id.selectedIndex;
+    let path = id[0].text;
+    if (index > -1)
+    {
+        path = id[index].text;
+    }
+
+    
+    let prom = serialPort.Open(path);
+    prom.then( function() {
+      bus.setWriter(serialPort);
+      serialPort.attachRxCallback(bus);
+      console.log("Open");
+      PWMTimer = setInterval(function() {
+        try{
+          bus.SetCallback(function(pkt_data){
+              if (pkt_data.byteLength == 4*6)
+              {
+                  let pwm_values = new Uint32Array(pkt_data.buffer);
+                  let index = 0;
+                  for(let index =0; index < pwm_values.length; ++index)
+                  {
+                    let val = pwm_values[index] & 0xffff;
+                    if (!(val & 0x8000))
+                    {
+                      if (PWM_Slider.length > index)
+                      {
+                        PWM_Slider[index].slider.value = val;
+                        PWM_Slider[index].text.innerHTML = val;
+                      }
+                    }
+                    else
+                    {
+                      if (PWM_Slider.length > index)
+                      {
+                        PWM_Slider[index].slider.value = 0;
+                        PWM_Slider[index].text.innerHTML = 'OFF';
+                      }
+                    }
+                  }
+              }
+            });
+              
+          bus.transaction_channel_read(0x20, 0, 4 * 6,READ_INCREMENTING);
+      
+        }catch(err)
+        {
+          console.log("ERROR:" + err);
+        }
+      }, 100);
+
+    }).catch( function()
+    {
+        console.log("Err");
+    }
+    );
+    
+}
+
+
+function writeLED(led)
+{
+  let array = new Uint8Array(4);
+  array[0] = led;
+  bus.transaction_channel_write(0, 0, array, WRITE_NON_INCREMENTING);
+}
+
+
+</script>
+<style>
+    .slidecontainer {
+  width: 100%;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: pointer;
+}  
+</style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col"> Serial Ports:</div>
+          <div class="col">
+            <select  id="serialPort.Paths">
+            </select>
+          </div>
+          <div class="col">
+            <button id="serialPort.Open" onclick="openSerialPort()">Open</botton>
+          </div>          
+
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+            <p>LED: <span id="ledSlider.value"></span></p>
+            <input type="range" min="0" max="8" value="4" class="slider" id="ledSlider">
+       </div>
+
+       <div class="row">
+        <p>PWM1: <span id="PWM1.Slider.value"></span></p>
+        <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM1.Slider">
+        </div>
+
+        <div class="row">
+            <p>PWM2: <span id="PWM2.Slider.value"></span></p>
+            <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM2.Slider">
+        </div>        
+
+        <div class="row">
+          <p>PWM3: <span id="PWM3.Slider.value"></span></p>
+          <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM3.Slider">
+      </div>   
+
+      <div class="row">
+        <p>PWM4: <span id="PWM4.Slider.value"></span></p>
+        <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM4.Slider">
+    </div>   
+    
+    <div class="row">
+      <p>PWM5: <span id="PWM5.Slider.value"></span></p>
+      <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM5.Slider">
+  </div> 
+  
+  <div class="row">
+    <p>PWM6: <span id="PWM6.Slider.value"></span></p>
+    <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM6.Slider">
+</div>   
+      </div>
+
+
+<button onclick="sayHI()">Hi</button>
+<button onclick="writeLED()">LED</button>
+
+
+</body>
+</html>
