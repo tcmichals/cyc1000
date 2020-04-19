@@ -27,6 +27,8 @@ module fast_serial(input CLK12M,
 						 output wire BDBUS0,   //FSDI
 						 output wire BDBUS1,  //FSCLK
 						 output [7:0] LED,
+						 output wire D2,
+						 output wire D3,
 						 output wire D4,
 						 output wire D5);
 						 
@@ -41,8 +43,7 @@ wire tx_busy;
 wire rx_ready;
 wire o_in_bytes_stream_ready;
 
-assign D5 = BDBUS0;
-assign D4 = BDBUS2;
+
 
 						 
 PLL12	PLL12_inst (.inclk0 ( CLK12M ),
@@ -80,7 +81,11 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 		reg [4:0]  avm_m0_1_chipselect;  //         .chipselect
 	
 	avalon_fast_serial u0 (
-		.clk_clk                (CLK_C0_50Mhz),             
+		.clk_clk                (CLK_C0_50Mhz),  
+		.dshot_150_motor_1(D5),
+		.dshot_150_motor_2(D4),
+		.dshot_150_motor_3(D3),
+		.dshot_150_motor_4(D2),
 		.in_bytes_stream_ready  (o_in_bytes_stream_ready), 
 		.in_bytes_stream_valid  (rx_ready), 
 		.in_bytes_stream_data   (rx_data),  

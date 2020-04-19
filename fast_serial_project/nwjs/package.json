@@ -10,12 +10,7 @@
     "min_width": 400,
     "min_height": 200
   },
-
   "dependencies": {
-  
-
-  
-  
+    "canvas-gauges": "^2.1.7"
   }
 }
-

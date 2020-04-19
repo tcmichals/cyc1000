@@ -97,12 +97,36 @@
          type = "String";
       }
    }
+   element avalon_fast_serial
+   {
+      datum _originalDeviceFamily
+      {
+         value = "Cyclone 10 LP";
+         type = "String";
+      }
+   }
    element clk_0
    {
       datum _sortIndex
       {
          value = "0";
          type = "int";
+      }
+   }
+   element dshot_150_0
+   {
+      datum _sortIndex
+      {
+         value = "7";
+         type = "int";
+      }
+   }
+   element dshot_150_0.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "32";
+         type = "String";
       }
    }
    element in_bytes_to_packets
@@ -119,6 +143,14 @@
       {
          value = "4";
          type = "int";
+      }
+   }
+   element led_gpio_slave.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "48";
+         type = "String";
       }
    }
    element master
@@ -145,12 +177,28 @@
          type = "int";
       }
    }
+   element pwm_decoder_0.avs_s0
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
    element sysid_qsys_0
    {
       datum _sortIndex
       {
          value = "5";
          type = "int";
+      }
+   }
+   element sysid_qsys_0.control_slave
+   {
+      datum baseAddress
+      {
+         value = "64";
+         type = "String";
       }
    }
 }
@@ -175,6 +223,11 @@
  <parameter name="useTestBenchNamingPattern" value="false" />
  <instanceScript></instanceScript>
  <interface name="clk" internal="clk_0.clk_in" type="clock" dir="end" />
+ <interface
+   name="dshot_150"
+   internal="dshot_150_0.conduit_end"
+   type="conduit"
+   dir="end" />
  <interface
    name="in_bytes_stream"
    internal="in_bytes_to_packets.in_bytes_stream"
@@ -202,6 +255,7 @@
   <parameter name="inputClockFrequency" value="0" />
   <parameter name="resetSynchronousEdges" value="NONE" />
  </module>
+ <module name="dshot_150_0" kind="dshot_150" version="1.0" enabled="1" />
  <module
    name="in_bytes_to_packets"
    kind="altera_avalon_st_bytes_to_packets"
@@ -258,6 +312,15 @@
    kind="avalon"
    version="18.1"
    start="master.avalon_master"
+   end="dshot_150_0.avs_s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0040" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="master.avalon_master"
    end="sysid_qsys_0.control_slave">
   <parameter name="arbitrationPriority" value="1" />
   <parameter name="baseAddress" value="0x0010" />
@@ -295,6 +358,7 @@
    version="18.1"
    start="clk_0.clk"
    end="pwm_decoder_0.clock" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="dshot_150_0.clock" />
  <connection
    kind="reset"
    version="18.1"
@@ -325,6 +389,11 @@
    version="18.1"
    start="clk_0.clk_reset"
    end="pwm_decoder_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="dshot_150_0.reset" />
  <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
  <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
  <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />

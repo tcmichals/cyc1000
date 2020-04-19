@@ -280,6 +280,7 @@ onReceive( packet)
             if (this.postCallback)
                 this.postCallback(data);
             this.rxMsgArrayBuffer = new ArrayBuffer();
+
         }
             
     }

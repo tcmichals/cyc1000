@@ -13,17 +13,24 @@
 
 <script language="javascript" type="text/javascript" src="js/serialport.js"></script>
 <script language="javascript" type="text/javascript" src="js/avalonTransport.js"></script>
-<script language="javascript" type="text/javascript" src="js/workerthread.js"></script>
+<script language="javascript" type="text/javascript" src="node_modules/canvas-gauges/gauge.min.js"></script>
 
 
 <script language="javascript" type="text/javascript">
 
 var serialPort = new SerialPort();
 var bus = new AvalonBus();
-var PWM_Slider = [];
+var pwmGauges = [];
 var PWMTimer = null;
-
+var worker = null;
 var isThreadsSupported  =  false;
+
+var MotorUpdateTimer = [];
+var MotorUpdateValue = [];
+var motorEnable = false;
+var MotorUpdateRate = 30; //in ms
+
+
 function pullSerialPort(id)
 {
     chrome.serial.getDevices( function(ports)
@@ -42,33 +49,101 @@ function pullSerialPort(id)
     });
 }
 
-function addPWMSlider(index)
+function enableMotor()
 {
-    var idSlider = "PWM" + (index) + ".Slider"
-    var slider = document.getElementById(idSlider);
-
-    var output = document.getElementById(idSlider + ".value");
-    slider.oninput = function() 
+  var button = document.getElementById('motor.enable');
+  var slider = document.getElementById('Motor1.Slider');
+  if (motorEnable)
+  {
+    button.innerHTML = "Enable Motor";
+    motorEnable = false;
+    for(let index= 0; index < MotorUpdateTimer.length; ++index)
     {
-        output.innerHTML = this.value;
+      clearInterval(MotorUpdateTimer[index]);
     }
+    MotorUpdateTimer =[];
+    MotorUpdateValue = [];
+    slider.value = 0;
 
-    slider.onchange = function() 
-    {
-        output.innerHTML = this.value;
-    }
+  }
+  else if (serialPort.isOpen())
+  {
+    button.innerHTML = "Disable Motor";
+    motorEnable = true;
+    MotorUpdateTimer = [];
+    MotorUpdateValue = [];
+    slider.value = 0;
 
-    output.innerHTML = slider.value;
-    PWM_Slider.push({slider: slider, text: output});
+    MotorUpdateValue.push(0);
+    let timer = setInterval(function() {
+        sendMotorValue(MotorUpdateValue[0]);
+      }, MotorUpdateRate); 
 
+    MotorUpdateTimer.push(timer );
+  }
+
+ 
+}
+
+function prepareDshotPacket(value)
+{   
+  let packet = new Uint16Array(1);
+  packet = value << 1;
+  
+  let csum = new Uint16Array(1);
+  let csum_data = new Uint16Array(1);
+
+  csum = 0;
+  csum_data = packet;
+  for (let i = 0; i < 3; i++) 
+  {
+      csum ^=  csum_data;   // xor data by nibbles
+      csum_data >>= 4;
+  }
+// append checksum
+  csum &= 0xf;
+  packet = (packet << 4) | csum;
+
+  return packet;
+}
+
+function sendMotorValue( speed, motor = 1)
+{
+  let dshot_value = prepareDshotPacket(speed);
+  let buffer = new ArrayBuffer(4);
+  let uint16_view = new DataView(buffer);
+  /* set the byte as little endian */
+  uint16_view.setUint16(0,dshot_value, true);
+
+  let Uint8View = new Uint8Array(buffer);
+
+  bus.transaction_channel_write(0x40, 0, Uint8View, WRITE_NON_INCREMENTING);
+}
+function onMotorSliderChange()
+{
+  var slider = document.getElementById('Motor1.Slider');
+  if (slider && motorEnable)
+  {
+    if (MotorUpdateTimer.length > 0)
+         clearInterval(MotorUpdateTimer[0]);
+
+    let motor_speed = parseInt(slider.value);
+    if ( motor_speed <= 100)
+      motor_speed = 0;
+    console.log("Motor speed:" + motor_speed.toString());
+
+    MotorUpdateValue[0] = motor_speed;
+    let timer = setInterval(function() {
+        sendMotorValue(MotorUpdateValue[0]);
+      }, MotorUpdateRate); 
+
+      MotorUpdateTimer[0] = timer;
+  }
 
 }
 
-var worker = null;
 
-function sayHI() {
-    worker.postMessage({'cmd': 'start', 'msg': 'Hi'});
-  }
+
 
   function stop() {
     // worker.terminate() from this script would also stop the worker.
@@ -78,6 +153,64 @@ function sayHI() {
   function unknownCmd() {
     worker.postMessage({'cmd': 'foobard', 'msg': '???'});
   }
+
+
+function setUpPWMGauges()
+{
+  for (let index=1; index < 7; index++)
+  {
+    id = "pwm" + index.toString() + ".gauge";
+    let gauge_ctrl = new LinearGauge( {
+      "renderTo":id,
+      "width":1000,
+      "height":100,
+      "minValue":1000,
+      "maxValue":2000,
+      "majorTicks":[1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000],
+      "minorTicks":25,
+      "strokeTicks": true,
+      "colorPlate": "#fff",
+      "borderShadowWidth": 0,
+      "borders": false,
+      "barBeginCircle": false,
+      "tickSide": "left",
+      "numberSide": "left",
+      "needleSide": "left",
+      "needleType":"line",
+      "needleWidth": 3,
+      "colorNeedle": '#222',
+      "colorNeedleEnd": '#222',
+      "animationRule": "linear",
+      "animationTarget": "plate",
+      "barWidth":5,
+      "ticksWidth":50,
+      "ticksWidthMinor": 15,
+      "highlights": [
+        {"from": 1000, "to": 1500, "color": "green"},
+        {"from": 1500, "to": 1800, "color": "yellow"},
+        {"from": 1800, "to": 2000, "color": "red"}
+      ],
+      "valueTextShadow": false,
+      "value":1530,
+      "minValue":1000,
+      "maxValue":2000,
+      "title": "counts",
+      "valueBoxBorderRadius":0,
+      "valueTextShadow":false,
+      "animation": false,
+ 
+  }).draw();
+
+  var idSlider = "PWM" + (index) + ".Slider"
+  var output = document.getElementById(idSlider + ".value");
+   output.innerHTML = gauge_ctrl.value;
+
+   pwmGauges.push({gauge: gauge_ctrl, text: output});
+
+}
+
+}
+
 
 window.addEventListener("load", function (event) {
 
@@ -93,28 +226,7 @@ window.addEventListener("load", function (event) {
 
     output.innerHTML = slider.value;
 
-    addPWMSlider(1);
-    addPWMSlider(2);
-    addPWMSlider(3);
-    addPWMSlider(4);
-    addPWMSlider(5);
-    addPWMSlider(6);
-
-    //isThreadsSupported = isWorkerSupported();
-
-    try
-    {
-      worker = new Worker("js/workerthread.js");
-      worker.addEventListener('message', function(e) 
-      {
-        console.log("got message");
-        }, false);
-
-    }
-    catch(err)
-    {
-      console.log("Error creating thread" + err);
-    }
+    setUpPWMGauges();
     
 
 });
@@ -138,6 +250,7 @@ function openSerialPort()
       bus.setWriter(serialPort);
       serialPort.attachRxCallback(bus);
       console.log("Open");
+      
       PWMTimer = setInterval(function() {
         try{
           bus.SetCallback(function(pkt_data){
@@ -150,18 +263,18 @@ function openSerialPort()
                     let val = pwm_values[index] & 0xffff;
                     if (!(val & 0x8000))
                     {
-                      if (PWM_Slider.length > index)
+                      if (pwmGauges.length > index)
                       {
-                        PWM_Slider[index].slider.value = val;
-                        PWM_Slider[index].text.innerHTML = val;
+                        pwmGauges[index].gauge.value = val;
+                        pwmGauges[index].text.innerHTML = val;
                       }
                     }
                     else
                     {
-                      if (PWM_Slider.length > index)
+                      if (pwmGauges.length > index)
                       {
-                        PWM_Slider[index].slider.value = 0;
-                        PWM_Slider[index].text.innerHTML = 'OFF';
+                        pwmGauges[index].gauge.value = val;
+                        pwmGauges[index].text.innerHTML = 'OFF';
                       }
                     }
                   }
@@ -175,6 +288,7 @@ function openSerialPort()
           console.log("ERROR:" + err);
         }
       }, 100);
+    
 
     }).catch( function()
     {
@@ -192,6 +306,24 @@ function writeLED(led)
   bus.transaction_channel_write(0, 0, array, WRITE_NON_INCREMENTING);
 }
 
+function startTimer()
+{
+
+setInterval( function()
+{
+  pwmGauges.forEach(element => {
+
+    element.gauge.value +=10;
+    if ( element.gauge.value == 2000)
+    element.gauge.value =1000;
+
+
+
+  });
+
+}, 100);
+
+}
 
 </script>
 <style>
@@ -229,6 +361,13 @@ function writeLED(led)
   background: #4CAF50;
   cursor: pointer;
 }  
+
+
+.bottom-align-text {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
 </style>
 </head>
 
@@ -249,45 +388,59 @@ function writeLED(led)
       </div>
 
       <div class="container">
-        <div class="row">
+        <div class="col">
             <p>LED: <span id="ledSlider.value"></span></p>
             <input type="range" min="0" max="8" value="4" class="slider" id="ledSlider">
        </div>
 
        <div class="row">
-        <p>PWM1: <span id="PWM1.Slider.value"></span></p>
-        <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM1.Slider">
+          <p >PWM1: <p id="PWM1.Slider.value"></p></p>
+          <canvas id='pwm1.gauge'></canvas>
         </div>
 
         <div class="row">
             <p>PWM2: <span id="PWM2.Slider.value"></span></p>
-            <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM2.Slider">
+            <canvas id='pwm2.gauge'></canvas>
+
         </div>        
 
         <div class="row">
           <p>PWM3: <span id="PWM3.Slider.value"></span></p>
-          <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM3.Slider">
+          <canvas id='pwm3.gauge'></canvas>
+
       </div>   
 
       <div class="row">
         <p>PWM4: <span id="PWM4.Slider.value"></span></p>
-        <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM4.Slider">
+        <canvas id='pwm4.gauge'></canvas>
+
     </div>   
     
     <div class="row">
       <p>PWM5: <span id="PWM5.Slider.value"></span></p>
-      <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM5.Slider">
+      <canvas id='pwm5.gauge'></canvas>
+
   </div> 
   
   <div class="row">
     <p>PWM6: <span id="PWM6.Slider.value"></span></p>
-    <input type="range" min="900" max="2700" value="2000" class="slider" id="PWM6.Slider">
-</div>   
-      </div>
+    <canvas id='pwm6.gauge'></canvas>
+
+  </div>   
 
 
-<button onclick="sayHI()">Hi</button>
-<button onclick="writeLED()">LED</button>
+  <div class="row">
+  
+    <p>Motor 1: <span id="Motor1.Slider.value"></span></p>
+    <input type="range" min="100" max="1000" value="0" class="slider" id="Motor1.Slider" onchange="onMotorSliderChange()">
+  </div>   
+  <div class="row">
+    <p>Make sure propellers are off and motor is mounted securely. Not responsible for damage </p>
+    
+   </div>  
+   <button onclick="enableMotor()" id="motor.enable">Enable Motor</button>
+
+   <button onclick="startTimer()" >Test</button>
 
 
 </body>
