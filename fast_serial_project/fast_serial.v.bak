@@ -32,7 +32,7 @@ module fast_serial(input CLK12M,
 						 output wire D4,
 						 output wire D5);
 						 
-localparam MOTOR_CONTROL = 1'b1;
+
 wire CLK_C0_50Mhz;
 wire r_reset;
 
@@ -43,23 +43,8 @@ wire tx_busy;
 wire rx_ready;
 wire o_in_bytes_stream_ready;
 
-wire dshot_out_1;
-wire dshot_out_2;
-wire dshot_out_3;
-wire dshot_out_4;
-
-wire pwm_out_1;
-wire pwm_out_2;
-wire pwm_out_3;
-wire pwm_out_4;
 
 
-assign D5 = (MOTOR_CONTROL)?dshot_out_1:pwm_out_1;
-assign D4 = (MOTOR_CONTROL)?dshot_out_2:pwm_out_2;
-assign D3 = (MOTOR_CONTROL)?dshot_out_3:pwm_out_3;
-assign D2 = (MOTOR_CONTROL)?dshot_out_4:pwm_out_4;
-
-		
 						 
 PLL12	PLL12_inst (.inclk0 ( CLK12M ),
 						.c0 ( CLK_C0_50Mhz ));
@@ -97,10 +82,10 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 	
 	avalon_fast_serial u0 (
 		.clk_clk                (CLK_C0_50Mhz),  
-		.dshot_150_motor_1(dshot_out_1),
-		.dshot_150_motor_2(dshot_out_2),
-		.dshot_150_motor_3(dshot_out_3),
-		.dshot_150_motor_4(dshot_out_4),
+		.dshot_150_motor_1(D5),
+		.dshot_150_motor_2(D4),
+		.dshot_150_motor_3(D3),
+		.dshot_150_motor_4(D2),
 		.in_bytes_stream_ready  (o_in_bytes_stream_ready), 
 		.in_bytes_stream_valid  (rx_ready), 
 		.in_bytes_stream_data   (rx_data),  
@@ -114,12 +99,7 @@ tx_fastserial tx_lite(.i_clk(CLK_C0_50Mhz),
 		.pwm_pwm_4(PIO3),
 		.pwm_pwm_5(PIO4),
 		.pwm_pwm_6(PIO5),
-		.reset_reset_n(r_reset),
-		.pwm_out_pwm_out_1(pwm_out_1),
-		.pwm_out_pwm_out_2(pwm_out_2),
-		.pwm_out_pwm_out_3(pwm_out_3),
-		.pwm_out_pwm_out_4(pwm_out_4)
-		);
+		.reset_reset_n(r_reset));
 			
 reg [31:0] reset_count;
 reg reset_reg;

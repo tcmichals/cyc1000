@@ -38,38 +38,39 @@ wire dshot_ready_4;
 
 
 dhot_output dshot_motor_1(.i_clk(clock_clk),
-						.i_reset(reset_reset),
-						.i_dshot_value(dshot_value_motor_1),
-						.i_write(dshot_ready_1),
-						.o_pwm(motor_1));
+			.i_reset(reset_reset),
+			.i_dshot_value(dshot_value_motor_1),
+			.i_write(dshot_ready_1),
+			.o_pwm(motor_1));
 
 dhot_output dshot_motor_2(.i_clk(clock_clk),
-						.i_reset(reset_reset),
-						.i_dshot_value(dshot_value_motor_2),
-						.i_write(dshot_ready_2),
-						.o_pwm(motor_2));
+			.i_reset(reset_reset),
+			.i_dshot_value(dshot_value_motor_2),
+			.i_write(dshot_ready_2),
+			.o_pwm(motor_2));
 
 dhot_output dshot_motor_3(.i_clk(clock_clk),
-						.i_reset(reset_reset),
-						.i_dshot_value(dshot_value_motor_3),
-						.i_write(dshot_ready_3),
-						.o_pwm(motor_3));
+			.i_reset(reset_reset),
+			.i_dshot_value(dshot_value_motor_3),
+			.i_write(dshot_ready_3),
+			.o_pwm(motor_3));
 
 dhot_output dshot_motor_4(.i_clk(clock_clk),
-						.i_reset(reset_reset),
-						.i_dshot_value(dshot_value_motor_4),
-						.i_write(dshot_ready_4),
-						.o_pwm(motor_4));
+			.i_reset(reset_reset),
+			.i_dshot_value(dshot_value_motor_4),
+			.i_write(dshot_ready_4),
+			.o_pwm(motor_4));
+
 
 assign dshot_ready_1 = (avs_s0_write && (avs_s0_address == 2'b00))? 1'b1: 1'b0;
 assign dshot_ready_2 = (avs_s0_write && (avs_s0_address == 2'b01))? 1'b1: 1'b0;
 assign dshot_ready_3 = (avs_s0_write && (avs_s0_address == 2'b10))? 1'b1: 1'b0;
 assign dshot_ready_4 = (avs_s0_write && (avs_s0_address == 2'b11))? 1'b1: 1'b0;
 
-assign dshot_value_motor_1 = (avs_s0_write && avs_s0_address == 2'b00)?avs_s0_writedata[15:0]:16'h0;
-assign dshot_value_motor_2 = (avs_s0_write && avs_s0_address == 2'b01)?avs_s0_writedata[15:0]:16'h0;
-assign dshot_value_motor_3 = (avs_s0_write && avs_s0_address == 2'b10)?avs_s0_writedata[15:0]:16'h0;
-assign dshot_value_motor_4 = (avs_s0_write && avs_s0_address == 2'b11)?avs_s0_writedata[15:0]:16'h0;
+assign dshot_value_motor_1 = (avs_s0_write && (avs_s0_address == 2'b00))?avs_s0_writedata[15:0]:16'h0;
+assign dshot_value_motor_2 = (avs_s0_write && (avs_s0_address == 2'b01))?avs_s0_writedata[15:0]:16'h0;
+assign dshot_value_motor_3 = (avs_s0_write && (avs_s0_address == 2'b10))?avs_s0_writedata[15:0]:16'h0;
+assign dshot_value_motor_4 = (avs_s0_write && (avs_s0_address == 2'b11))?avs_s0_writedata[15:0]:16'h0;
 
 
 

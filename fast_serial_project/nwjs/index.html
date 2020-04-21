@@ -88,14 +88,12 @@ function enableMotor()
 
 function prepareDshotPacket(value)
 {   
-  let packet = new Uint16Array(1);
+  let packet = 0
   packet = value << 1;
   
-  let csum = new Uint16Array(1);
-  let csum_data = new Uint16Array(1);
+  let csum = 0;
+  let csum_data = packet;
 
-  csum = 0;
-  csum_data = packet;
   for (let i = 0; i < 3; i++) 
   {
       csum ^=  csum_data;   // xor data by nibbles
@@ -107,6 +105,18 @@ function prepareDshotPacket(value)
 
   return packet;
 }
+
+
+function setMotorTimer(rate)
+{
+
+  let timer = setInterval(function() {
+        sendMotorValue(MotorUpdateValue[0]);
+      }, rate); 
+
+      return timer;
+}
+
 
 function sendMotorValue( speed, motor = 1)
 {
@@ -125,20 +135,15 @@ function onMotorSliderChange()
   var slider = document.getElementById('Motor1.Slider');
   if (slider && motorEnable)
   {
-    if (MotorUpdateTimer.length > 0)
-         clearInterval(MotorUpdateTimer[0]);
+  //  if (MotorUpdateTimer.length > 0)
+   //      clearInterval(MotorUpdateTimer[0]);
 
     let motor_speed = parseInt(slider.value);
     if ( motor_speed <= 100)
       motor_speed = 0;
-    console.log("Motor speed:" + motor_speed.toString());
 
     MotorUpdateValue[0] = motor_speed;
-    let timer = setInterval(function() {
-        sendMotorValue(MotorUpdateValue[0]);
-      }, MotorUpdateRate); 
-
-      MotorUpdateTimer[0] = timer;
+    //MotorUpdateTimer[0] = setMotorTimer(MotorUpdateRate);
   }
 
 }
@@ -238,19 +243,30 @@ window.addEventListener("load", function (event) {
 function openSerialPort()
 {
     let id = document.getElementById("serialPort.Paths");
+    let button = document.getElementById('serialPort.Open')
+
     let index = id.selectedIndex;
     let path = id[0].text;
     if (index > -1)
     {
         path = id[index].text;
     }
+    if (serialPort.isOpen())
+    {
+      serialPort.Close();
+      button.innerHTML = "Open";
+      if (PWMTimer)
+        clearInterval(PWMTimer)
+      return;
+    }
 
-    
+  
     let prom = serialPort.Open(path);
     prom.then( function() {
       bus.setWriter(serialPort);
       serialPort.attachRxCallback(bus);
       console.log("Open");
+      button.innerHTML = "Close";
       
       PWMTimer = setInterval(function() {
         try{
@@ -266,7 +282,9 @@ function openSerialPort()
                     {
                       if (pwmGauges.length > index)
                       {
-                        pwmGauges[index].gauge.value = val;
+                        if (val >= 1000 && val <= 2000)
+                          pwmGauges[index].gauge.value = val;
+
                         pwmGauges[index].text.innerHTML = val;
                       }
                     }
@@ -274,7 +292,7 @@ function openSerialPort()
                     {
                       if (pwmGauges.length > index)
                       {
-                        pwmGauges[index].gauge.value = val;
+                        pwmGauges[index].gauge.value = 1000;
                         pwmGauges[index].text.innerHTML = 'OFF';
                       }
                     }

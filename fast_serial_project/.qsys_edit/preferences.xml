@@ -8,8 +8,8 @@
    <name preferredWidth="211" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
- <window width="1592" height="892" x="226" y="64" />
+ <library expandedCategories="Library,Project" />
+ <window width="1592" height="892" x="88" y="91" />
  <hdlexample language="VERILOG" />
  <generation simulation="NONE" />
 </preferences>

@@ -1,6 +1,6 @@
 
 
-var currentSerial = null;
+
 class SerialPort
 {
 
@@ -8,6 +8,11 @@ class SerialPort
     {
         this.connectionId = -1;
         this.rxCallback = null;
+        this.txCallback = null;
+        this.txQueue = [];
+        this.txIsTransmitting = false;
+    
+
     }
 
     isOpen()
@@ -39,13 +44,25 @@ class SerialPort
                 else
                 {
                     console.log("connected");
+                    this.txIsTransmitting = false;
+                    this.txQueue = [];
                     this.connectionId = connectionInfo.connectionId;
-                    currentSerial = this;
-                    chrome.serial.onReceive.addListener(function(args) {
-                                if (currentSerial.rxCallback)
-                                {
-                                    currentSerial.rxCallback.onReceive(args.data);
-                                }
+
+                    let self = this;
+
+                    chrome.serial.onReceive.addListener(function(args) 
+                    {
+                        if (self.rxCallback)
+                        {
+                            self.rxCallback.onReceive(args.data);
+                        }
+                        
+                        if (self.txQueue.length && self.txIsTransmitting==false)
+                        {
+                            let buffer = self.txQueue.shift();
+                            self.localWrite(buffer);
+                        }
+
                     });
                     if (this.connectionId)
                             resolve();
@@ -69,19 +86,63 @@ class SerialPort
 
     }
 
+    processTxBytes(result)
+    {
+        
+
+    }
+
+    localWrite(buffer)
+    {
+        let self = this;
+        let txBuffer = buffer;
+        this.txIsTransmitting = true;
+        chrome.serial.send(this.connectionId, buffer, function(result)
+            {
+                if (result.bytesSent)
+                {
+                    if (result.bytesSent != txBuffer.byteLength)
+                        console.log("Not Done")
+                    else
+                    {
+                        self.txIsTransmitting = false;
+                    }
+
+                }
+                else
+                {
+                    console.log("Write: unhandled");
+                }
+            }
+        );
+
+    }
+
     Write( buffer)
     {
-        chrome.serial.send(this.connectionId, buffer, function(result){
+  
+        if (this.txQueue.length == 0 &&  this.txIsTransmitting==false)
+        {
+            this.localWrite(buffer);
         }
-        );
+        else
+        {
+            this.txQueue.push(buffer);
+            console.log("Write Queued");
+        }
+       
     }
+
 
     Close()
     {
-        chrome.serial.disconnect(connectionId, function(result){
-            console.log("Closed")
-            this.connectionID = -1;
+        let self = this;
+        chrome.serial.disconnect(this.connectionId, function(result)
+        {
+            console.log("Closed");
+            self.connectionId = -1;
         });
+        this.connectionId = -1;
     }
 
     attachRxCallback(callback)

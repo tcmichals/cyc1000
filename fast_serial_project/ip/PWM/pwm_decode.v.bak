@@ -94,11 +94,8 @@ always @(posedge i_clk or negedge i_reset) begin
                         clk_counter <= 0;
                         if (pwm_on_count < GUARD_TIME_ON_MAX)                           
                             pwm_on_count <= pwm_on_count + 1'b1;
-                        else begin
-									 state <= MEASURE_COMPLETE;
-									 o_pwm_value <= pwm_on_count | GUARD_ERROR;
-									 pwm_ready <= 1;
-								end
+                        else
+                            pwm_on_count <= pwm_on_count | GUARD_ERROR;
                     end
                 end
                 else begin

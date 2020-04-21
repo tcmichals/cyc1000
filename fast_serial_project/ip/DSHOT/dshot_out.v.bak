@@ -18,7 +18,7 @@ module dhot_output #(
 localparam [3:0] INIT_TIME  = 4'h0,
 		 		HIGH_TIME   = 4'h1,
 	     	 	LOW_TIME    = 4'h2,
-            IDLE_	    = 4'h3;
+                IDLE_	    = 4'h3;
 		
 /* DSHOT Bit time:              (1 - TH1)   (0-T0H)
 DSHOT 150 Bit time is 6.67us    5.00us      2.50us
@@ -30,7 +30,7 @@ DSHOT1200 Bit time is 0.83us    0.025       0.313us
 /* For DSHOT150 clk is 50Mhz so 0-T0H is  2.50 * 50 = 125
                                 0-Off is (6.67 - 2.50us) * 50 = 208.9
 */                                
-localparam [15:0] GAURD_BAND_SIGNAL = 16'd5;                         
+localparam [15:0] GAURD_BAND_SIGNAL = 16'd10;                         
 localparam [15:0] LOW_HIGH_TIME = 16'd125 - GAURD_BAND_SIGNAL;
 localparam [15:0] LOW_LOW_TIME = 16'd209 + GAURD_BAND_SIGNAL;
 

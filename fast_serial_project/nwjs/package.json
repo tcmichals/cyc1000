@@ -4,8 +4,8 @@
   "window": {
     "title": "PWM Decoder",
     "frame": true,
-    "width": 1000,
-    "height": 700,
+    "width": 1500,
+    "height": 850,
     "position": "mouse",
     "min_width": 400,
     "min_height": 200

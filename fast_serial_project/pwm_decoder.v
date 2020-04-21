@@ -73,7 +73,7 @@ module pwm_decoder (
 				
 always @(*) begin
 	case(avs_s0_address) 
-		0:	read_data <=  {16'h0001,pwm_count_1};
+		0: read_data <=  {16'h0001,pwm_count_1};
 		1: read_data <=  {16'h0002,pwm_count_2};
 		2: read_data <=  {16'h0003,pwm_count_3};
 		3: read_data <=  {16'h0004,pwm_count_4};
